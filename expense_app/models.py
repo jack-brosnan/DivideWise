@@ -20,6 +20,9 @@ class ExpenseSpace(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         ordering = ["created_on"]
 
@@ -36,6 +39,9 @@ class ExpenseLine(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         ordering = ["created_on"]
 
@@ -47,6 +53,9 @@ class Contributor(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
     
 class Contribution(models.Model):
     """
@@ -56,6 +65,10 @@ class Contribution(models.Model):
     contributor = models.ForeignKey(Contributor, on_delete=models.CASCADE, related_name="expense_contributors")
     custom_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     paid_status = models.IntegerField(choices=PAID_STATUS, default=0)
+
+    def __str__(self):
+        return f"{self.contributer.name} - {self.expense_line.title}"
+        
     """
     Method to calculate the remaining balance of the expense if custom amounts are applied to some contributors.
     """
@@ -71,5 +84,5 @@ class Contribution(models.Model):
         contributors_non_custom = all_contributions.filter(custom_amount__isnull=True).count()
         # divide the remaining amount equally amongst all contributors with no custom amount applied
         if contributors_non_custom > 0:
-            return remaining_amount / contributors_non_custom
+            return round((remaining_amount / contributors_non_custom), 2)
         return 0

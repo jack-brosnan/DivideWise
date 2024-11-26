@@ -7,14 +7,17 @@ from .models import ExpenseSpace, ExpenseLine, Contributor, Contribution
 class ExpenseSpaceAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'name', 'currency', 'created_on', 'updated_on')
 
+    
 @admin.register(ExpenseLine)
 class ExpenseLineAdmin(admin.ModelAdmin):
     list_display = ('id', 'expense_space', 'title', 'amount', 'paid_status', 'created_on')
 
+    
 @admin.register(Contributor)
 class ContributorAdmin(admin.ModelAdmin):
     list_display = ('id', 'expense_space', 'name', 'email')
 
+    
 @admin.register(Contribution)
 class ContributionAdmin(admin.ModelAdmin):
     list_display = ('id', 'expense_line', 'contributor', 'custom_amount', 'remaining_share', 'paid_status')
