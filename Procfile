@@ -1,1 +1,1 @@
-gunicorn dividewise.wsgi
+web: gunicorn dividewise.wsgi
