@@ -47,6 +47,7 @@ class Contributor(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(null=True, blank=True)
 
+    
 class Contribution(models.Model):
     """
     Stores a single contributor expense line entry related to :model:`expense_app.ExpenseLine`.
@@ -64,7 +65,7 @@ class Contribution(models.Model):
         all_contributions = self.expense_line.expense_contributions.all()
         # Add the total sum of all custom amounts applied. If none is applied, defaults to 0
         total_custom_amount = sum(c.custom_amount or 0 for c in all_contributions)
-        # calcualte the remaining amount after deducting the total custom amounts
+        # calculate the remaining amount after deducting the total custom amounts
         remaining_amount = max(self.expense_line.amount - total_custom_amount, 0)
         # get all contributors with no custom amount applied
         contributors_non_custom = all_contributions.filter(custom_amount__isnull=True).count()
