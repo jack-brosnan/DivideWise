@@ -17,8 +17,8 @@ class ExpenseSpace(models.Model):
     description = models.CharField(max_length=200)
     space_image = CloudinaryField('image', default='placeholder')
     currency = models.IntegerField(choices=CURRENCY, default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["created_on"]
@@ -33,8 +33,8 @@ class ExpenseLine(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     paid_status = models.IntegerField(choices=PAID_STATUS, default=0)
     due_date = models.DateTimeField
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["created_on"]
