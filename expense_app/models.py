@@ -32,7 +32,7 @@ class ExpenseLine(models.Model):
     description = models.CharField(max_length=200)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     paid_status = models.IntegerField(choices=PAID_STATUS, default=0)
-    due_date = models.DateTimeField
+    due_date = models.DateTimeField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -54,6 +54,22 @@ class Contribution(models.Model):
     expense_line = models.ForeignKey(ExpenseLine, on_delete=models.CASCADE, related_name="expense_contributions")
     contributor = models.ForeignKey(Contributor, on_delete=models.CASCADE, related_name="expense_contributors")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    custom_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    remaining_share = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    custom_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     paid_status = models.IntegerField(choices=PAID_STATUS, default=0)
+    """
+    Method to calculate the remaining balance of the expense if custom amounts are applied to some contributors.
+    """
+    @property
+    def remaining_share(self):
+        # Get all contributors that are assigned to the expense line 
+        all_contributions = self.expense_line.expense_contributions.all()
+        # Add the total sum of all custom amounts applied. If none is applied, defaults to 0
+        total_custom_amount = sum(c.custom_amount or 0 for c in all_contributions)
+        # calcualte the remaining amount after deducting the total custom amounts
+        remaining_amount = max(self.expense_line.amount - total_custom_amounts, 0)
+        # get all contributors with no custom amount applied
+        contributors_non_custom = all_contributions.filter(custom_amount__isnull=True).count()
+        # divide the remaining amount equally amongst all contributors with no custom amount applied
+        if contributors_non_custom > 0:
+            return remaining_amount / contributors_non_custom
+        return 0
