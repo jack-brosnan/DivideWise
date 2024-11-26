@@ -14,7 +14,7 @@ class ExpenseSpace(models.Model):
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="expense_spaces")
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, null=True, blank=True)
     space_image = CloudinaryField('image', default='placeholder')
     currency = models.IntegerField(choices=CURRENCY, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -29,10 +29,10 @@ class ExpenseLine(models.Model):
     """
     expense_space = models.ForeignKey(ExpenseSpace, on_delete=models.CASCADE, related_name="expense_lines")
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     paid_status = models.IntegerField(choices=PAID_STATUS, default=0)
-    due_date = models.DateTimeField(null=True, blank=True)
+    due_date = models.DateField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -45,7 +45,7 @@ class Contributor(models.Model):
     """
     expense_space = models.ForeignKey(ExpenseSpace, on_delete=models.CASCADE, related_name="contributors")
     name = models.CharField(max_length=50)
-    email = models.EmailField()
+    email = models.EmailField(null=True, blank=True)
 
 class Contribution(models.Model):
     """
@@ -53,7 +53,6 @@ class Contribution(models.Model):
     """
     expense_line = models.ForeignKey(ExpenseLine, on_delete=models.CASCADE, related_name="expense_contributions")
     contributor = models.ForeignKey(Contributor, on_delete=models.CASCADE, related_name="expense_contributors")
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
     custom_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     paid_status = models.IntegerField(choices=PAID_STATUS, default=0)
     """
@@ -66,7 +65,7 @@ class Contribution(models.Model):
         # Add the total sum of all custom amounts applied. If none is applied, defaults to 0
         total_custom_amount = sum(c.custom_amount or 0 for c in all_contributions)
         # calcualte the remaining amount after deducting the total custom amounts
-        remaining_amount = max(self.expense_line.amount - total_custom_amounts, 0)
+        remaining_amount = max(self.expense_line.amount - total_custom_amount, 0)
         # get all contributors with no custom amount applied
         contributors_non_custom = all_contributions.filter(custom_amount__isnull=True).count()
         # divide the remaining amount equally amongst all contributors with no custom amount applied
