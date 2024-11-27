@@ -4,15 +4,24 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col d-flex justify-content-end">
+            <a href="{% url 'add_space' %}" class="btn btn-success">Add Space</a>
+        </div>
+    </div>
     <h1 class="mb-3">Your Expense Spaces</h1>
-    <div class="row">
+    <div class="row justify-content-around">
         {% for space in expense_spaces %}
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 mb-3">
             <div class="card">
                 <img src="{{ space.space_image.url }}" class="space-img card-img-top" alt="{{ space.name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ space.name }}</h5>
+                    {% if space.description is null %}
+                    <br>
+                    {% else %}
                     <p class="card-text">{{ space.description }}</p>
+                    {% endif %}
                     <p class="card-text"><small class="text-muted">Created on:
                             {{ space.created_on|date:"M d, Y" }}</small></p>
                 </div>
