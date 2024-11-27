@@ -45,3 +45,25 @@ def add_space(request):
 
     return render(
         request, 'expense_app/add_space.html', {'expense_space_form': expense_space_form})
+
+@login_required
+def edit_space(request, edit_id):
+    
+    expense_space = get_object_or_404(ExpenseSpace, pk=edit_id, user=request.user)
+
+    if request.method == "POST":
+        expense_space_form = ExpenseSpaceForm(data=request.POST, files=request.FILES, instance=expense_space)
+        if expense_space_form.is_valid():
+            expense_space_form.save()
+            messages.success(request, 'Space Updated!')
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            messages.error(request, 'Error updating expense!')
+
+    else:
+        expense_space_form = ExpenseSpaceForm(instance=expense_space)
+
+    return render(
+        request, 'expense_app/edit_space.html',
+         {'expense_space_form': expense_space_form, 'edit_id': edit_id}
+    )
