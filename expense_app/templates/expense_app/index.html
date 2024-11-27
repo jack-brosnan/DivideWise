@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container mt-4">
+    <h1 class="mb-3">Your Expense Spaces</h1>
+    <div class="row">
+        {% for space in expense_spaces %}
+        <div class="col-12 col-md-3">
+            <div class="card">
+                <img src="{{ space.space_image.url }}" class="space-img card-img-top" alt="{{ space.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ space.name }}</h5>
+                    <p class="card-text">{{ space.description }}</p>
+                    <p class="card-text"><small class="text-muted">Created on:
+                            {{ space.created_on|date:"M d, Y" }}</small></p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">View Space</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="row">
+            <p class="text-center">No expense spaces found.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<h1>Welcome!</h1>
+<p>Please log in to view your expense spaces.</p>
+{% endif %}
+{% endblock %}

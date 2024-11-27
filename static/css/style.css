@@ -29,10 +29,10 @@ body {
     background-color: #F9FAFC;
 }
 
-.card {
+/* .card {
     border: none;
     background-color: transparent;
-}
+} */
 
 .image-container {
     position: relative;
@@ -162,6 +162,19 @@ body {
 
 .approval {
     color: rgb(222, 146, 168);
+}
+
+/* Main View */
+
+/* .dashboard-view {
+    height:80vh;
+} */
+
+/* Expense Space Cards */
+
+.space-img {
+    max-width: 100%;
+    max-height: 200px;
 }
 
 /* Footer */

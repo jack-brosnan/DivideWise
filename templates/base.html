@@ -68,9 +68,13 @@
             </div>
         </div>
     </nav>
-    
+
     <main>
-        <h1>Hello Django From Heroku</h1>
+        <div class="container dashboard-view">
+            {% block content %}
+            <!-- Content Goes here -->
+            {% endblock content %}
+        </div>
     </main>
 
     <!-- Footer -->
@@ -81,14 +85,14 @@
             <ul class="nav col-lg-5 justify-content-end">
                 <li class="nav-item"><a href="#" class="nav-link px-2">Home</a></li>
                 <li class="nav-item d-none d-md-block"><a href="#" class="nav-link px-2">Calculator</a></li>
-                
+
                 <li class="nav-item dropdown d-md-none">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Resources
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Calculator</a></li>                        
+                        <li><a class="dropdown-item" href="#">Calculator</a></li>
                     </ul>
                 </li>
             </ul>
@@ -106,14 +110,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-<body>
-
-</body>
