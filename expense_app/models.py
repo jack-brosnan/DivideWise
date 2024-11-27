@@ -66,8 +66,8 @@ class Contribution(models.Model):
     custom_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     paid_status = models.IntegerField(choices=PAID_STATUS, default=0)
 
-    def __str__(self):
-        return f"{self.contributer.name} - {self.expense_line.title}"
+    # def __str__(self):
+    #     return f"{self.contributer.name} - {self.expense_line.title}"
         
     """
     Method to calculate the remaining balance of the expense if custom amounts are applied to some contributors.
