@@ -17,6 +17,13 @@
             <p>{{ expense_space.description }}</p>
             <p><strong>Currency:</strong> {{ expense_space.get_currency_display }}</p>
             <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
+            <p>Contributors:
+            {% for c in contributor %}
+            <span>{{ c.name }}</span>
+            {% empty %}
+            <p>No contributors assigned</p>
+            {% endfor %}
+            </p>
         </div>
     </div>
 </div>

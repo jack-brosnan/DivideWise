@@ -85,9 +85,10 @@ def view_space(request, space_id):
     """
     expense_space = get_object_or_404(ExpenseSpace, pk=space_id, user=request.user)
     expense_line = ExpenseLine.objects.filter(expense_space=expense_space).order_by('-created_on')
+    contributor = Contributor.objects.filter(expense_space=expense_space)
     
     return render(
         request,
         'expense_app/view_space.html',
-        {'expense_space': expense_space, 'expense_line': expense_line}
+        {'expense_space': expense_space, 'expense_line': expense_line, 'contributor': contributor,}
     )
