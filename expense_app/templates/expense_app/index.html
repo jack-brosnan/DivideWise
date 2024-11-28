@@ -26,7 +26,7 @@
                             {{ space.created_on|date:"M d, Y" }}</small></p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">View Space</a>
+                    <a href="{% url 'view_space' space.id %}" class="btn btn-primary">View Space</a>
                     <a href="{% url 'edit_space' edit_id=space.id %}" class="btn btn-primary">Edit</a>
                     <button class="btn btn-danger delete-space mr-3" data-space-id="{{ space.id }}">Delete</button>
                 </div>
