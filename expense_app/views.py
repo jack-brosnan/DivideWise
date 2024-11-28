@@ -55,10 +55,10 @@ def edit_space(request, edit_id):
         expense_space_form = ExpenseSpaceForm(data=request.POST, files=request.FILES, instance=expense_space)
         if expense_space_form.is_valid():
             expense_space_form.save()
-            messages.success(request, 'Space Updated!')
+            messages.add_message(request, messages.SUCCESS, 'Space Updated!')
             return HttpResponseRedirect(reverse('home'))
         else:
-            messages.error(request, 'Error updating expense!')
+            messages.add_message(request, messages.ERROR, 'Error updating expense!')
 
     else:
         expense_space_form = ExpenseSpaceForm(instance=expense_space)
@@ -74,6 +74,6 @@ def delete_space(request, space_id):
     expense_space = get_object_or_404(ExpenseSpace, pk=space_id, user=request.user)
     if request.method == "POST":
         expense_space.delete()
-        messages.success(request, 'Space deleted successfully!')
+        messages.add_message(request, messages.SUCCESS, 'Space deleted successfully!')
         return redirect('home')
     return redirect('home')

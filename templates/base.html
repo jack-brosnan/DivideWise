@@ -69,6 +69,21 @@
         </div>
     </nav>
 
+    <!-- displaying Django messages -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible
+          fade show" id="msg" role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
     <main>
         <div class="container dashboard-view">
             {% block content %}
@@ -106,7 +121,7 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
     <!-- Local script -->
-     <script src="static/js/script.js"></script>
+    <script src="static/js/script.js"></script>
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/1ef2e57231.js" crossorigin="anonymous"></script>
 </body>
