@@ -84,10 +84,10 @@ def view_space(request, space_id):
     Display the details of a specific ExpenseSpace along with its linked ExpenseLines.
     """
     expense_space = get_object_or_404(ExpenseSpace, pk=space_id, user=request.user)
-    expense_lines = ExpenseLine.objects.filter(expense_space=expense_space).order_by('-created_on')
+    expense_line = ExpenseLine.objects.filter(expense_space=expense_space).order_by('-created_on')
     
     return render(
         request,
         'expense_app/view_space.html',
-        {'expense_space': expense_space, 'expense_lines': expense_lines}
+        {'expense_space': expense_space, 'expense_line': expense_line}
     )
