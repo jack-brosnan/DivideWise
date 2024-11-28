@@ -46,3 +46,4 @@ class ExpenseSpaceForm(forms.ModelForm):
                     attrs={'placeholder': 'Enter currency'}
                 ),
             }
+

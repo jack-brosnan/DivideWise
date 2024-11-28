@@ -67,3 +67,13 @@ def edit_space(request, edit_id):
         request, 'expense_app/edit_space.html',
          {'expense_space_form': expense_space_form, 'edit_id': edit_id}
     )
+
+@login_required
+def delete_space(request, space_id):
+
+    expense_space = get_object_or_404(ExpenseSpace, pk=space_id, user=request.user)
+    if request.method == "POST":
+        expense_space.delete()
+        messages.success(request, 'Space deleted successfully!')
+        return redirect('home')
+    return redirect('home')

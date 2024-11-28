@@ -28,6 +28,7 @@
                 <div class="card-footer">
                     <a href="#" class="btn btn-primary">View Space</a>
                     <a href="{% url 'edit_space' edit_id=space.id %}" class="btn btn-primary">Edit</a>
+                    <button class="btn btn-danger delete-space mr-3" data-space-id="{{ space.id }}">Delete</button>
                 </div>
             </div>
         </div>
@@ -42,4 +43,26 @@
 <h1>Welcome!</h1>
 <p>Please log in to view your expense spaces.</p>
 {% endif %}
+
+<!-- Modal popup to confirm deltion of record -->
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete expense?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your expense? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form id="deleteForm" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
