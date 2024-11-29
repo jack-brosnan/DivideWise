@@ -15,7 +15,7 @@
         <div class="col-8 col-md-3">
             <h1>{{ expense_space.name }}</h1>
             <p>{{ expense_space.description }}</p>
-            <p><strong>Currency:</strong> {{ expense_space.get_currency_display }}</p>
+            <p><strong>Total Expense:</strong> {{ expense_space.get_currency_display }} {{ expense_space.total_expense }}</p>
             <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
 
         </div>

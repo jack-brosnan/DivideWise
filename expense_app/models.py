@@ -19,6 +19,13 @@ class ExpenseSpace(models.Model):
     currency = models.IntegerField(choices=CURRENCY, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    
+    def total_expense(self):
+        total = 0
+        expense_amount = ExpenseLine.objects.filter(expense_space=self)
+        for line in expense_amount:
+            total += line.amount
+        return total
 
     def __str__(self):
         return self.name
