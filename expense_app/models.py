@@ -53,6 +53,17 @@ class Contributor(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(null=True, blank=True)
 
+    def total_contributions(self):
+        total = 0
+        contributions = Contribution.objects.filter(contributor=self)
+        for share in contributions:
+            if share.custom_amount is None:
+                total += share.remaining_share
+            else:
+                total += share.custom_amount
+        return round(total, 2)
+        
+
     def __str__(self):
         return self.name
 

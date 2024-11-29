@@ -17,13 +17,20 @@
             <p>{{ expense_space.description }}</p>
             <p><strong>Currency:</strong> {{ expense_space.get_currency_display }}</p>
             <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
-            <p>Contributors:
+
+        </div>
+        <div class="col-6 col-md-5">
+            <h3>Contributors</h3>
+            <div class="row justify-content-between border border-3 rounded">
                 {% for c in contributor %}
-                <span>{{ c.name }}</span>
+                <div class="col-6">
+                    <p>{{ c.name }} - {{ expense_space.get_currency_display }} {{ c.total_contributions }}</p>
+                </div>
                 {% empty %}
-                <p>No contributors assigned</p>
+                    <p>No contributors assigned</p>
                 {% endfor %}
-            </p>
+            </div>
+
         </div>
     </div>
 </div>
@@ -37,7 +44,7 @@
                     aria-controls="collapse-{{ line.id }}">
                     <div class="d-flex justify-content-between w-100">
                         <span>{{ line.title}}</span>
-                        <span>{{ line.created_on|date:"M d, Y"}}</span>
+                        <span class="d-none d-md-block">{{ line.created_on|date:"M d, Y"}}</span>
                         <span>{{ expense_space.get_currency_display }} {{ line.amount}}</span>
 
                     </div>
