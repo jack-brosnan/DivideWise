@@ -87,6 +87,7 @@ def view_space(request, space_id):
     expense_line = ExpenseLine.objects.filter(expense_space=expense_space).order_by('-created_on')
     contributor = Contributor.objects.filter(expense_space=expense_space)
     
+    
     return render(
         request,
         'expense_app/view_space.html',

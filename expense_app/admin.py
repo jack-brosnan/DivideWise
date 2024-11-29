@@ -20,8 +20,8 @@ class ContributorAdmin(admin.ModelAdmin):
     
 @admin.register(Contribution)
 class ContributionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'expense_line', 'contributor', 'custom_amount', 'remaining_share', 'paid_status')
-    readonly_fields = ('remaining_share',)
+    list_display = ('id', 'expense_line', 'contributor', 'split_type', 'custom_amount', 'remaining_share', 'paid_status')
+    readonly_fields = ('remaining_share', 'split_type')
 
     def remaining_share(self, obj):
         """

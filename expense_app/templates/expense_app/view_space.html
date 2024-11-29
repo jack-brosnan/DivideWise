@@ -18,11 +18,11 @@
             <p><strong>Currency:</strong> {{ expense_space.get_currency_display }}</p>
             <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
             <p>Contributors:
-            {% for c in contributor %}
-            <span>{{ c.name }}</span>
-            {% empty %}
-            <p>No contributors assigned</p>
-            {% endfor %}
+                {% for c in contributor %}
+                <span>{{ c.name }}</span>
+                {% empty %}
+                <p>No contributors assigned</p>
+                {% endfor %}
             </p>
         </div>
     </div>
@@ -32,31 +32,56 @@
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" 
-                    data-bs-target="#collapse-{{ line.id }}" aria-expanded="false" 
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapse-{{ line.id }}" aria-expanded="false"
                     aria-controls="collapse-{{ line.id }}">
                     <div class="d-flex justify-content-between w-100">
                         <span>{{ line.title}}</span>
                         <span>{{ line.created_on|date:"M d, Y"}}</span>
                         <span>{{ expense_space.get_currency_display }} {{ line.amount}}</span>
-                        
+
                     </div>
                 </button>
             </h2>
             <div id="collapse-{{ line.id }}" class="accordion-collapse collapse">
                 <div class="accordion-body">
-                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
-                    plugin adds the appropriate classes that we use to style each element. These classes control the
-                    overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of
-                    this with custom CSS or overriding our default variables. It's also worth noting that just about any
-                    HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Contributor</th>
+                                <th scope="col">Split</th>
+                                <th scope="col">Custom Amount</th>
+                                <th scope="col">Remaining</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for split in line.expense_contributions.all %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ split.contributor.name }}</td>
+                                <td>{{ split.split_type }}</td>
+                                <td>{{ split.custom_amount|default:"-" }}</td>
+                                {% if split.custom_amount is none %}
+                                <td>{{ split.remaining_share }}</td>
+                                {% else %}
+                                <td>-</td>
+                                {% endif %}
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5">No contributions for this expense</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
     {% empty %}
     <h1>No Expenses here</h1>
     {% endfor %}
-    
+
 </div>
 {% endblock %}

@@ -68,6 +68,9 @@ class Contribution(models.Model):
 
     # def __str__(self):
     #     return f"{self.contributer.name} - {self.expense_line.title}"
+
+    def split_type(self):
+        return "Equal Split" if self.custom_amount is None else "Custom"
         
     """
     Method to calculate the remaining balance of the expense if custom amounts are applied to some contributors.
