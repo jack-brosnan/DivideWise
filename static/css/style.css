@@ -194,3 +194,18 @@ footer .nav-link {
 footer .nav-link:focus {
     color: #ffffff;
 }
+
+/* Expense Line Summary */
+
+.line-initials {
+    background-color: #E84610;
+    color: #ffffff;
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 1.5rem; 
+}

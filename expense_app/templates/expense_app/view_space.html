@@ -15,7 +15,8 @@
         <div class="col-8 col-md-3">
             <h1>{{ expense_space.name }}</h1>
             <p>{{ expense_space.description }}</p>
-            <p><strong>Total Expense:</strong> {{ expense_space.get_currency_display }} {{ expense_space.total_expense }}</p>
+            <p><strong>Total Expense:</strong> {{ expense_space.get_currency_display }}
+                {{ expense_space.total_expense }}</p>
             <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
 
         </div>
@@ -23,11 +24,19 @@
             <h3>Contributors</h3>
             <div class="row justify-content-between border border-3 rounded">
                 {% for c in contributor %}
-                <div class="col-6">
-                    <p>{{ c.name }} - {{ expense_space.get_currency_display }} {{ c.total_contributions }}</p>
+                <div class="col-12 col-md-6 border rounded">
+                    <div class="row justify-content-center">
+                        <div class="col-2 align-self-center line-initials">
+                            <p class="m-0">{{ c.name|slice:":1" }}</p>      
+                        </div>
+                        <div class="col-6">
+                            <p class="m-0">{{ c.name }}</p>
+                            <p class="m-0">{{ expense_space.get_currency_display }} {{ c.total_contributions }}</p>
+                        </div>
+                    </div>                    
                 </div>
                 {% empty %}
-                    <p>No contributors assigned</p>
+                <p>No contributors assigned</p>
                 {% endfor %}
             </div>
 
@@ -43,7 +52,8 @@
                     data-bs-target="#collapse-{{ line.id }}" aria-expanded="false"
                     aria-controls="collapse-{{ line.id }}">
                     <div class="d-flex justify-content-between w-100">
-                        <span>{{ line.title}}</span>
+                        <span>{{ line.title }}</span>
+                        
                         <span class="d-none d-md-block">{{ line.created_on|date:"M d, Y"}}</span>
                         <span>{{ expense_space.get_currency_display }} {{ line.amount}}</span>
 
