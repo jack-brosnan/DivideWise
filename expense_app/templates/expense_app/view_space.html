@@ -27,13 +27,13 @@
                 <div class="col-12 col-md-6 border rounded">
                     <div class="row justify-content-center">
                         <div class="col-2 align-self-center line-initials">
-                            <p class="m-0">{{ c.name|slice:":1" }}</p>      
+                            <p class="m-0">{{ c.name|slice:":1" }}</p>
                         </div>
                         <div class="col-6">
                             <p class="m-0">{{ c.name }}</p>
                             <p class="m-0">{{ expense_space.get_currency_display }} {{ c.total_contributions }}</p>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
                 {% empty %}
                 <p>No contributors assigned</p>
@@ -53,7 +53,7 @@
                     aria-controls="collapse-{{ line.id }}">
                     <div class="d-flex justify-content-between w-100">
                         <span>{{ line.title }}</span>
-                        
+
                         <span class="d-none d-md-block">{{ line.created_on|date:"M d, Y"}}</span>
                         <span>{{ expense_space.get_currency_display }} {{ line.amount}}</span>
 
@@ -78,9 +78,14 @@
                                 <th scope="row">{{ forloop.counter }}</th>
                                 <td>{{ split.contributor.name }}</td>
                                 <td>{{ split.split_type }}</td>
-                                <td>{{ split.custom_amount|default:"-" }}</td>
+                                <td>{% if split.custom_amount is none %}-
+                                    {% else %}
+                                    {{ expense_space.get_currency_display }}
+                                    {{ split.custom_amount|default:"-" }}{% endif %}</td>
                                 {% if split.custom_amount is none %}
-                                <td>{{ split.remaining_share }}</td>
+                                <td>
+                                    {{ expense_space.get_currency_display }}                                
+                                    {{ split.remaining_share }}</td>
                                 {% else %}
                                 <td>-</td>
                                 {% endif %}
