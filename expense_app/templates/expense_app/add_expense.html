@@ -12,7 +12,7 @@
         {% csrf_token %}
         {{ expense_line_form | crispy }}
         <button type="submit" class="btn btn-primary">Add Expense</button>
-        <a href="{% url 'view_space' %}" class="btn btn-success">Cancel</a>
+        <a href="{% url 'view_space' expense_space.id %}" class="btn btn-success">Cancel</a>
     </form>
 </div>
 {% endblock %}

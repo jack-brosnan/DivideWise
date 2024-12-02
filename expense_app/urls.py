@@ -8,4 +8,5 @@ urlpatterns = [
     path("delete_space/<int:space_id>/",views.delete_space,name="delete_space"),
     path("view_space/<int:space_id>/", views.view_space, name="view_space"),
     path('edit_contributor/<int:space_id>/', views.edit_contributor, name='edit_contributor'),
+    path('add_expense/<int:space_id>/', views.add_expense, name='add_expense'),
 ]

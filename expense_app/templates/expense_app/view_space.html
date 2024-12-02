@@ -106,7 +106,7 @@
     <h1>No Expenses here</h1>
     {% endfor %}
 <div class="container">
-    <a href="#" class="btn btn-success">Add Expense</a>
+    <a href="{% url 'add_expense' expense_space.id %}" class="btn btn-success">Add Expense</a>
 </div>
        
 {% endblock %}
