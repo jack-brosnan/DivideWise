@@ -53,7 +53,6 @@
                     data-bs-target="#collapse-{{ line.id }}" aria-expanded="false"
                     aria-controls="collapse-{{ line.id }}">
                     <div class="d-flex justify-content-between w-100">
-                        <span><a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}" class="btn btn-primary btn-sm">Edit</a></span>
                         <span>{{ line.title }}</span>
 
                         <span class="d-none d-md-block">{{ line.created_on|date:"M d, Y"}}</span>
@@ -64,6 +63,7 @@
             </h2>
             <div id="collapse-{{ line.id }}" class="accordion-collapse collapse">
                 <div class="accordion-body">
+                    <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}" class="btn btn-primary btn-sm">Edit Expense Details</a>
                     <table class="table">
                         <thead>
                             <tr>
