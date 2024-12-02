@@ -149,13 +149,29 @@ def add_expense(request, space_id):
             expense_line = expense_line_form.save(commit=False)
             expense_line.expense_space = expense_space
             expense_line.save()
-            messages.add_message(
-                request, messages.SUCCESS,
-                'Expense line added successfully!'
-            )
+            
             return redirect('view_space', space_id=space_id)
     else:
         expense_line_form = ExpenseLineForm()
 
     return render(
         request, 'expense_app/add_expense.html', {'expense_line_form': expense_line_form, 'expense_space': expense_space})
+
+@login_required
+def edit_expense(request, space_id, expense_id):
+    expense_space = get_object_or_404(ExpenseSpace, pk=space_id, user=request.user)
+    expense_line = get_object_or_404(ExpenseLine, pk=expense_id, expense_space=expense_space)
+               
+    if request.method == 'POST':
+        expense_line_form = ExpenseLineForm(request.POST, instance=expense_line)
+        if expense_line_form.is_valid():
+            expense_line = expense_line_form.save(commit=False)
+            expense_line.expense_space = expense_space
+            expense_line.save()
+            
+            return redirect('view_space', space_id=space_id)
+    else:
+        expense_line_form = ExpenseLineForm(instance=expense_line)
+
+    return render(
+        request, 'expense_app/edit_expense.html', {'expense_line_form': expense_line_form, 'expense_space': expense_space, 'expense_line': expense_line,})
