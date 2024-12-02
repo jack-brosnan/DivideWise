@@ -7,12 +7,12 @@
 {% block content %}
 
 <div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-8 col-md-3">
+    <div class="row justify-content-between">
+        <div class="col-12 col-md-3">
             <img src="{{ expense_space.space_image.url }}" class="space-img card-img-top"
                 alt="{{ expense_space.name }}">
         </div>
-        <div class="col-8 col-md-3">
+        <div class="col-12 col-md-3">
             <h1>{{ expense_space.name }}</h1>
             <p>{{ expense_space.description }}</p>
             <p><strong>Total Expense:</strong> {{ expense_space.get_currency_display }}
@@ -20,12 +20,12 @@
             <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
 
         </div>
-        <div class="col-6 col-md-5">
+        <div class="col-12 col-md-5">
             <h3>Contributors<span>
                 <a href="{% url 'edit_contributor' expense_space.id %}" class="btn btn-primary">Edit</a></span></h3>
             <div class="row justify-content-between border border-3 rounded">
                 {% for c in contributor %}
-                <div class="col-12 col-md-6 border rounded">
+                <div class="col-12 col-sm-6 col-md-6 border rounded">
                     <div class="row justify-content-center">
                         <div class="col-2 align-self-center line-initials">
                             <p class="m-0">{{ c.name|slice:":1" }}</p>
@@ -44,7 +44,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container p-0">
     {% for line in expense_line %}
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
@@ -105,6 +105,8 @@
     {% empty %}
     <h1>No Expenses here</h1>
     {% endfor %}
-
+<div class="container">
+    <a href="#" class="btn btn-success">Add Expense</a>
+</div>
        
 {% endblock %}

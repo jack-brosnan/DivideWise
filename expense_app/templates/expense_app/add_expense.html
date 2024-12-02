@@ -2,17 +2,17 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %}Add Space{% endblock %}
+{% block title %}Add Expense{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h1 class="display-4 text-center">Add Space</h1>
+    <h1 class="display-4 text-center">Add Expense</h1>
     <!-- <form method="post" action=""> -->
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ expense_space_form | crispy }}
+        {{ expense_line_form | crispy }}
         <button type="submit" class="btn btn-primary">Add Expense</button>
-        <a href="{% url 'home' %}" class="btn btn-success">Cancel</a>
+        <a href="{% url 'view_space' %}" class="btn btn-success">Cancel</a>
     </form>
 </div>
 {% endblock %}
