@@ -175,3 +175,15 @@ def edit_expense(request, space_id, expense_id):
 
     return render(
         request, 'expense_app/edit_expense.html', {'expense_line_form': expense_line_form, 'expense_space': expense_space, 'expense_line': expense_line,})
+
+@login_required
+def delete_expense(request, space_id, expense_id):
+    expense_space = get_object_or_404(ExpenseSpace, pk=space_id, user=request.user)
+    expense_line = get_object_or_404(ExpenseLine, pk=expense_id, expense_space=expense_space)
+               
+    if request.method == 'POST':
+        expense_line.delete()
+        return redirect('view_space', space_id=space_id)
+    
+    return render(
+        request, 'expense_app/edit_expense.html', {'expense_space': expense_space, 'expense_line': expense_line,})
