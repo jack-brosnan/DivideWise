@@ -1,7 +1,7 @@
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import ExpenseSpace, Contributor
+from .models import ExpenseSpace, Contributor, ExpenseLine
 
 
 class ExpenseSpaceForm(forms.ModelForm):
@@ -51,3 +51,37 @@ class ContributorForm(forms.ModelForm):
     class Meta:
         model = Contributor
         fields = ['name',]
+
+class ExpenseLineForm(forms.ModelForm):
+    """
+    Form for adding or editing an expense.
+    """
+    class Meta:
+        """
+        **Model**: :model:`ExpenseLine`
+
+        **Fields**:
+
+        1. ``title``: Text field for entering the item name.
+        2. ``description``: TextInput for entering a description.
+        3. ``due_date``: Date input.
+        4. ``amount``: Float field to enter the expense amount.
+
+        """
+        model = ExpenseLine
+        fields = ['title', 'description', 'amount', 'due_date']
+        
+        widgets = {
+                'title': forms.TextInput(
+                    attrs={'placeholder': 'Enter Title'}
+                ),
+                'description': forms.TextInput(
+                    attrs={'placeholder': 'Enter Description'}
+                ),
+                'amount': forms.NumberInput(
+                    attrs={'placeholder': 'Enter amount'}
+                ),
+                'due_date': forms.DateInput(
+                    attrs={'placeholder': 'Optional'}
+                ),
+            }
