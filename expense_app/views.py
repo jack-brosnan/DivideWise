@@ -149,6 +149,7 @@ def add_expense(request, space_id):
             expense_line = expense_line_form.save(commit=False)
             expense_line.expense_space = expense_space
             expense_line.save()
+            messages.add_message(request, messages.SUCCESS, 'Expense added!')
             
             return redirect('view_space', space_id=space_id)
     else:
@@ -168,6 +169,7 @@ def edit_expense(request, space_id, expense_id):
             expense_line = expense_line_form.save(commit=False)
             expense_line.expense_space = expense_space
             expense_line.save()
+            messages.add_message(request, messages.SUCCESS, 'Expense Updated!')
             
             return redirect('view_space', space_id=space_id)
     else:
@@ -183,6 +185,7 @@ def delete_expense(request, space_id, expense_id):
                
     if request.method == 'POST':
         expense_line.delete()
+        messages.add_message(request, messages.SUCCESS, 'Expense Removed!')
         return redirect('view_space', space_id=space_id)
     
     return render(

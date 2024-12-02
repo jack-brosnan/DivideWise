@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container">
     <h1 class="display-4 text-center">Edit Space</h1>
-    <!-- <form method="post" action=""> -->
+    
     <form method="post" action="{% url 'edit_space' edit_id=edit_id %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ expense_space_form | crispy }}
