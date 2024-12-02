@@ -1,7 +1,7 @@
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import ExpenseSpace
+from .models import ExpenseSpace, Contributor
 
 
 class ExpenseSpaceForm(forms.ModelForm):
@@ -47,3 +47,7 @@ class ExpenseSpaceForm(forms.ModelForm):
                 ),
             }
 
+class ContributorForm(forms.ModelForm):
+    class Meta:
+        model = Contributor
+        fields = ['name',]

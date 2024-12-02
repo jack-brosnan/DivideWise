@@ -21,7 +21,8 @@
 
         </div>
         <div class="col-6 col-md-5">
-            <h3>Contributors</h3>
+            <h3>Contributors<span>
+                <a href="{% url 'edit_contributor' expense_space.id %}" class="btn btn-primary">Edit</a></span></h3>
             <div class="row justify-content-between border border-3 rounded">
                 {% for c in contributor %}
                 <div class="col-12 col-md-6 border rounded">
@@ -84,7 +85,7 @@
                                     {{ split.custom_amount|default:"-" }}{% endif %}</td>
                                 {% if split.custom_amount is none %}
                                 <td>
-                                    {{ expense_space.get_currency_display }}                                
+                                    {{ expense_space.get_currency_display }}
                                     {{ split.remaining_share }}</td>
                                 {% else %}
                                 <td>-</td>
@@ -105,5 +106,5 @@
     <h1>No Expenses here</h1>
     {% endfor %}
 
-</div>
+       
 {% endblock %}

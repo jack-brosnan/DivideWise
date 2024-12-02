@@ -1,0 +1,10 @@
+<td>
+  <form method="post" action="{% url 'edit_contributor' expense_space.id %}">
+    {% csrf_token %}
+    {{ form.name }}
+</td>
+<td>
+  <button type="submit" name="save" value="{{ form.instance.id }}" class="btn btn-primary btn-sm">Save</button>
+  <button type="submit" name="cancel" value="{{ form.instance.id }}" class="btn btn-secondary btn-sm">Cancel</button>
+  </form>
+</td
