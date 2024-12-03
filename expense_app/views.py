@@ -213,3 +213,16 @@ def edit_custom_amount(request, space_id, expense_id, contribution_id):
         'form': form,
     })
 
+@login_required
+def delete_contribution(request, space_id, expense_id, contribution_id):
+    expense_space = get_object_or_404(ExpenseSpace, pk=space_id, user=request.user)
+    expense_line = get_object_or_404(ExpenseLine, pk=expense_id, expense_space=expense_space)
+    contribution = get_object_or_404(Contribution, pk=contribution_id, expense_line=expense_line)
+               
+    if request.method == 'POST':
+        contribution.delete()
+        messages.add_message(request, messages.SUCCESS, 'Contribution Removed')
+        return redirect('view_space', space_id=space_id)
+    
+    return render(
+        request, 'expense_app/edit_expense.html', {'expense_space': expense_space, 'expense_line': expense_line, 'contribution': contribution,})

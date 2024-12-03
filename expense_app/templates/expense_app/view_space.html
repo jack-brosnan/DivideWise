@@ -63,12 +63,13 @@
             </h2>
             <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse show">
                 <div class="accordion-body">
+                    {{ line.description }}
                     <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}"
                         class="btn btn-primary btn-sm">Edit Expense Details</a>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col"></th>
                                 <th scope="col">Contributor</th>
                                 <th scope="col">Split</th>
                                 <th scope="col">Custom Amount</th>
@@ -78,19 +79,30 @@
                         <tbody>
                             {% for split in line.expense_contributions.all %}
                             <tr>
-                                <th scope="row">{{ forloop.counter }}</th>
+                                <th>
+
+                                    <form method="post"
+                                        action="{% url 'delete_contribution' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
+                                        class="my-2">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                    </form>
+
+                                </th>
                                 <td>{{ split.contributor.name }}</td>
                                 <td>{{ split.split_type }}</td>
 
                                 <td>
                                     {% if split.custom_amount is none %}
-                                    <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}" class="btn btn-sm btn-success">Add</a>
+                                    <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
+                                        class="btn btn-sm btn-success">Add</a>
                                     {% else %}
                                     {{ expense_space.get_currency_display }} {{ split.custom_amount|default:"-" }}
-                                    <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
+                                        class="btn btn-sm btn-primary">Edit</a>
                                     {% endif %}
                                 </td>
-                                
+
                                 {% if split.custom_amount is none %}
                                 <td>
                                     {{ expense_space.get_currency_display }}
