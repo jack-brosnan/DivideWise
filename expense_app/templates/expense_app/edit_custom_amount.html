@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit Contribution{% endblock %}
+
+{% block content %}
+
+<div class="container text-center">
+    <h2>Edit contribution from {{ contribution.contributor.name }} for {{ expense_line.title }}</h2>
+    
+    <form method="post" action="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=expense_line.id contribution_id=contribution.id %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="custom_amount" class="form-label">Custom Amount:</label>
+            {{ expense_space.get_currency_display }} {{ form.custom_amount }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'view_space' expense_space.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -85,3 +85,8 @@ class ExpenseLineForm(forms.ModelForm):
                     attrs={'placeholder': 'Optional'}
                 ),
             }
+
+class CustomAmountForm(forms.ModelForm):
+    class Meta:
+        model = Contribution
+        fields = ['custom_amount',]

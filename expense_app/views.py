@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from .models import ExpenseSpace, ExpenseLine, Contributor, Contribution
-from .forms import ExpenseSpaceForm, ContributorForm, ExpenseLineForm
+from .forms import ExpenseSpaceForm, ContributorForm, ExpenseLineForm, CustomAmountForm
 
 # Create your views here.
 
@@ -191,3 +191,24 @@ def delete_expense(request, space_id, expense_id):
     return render(
         request, 'expense_app/edit_expense.html', {'expense_space': expense_space, 'expense_line': expense_line,})
 
+@login_required
+def edit_custom_amount(request, space_id, expense_id, contribution_id):
+    expense_space = get_object_or_404(ExpenseSpace, pk=space_id, user=request.user)
+    expense_line = get_object_or_404(ExpenseLine, pk=expense_id, expense_space=expense_space)
+    contribution = get_object_or_404(Contribution, pk=contribution_id, expense_line=expense_line)
+
+    if request.method == 'POST':
+        form = CustomAmountForm(request.POST, instance=contribution)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Updated custom amount')
+            return redirect('view_space', space_id=space_id)
+    else:
+        form = CustomAmountForm(instance=contribution)
+
+    return render(request, 'expense_app/edit_custom_amount.html', {
+        'expense_space': expense_space,
+        'expense_line': expense_line,
+        'contribution': contribution,
+        'form': form,
+    })

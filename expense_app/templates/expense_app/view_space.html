@@ -87,6 +87,7 @@
                                     -
                                     {% else %}
                                     {{ expense_space.get_currency_display }} {{ split.custom_amount|default:"-" }}
+                                    <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}" class="btn btn-sm btn-primary">Edit</a>
                                     {% endif %}
                                 </td>
                                 

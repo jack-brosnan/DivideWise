@@ -6,8 +6,8 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="display-4 text-center">Add Space</h1>
-    <!-- <form method="post" action=""> -->
+    <h2 class="text-center">Add Space</h2>
+    
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ expense_space_form | crispy }}
