@@ -1,7 +1,7 @@
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import ExpenseSpace, Contributor, ExpenseLine
+from .models import ExpenseSpace, Contributor, ExpenseLine, Contribution
 
 
 class ExpenseSpaceForm(forms.ModelForm):

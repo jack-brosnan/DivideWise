@@ -190,3 +190,4 @@ def delete_expense(request, space_id, expense_id):
     
     return render(
         request, 'expense_app/edit_expense.html', {'expense_space': expense_space, 'expense_line': expense_line,})
+

@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container">
     <h1 class="display-4 text-center">Add Expense</h1>
-    <!-- <form method="post" action=""> -->
+    
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ expense_line_form | crispy }}

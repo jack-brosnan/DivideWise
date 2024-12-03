@@ -22,7 +22,7 @@
         </div>
         <div class="col-12 col-md-5">
             <h3>Contributors<span>
-                <a href="{% url 'edit_contributor' expense_space.id %}" class="btn btn-primary">Edit</a></span></h3>
+                    <a href="{% url 'edit_contributor' expense_space.id %}" class="btn btn-primary">Edit</a></span></h3>
             <div class="row justify-content-between border border-3 rounded">
                 {% for c in contributor %}
                 <div class="col-12 col-sm-6 col-md-6 border rounded">
@@ -50,8 +50,8 @@
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapse-{{ line.id }}" aria-expanded="false"
-                    aria-controls="collapse-{{ line.id }}">
+                    data-bs-target="#panelsStayOpen-{{ line.id }}" aria-expanded="true"
+                    aria-controls="panelsStayOpen-{{ line.id }}">
                     <div class="d-flex justify-content-between w-100">
                         <span>{{ line.title }}</span>
 
@@ -61,9 +61,10 @@
                     </div>
                 </button>
             </h2>
-            <div id="collapse-{{ line.id }}" class="accordion-collapse collapse">
+            <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse show">
                 <div class="accordion-body">
-                    <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}" class="btn btn-primary btn-sm">Edit Expense Details</a>
+                    <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}"
+                        class="btn btn-primary btn-sm">Edit Expense Details</a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -80,10 +81,15 @@
                                 <th scope="row">{{ forloop.counter }}</th>
                                 <td>{{ split.contributor.name }}</td>
                                 <td>{{ split.split_type }}</td>
-                                <td>{% if split.custom_amount is none %}-
+
+                                <td>
+                                    {% if split.custom_amount is none %}
+                                    -
                                     {% else %}
-                                    {{ expense_space.get_currency_display }}
-                                    {{ split.custom_amount|default:"-" }}{% endif %}</td>
+                                    {{ expense_space.get_currency_display }} {{ split.custom_amount|default:"-" }}
+                                    {% endif %}
+                                </td>
+                                
                                 {% if split.custom_amount is none %}
                                 <td>
                                     {{ expense_space.get_currency_display }}
@@ -106,8 +112,8 @@
     {% empty %}
     <h1>No Expenses here</h1>
     {% endfor %}
-<div class="container">
-    <a href="{% url 'add_expense' expense_space.id %}" class="btn btn-success">Add Expense</a>
-</div>
-       
-{% endblock %}
+    <div class="container">
+        <a href="{% url 'add_expense' expense_space.id %}" class="btn btn-success">Add Expense</a>
+    </div>
+
+    {% endblock %}
