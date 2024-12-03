@@ -226,3 +226,29 @@ def delete_contribution(request, space_id, expense_id, contribution_id):
     
     return render(
         request, 'expense_app/edit_expense.html', {'expense_space': expense_space, 'expense_line': expense_line, 'contribution': contribution,})
+
+@login_required
+def add_contribution(request, space_id, expense_id):
+    
+    expense_space = get_object_or_404(ExpenseSpace, pk=space_id, user=request.user)
+    expense_line = get_object_or_404(ExpenseLine, pk=expense_id, expense_space=expense_space)
+
+    
+    current_contributors = expense_line.expense_contributions.all().values_list('contributor_id', flat=True)
+    unassigned_contributors = Contributor.objects.filter(expense_space=expense_space).exclude(id__in=current_contributors)
+
+    if request.method == 'POST':
+        selected_contributors = request.POST.getlist('contributors')
+        if selected_contributors:
+            for contributor_id in selected_contributors:
+                contributor = get_object_or_404(Contributor, id=contributor_id, expense_space=expense_space)
+                Contribution.objects.create(expense_line=expense_line, contributor=contributor)
+            messages.success(request, 'Contributors added to the expense')
+            return redirect('view_space', space_id=space_id)
+
+    return render(request, 'expense_app/add_contribution.html', 
+    {
+        'expense_space': expense_space,
+        'expense_line': expense_line,
+        'unassigned_contributors': unassigned_contributors,
+    })

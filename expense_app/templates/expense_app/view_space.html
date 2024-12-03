@@ -110,12 +110,22 @@
                                 {% else %}
                                 <td>-</td>
                                 {% endif %}
+
                             </tr>
+                            
                             {% empty %}
                             <tr>
                                 <td colspan="5">No contributions for this expense</td>
                             </tr>
+                            
                             {% endfor %}
+                            <tr>
+                                <td colspan="5">
+
+                                    <a href="{% url 'add_contribution' space_id=expense_space.id expense_id=line.id %}" class="btn btn-sm btn-success">Add</a>
+
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

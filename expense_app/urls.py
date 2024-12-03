@@ -13,6 +13,8 @@ urlpatterns = [
     path('delete_expense/<int:space_id>/<int:expense_id>/', views.delete_expense, name='delete_expense'),
     path('edit_custom_amount/<int:space_id>/<int:expense_id>/<int:contribution_id>/', views.edit_custom_amount, name='edit_custom_amount'),
     path('delete_contribution/<int:space_id>/<int:expense_id>/<int:contribution_id>/', views.delete_contribution, name='delete_contribution'),
+    path('add_contribution/<int:space_id>/<int:expense_id>/', views.add_contribution, name='add_contribution'),
+
 
     
 ]

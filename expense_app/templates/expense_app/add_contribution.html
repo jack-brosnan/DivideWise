@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add Contribution{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Add Contributors to {{ expense_line.title }}</h2>
+    <form method="post" action="{% url 'add_contribution' space_id=expense_space.id expense_id=expense_line.id %}">
+        {% csrf_token %}
+
+        {% if unassigned_contributors %}
+        <div class="form-group">
+            <label for="contributors">Select Contributors to Add:</label>
+            <div>
+                <table>
+                {% for contributor in unassigned_contributors %}
+                    <tr>
+                        <td>
+                            {{ contributor.name }}
+                        </td>
+                        <td>
+                            <input type="checkbox" class="form-check-input" name="contributors" value="{{ contributor.id }}" id="contributor-{{ contributor.id }}">
+                        </td>
+                    </tr>                   
+                
+                {% endfor %}
+            </table>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Selected Contributors</button>
+        {% else %}
+        <p>All contributors assigned to this expense.</p> 
+        
+        {% endif %}
+
+        <a href="{% url 'view_space' expense_space.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
