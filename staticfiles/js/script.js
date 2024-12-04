@@ -1,15 +1,22 @@
-console.log('hello')
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("JavaScript file is linked and working!");
 
-const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
-const deleteButtons = document.getElementsByClassName("delete-space");
-const deleteForm = document.getElementById("deleteForm");
+    const deleteModal = document.getElementById("deleteModal");
+    if (deleteModal) {
+        console.log("Delete modal found");
+    } else {
+        console.error("Delete modal not found");
+    }
 
-for (let button of deleteButtons) {
-    button.addEventListener("click", (e) => {
-        let spaceId = button.getAttribute("data-space-id");
-        console.log("Space ID:", spaceId); 
-        deleteForm.action = `/delete_space/${spaceId}/`; 
-        console.log("Form Action:", deleteForm.action); 
-        deleteModal.show();
-    });
-}
+    const deleteButtons = document.getElementsByClassName("delete-space");
+    console.log("Number of delete buttons:", deleteButtons.length);
+
+    const deleteForm = document.getElementById("deleteForm");
+    if (deleteForm) {
+        console.log("Delete form found");
+    } else {
+        console.error("Delete form not found");
+    }
+
+    // Original delete modal logic here
+});

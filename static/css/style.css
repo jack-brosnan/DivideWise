@@ -209,3 +209,13 @@ footer .nav-link:focus {
     align-items: center; 
     font-size: 1.5rem; 
 }
+
+/* Class to stop users updating required fields on form: ExpenseSpace[edit] */
+
+.readonly {
+    
+    color: gray;
+    background-color: lightgrey;
+    pointer-events: none;
+    
+}
