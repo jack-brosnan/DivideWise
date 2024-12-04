@@ -24,6 +24,11 @@
 
     if (pageUrl.includes('edit_space')) {
         const currencyField = document.getElementById('id_currency');
+        const imageContainer = document.getElementById('div_id_space_image');
+        const imageCurrentField = imageContainer.querySelector('div');
+
+        imageCurrentField.setAttribute('hidden', true);
+
         if (currencyField) {
             currencyField.classList.add('readonly');
         }
