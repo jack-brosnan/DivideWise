@@ -252,8 +252,41 @@ footer .nav-link:focus {
     color: red;
 }
 
+/* expense line accordion component */
+
+.accordion-button::after {
+    display: none;
+}
+
+.accordion-button:not(.collapsed) {
+    /* color: #ffffff; */
+    background-color: #ffffff;
+    box-shadow: inset 0 calc(-1* var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
+    font-weight: normal;
+}
+
+.accordion-button:focus {
+    z-index: 3;
+    outline: 0;
+    box-shadow: none;
+}
+
+.link-color {
+    color: #000000;
+    text-decoration-line: none;
+    font-weight: bold;
+}
+
 /* contribution table */
 
 .table-scroll {
     overflow-x: auto;       
+}
+
+.table-data-center {
+    text-align: center;
+}
+
+.remove-decoration {
+    text-decoration-line: none;
 }

@@ -44,7 +44,7 @@
         </div>
     </div>
 </div>
-<div class="container p-0">
+<div class="container mt-4 p-0">
     {% for line in expense_line %}
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
@@ -128,7 +128,10 @@
                                     <td colspan="5">
 
                                         <a href="{% url 'add_contribution' space_id=expense_space.id expense_id=line.id %}"
-                                            class="btn btn-sm btn-success">Add</a>
+                                            class="btn btn-link remove-decoration"><i
+                                                class="fa-solid fa-circle-plus add-icon"></i>
+                                            <span class="link-color"> Add Contributor</span>
+                                        </a>
 
                                     </td>
                                 </tr>
@@ -142,9 +145,19 @@
     {% empty %}
     <h1>No Expenses here</h1>
     {% endfor %}
-    <div class="container">
-        <a href="{% url 'add_expense' expense_space.id %}" class="btn btn-success">Add Expense</a>
+    <!-- Add Expense Section -->
+    <div class="accordion mt-4">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <a href="{% url 'add_expense' expense_space.id %}"
+                    class="accordion-button collapsed btn-link text-start remove-decoration">
+                    <div class="d-flex justify-content-center w-100">
+                        <span><i class="fa-solid fa-circle-plus add-icon"></i> Add New Expense</span>
+                    </div>
+                </a>
+            </h2>
+        </div>
     </div>
 
-
-    {% endblock %}
+</div>
+{% endblock %}
