@@ -44,6 +44,9 @@
         </div>
     </div>
 </div>
+<div class="container mt-2">
+    <button id="toggleButton" class="btn btn-primary">Toggle Expenses</button>
+</div>
 <div class="container mt-4 p-0">
     {% for line in expense_line %}
     <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -61,7 +64,7 @@
                     </div>
                 </button>
             </h2>
-            <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse show">
+            <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse accordion-panel show">
                 <div class="accordion-body">
                     {{ line.description }}
                     <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}"

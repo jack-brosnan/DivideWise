@@ -290,3 +290,7 @@ footer .nav-link:focus {
 .remove-decoration {
     text-decoration-line: none;
 }
+
+td {
+    vertical-align: middle;
+}
