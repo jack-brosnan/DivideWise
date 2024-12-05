@@ -25,11 +25,12 @@
                     <td>
                         <form method="post" action="{% url 'edit_contributor' expense_space.id %}" style="display:inline;">
                             {% csrf_token %}
-                            <button type="submit" name="edit" value="{{ c.id }}" class="btn btn-primary btn-sm">Edit</button>
+                            <button type="submit" name="edit" value="{{ c.id }}" class="btn btn-link edit-icon" title="Edit Contributor"><i class="fa-regular fa-pen-to-square"></i></button>
                         </form>
                         <form method="post" action="{% url 'edit_contributor' expense_space.id %}" style="display:inline;">
                             {% csrf_token %}
-                            <button type="submit" name="delete" value="{{ c.id }}" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="submit" name="delete" value="{{ c.id }}" class="btn btn-link p-0 delete-icon" title="Remove Contributor">
+                                <i class="fa-solid fa-x"></i></button>
                         </form>
                     </td>
                 {% endif %}
@@ -49,7 +50,7 @@
                         {{ form.name }}
                 </td>
                 <td>
-                    <button type="submit" name="save" class="btn btn-success btn-sm">Add</button>
+                    <button type="submit" name="save" class="btn btn-link add-icon"><i class="fa-solid fa-plus"></i></button>
                     </form>
                 </td>
             </tr>

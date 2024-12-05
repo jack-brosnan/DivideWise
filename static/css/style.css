@@ -219,3 +219,35 @@ footer .nav-link:focus {
     pointer-events: none;
     
 }
+
+/* Style form action buttons using fontawsome icons */
+
+.delete-icon {
+    background: none;
+    border: none;
+    color: red;
+}
+
+.add-icon {
+    background: none;
+    border: none;
+    color: green;
+}
+
+.edit-icon {
+    background: none;
+    border: none;
+    color: blue;
+}
+
+.save-icon {
+    background: none;
+    border: none;
+    color: green;
+}
+
+.cancel-icon {
+    background: none;
+    border: none;
+    color: red;
+}

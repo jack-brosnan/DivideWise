@@ -86,7 +86,9 @@
                                         action="{% url 'delete_contribution' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
                                         class="my-2">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                        <button type="submit" class="btn btn-link p-0 delete-icon" title="Remove line">
+                                            <i class="fa-solid fa-x"></i>
+                                        </button>
                                     </form>
 
                                 </th>
@@ -96,11 +98,11 @@
                                 <td>
                                     {% if split.custom_amount is none %}
                                     <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
-                                        class="btn btn-sm btn-success">Add</a>
+                                        class="btn btn-link add-icon"><i class="fa-solid fa-plus"></i></a>
                                     {% else %}
                                     {{ expense_space.get_currency_display }} {{ split.custom_amount|default:"-" }}
                                     <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
-                                        class="btn btn-sm btn-primary">Edit</a>
+                                        class="btn btn-link edit-icon"><i class="fa-regular fa-pen-to-square"></i></a>
                                     {% endif %}
                                 </td>
 
