@@ -52,11 +52,10 @@
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                     data-bs-target="#panelsStayOpen-{{ line.id }}" aria-expanded="true"
                     aria-controls="panelsStayOpen-{{ line.id }}">
+
                     <div class="d-flex justify-content-between w-100">
                         <span>{{ line.title }}</span>
 
-                        <span class="d-none d-md-block">{{ line.created_on|date:"M d, Y"}}</span>
-                        <span>{{ expense_space.get_currency_display }} {{ line.total_custom_amount }}</span>
                         <span>{{ expense_space.get_currency_display }} {{ line.amount}}</span>
 
                     </div>
@@ -67,71 +66,75 @@
                     {{ line.description }}
                     <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}"
                         class="btn btn-primary btn-sm">Edit Expense Details</a>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Contributor</th>
-                                <th scope="col">Split</th>
-                                <th scope="col">Custom Amount</th>
-                                <th scope="col">Remaining</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for split in line.expense_contributions.all %}
-                            <tr>
-                                <th>
+                    <div class="table-scroll">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Contributor</th>
+                                    <th scope="col">Split</th>
+                                    <th scope="col">Custom Amount</th>
+                                    <th scope="col">Remaining</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for split in line.expense_contributions.all %}
+                                <tr>
+                                    <th>
 
-                                    <form method="post"
-                                        action="{% url 'delete_contribution' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
-                                        class="my-2">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-link p-0 delete-icon" title="Remove line">
-                                            <i class="fa-solid fa-x"></i>
-                                        </button>
-                                    </form>
+                                        <form method="post"
+                                            action="{% url 'delete_contribution' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
+                                            class="my-2">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-link p-0 delete-icon"
+                                                title="Remove line">
+                                                <i class="fa-solid fa-x"></i>
+                                            </button>
+                                        </form>
 
-                                </th>
-                                <td>{{ split.contributor.name }}</td>
-                                <td>{{ split.split_type }}</td>
+                                    </th>
+                                    <td>{{ split.contributor.name }}</td>
+                                    <td>{{ split.split_type }}</td>
 
-                                <td>
+                                    <td>
+                                        {% if split.custom_amount is none %}
+                                        <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
+                                            class="btn btn-link add-icon"><i class="fa-solid fa-plus"></i></a>
+                                        {% else %}
+                                        {{ expense_space.get_currency_display }} {{ split.custom_amount|default:"-" }}
+                                        <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
+                                            class="btn btn-link edit-icon"><i
+                                                class="fa-regular fa-pen-to-square"></i></a>
+                                        {% endif %}
+                                    </td>
+
                                     {% if split.custom_amount is none %}
-                                    <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
-                                        class="btn btn-link add-icon"><i class="fa-solid fa-plus"></i></a>
+                                    <td>
+                                        {{ expense_space.get_currency_display }}
+                                        {{ split.remaining_share }}</td>
                                     {% else %}
-                                    {{ expense_space.get_currency_display }} {{ split.custom_amount|default:"-" }}
-                                    <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
-                                        class="btn btn-link edit-icon"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <td>-</td>
                                     {% endif %}
-                                </td>
 
-                                {% if split.custom_amount is none %}
-                                <td>
-                                    {{ expense_space.get_currency_display }}
-                                    {{ split.remaining_share }}</td>
-                                {% else %}
-                                <td>-</td>
-                                {% endif %}
+                                </tr>
 
-                            </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5">No contributions for this expense</td>
+                                </tr>
 
-                            {% empty %}
-                            <tr>
-                                <td colspan="5">No contributions for this expense</td>
-                            </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="5">
 
-                            {% endfor %}
-                            <tr>
-                                <td colspan="5">
+                                        <a href="{% url 'add_contribution' space_id=expense_space.id expense_id=line.id %}"
+                                            class="btn btn-sm btn-success">Add</a>
 
-                                    <a href="{% url 'add_contribution' space_id=expense_space.id expense_id=line.id %}"
-                                        class="btn btn-sm btn-success">Add</a>
-
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

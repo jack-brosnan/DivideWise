@@ -200,24 +200,24 @@ footer .nav-link:focus {
 .line-initials {
     background-color: #E84610;
     color: #ffffff;
-    width: 40px; 
+    width: 40px;
     height: 40px;
     border-radius: 50%;
     text-align: center;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    font-size: 1.5rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
 }
 
 /* Class to stop users updating required fields on form: ExpenseSpace[edit] */
 
 .readonly {
-    
+
     color: gray;
     background-color: lightgrey;
     pointer-events: none;
-    
+
 }
 
 /* Style form action buttons using fontawsome icons */
@@ -250,4 +250,10 @@ footer .nav-link:focus {
     background: none;
     border: none;
     color: red;
+}
+
+/* contribution table */
+
+.table-scroll {
+    overflow-x: auto;       
 }
