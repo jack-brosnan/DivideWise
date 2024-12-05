@@ -56,6 +56,7 @@
                         <span>{{ line.title }}</span>
 
                         <span class="d-none d-md-block">{{ line.created_on|date:"M d, Y"}}</span>
+                        <span>{{ expense_space.get_currency_display }} {{ line.total_custom_amount }}</span>
                         <span>{{ expense_space.get_currency_display }} {{ line.amount}}</span>
 
                     </div>
@@ -112,17 +113,18 @@
                                 {% endif %}
 
                             </tr>
-                            
+
                             {% empty %}
                             <tr>
                                 <td colspan="5">No contributions for this expense</td>
                             </tr>
-                            
+
                             {% endfor %}
                             <tr>
                                 <td colspan="5">
 
-                                    <a href="{% url 'add_contribution' space_id=expense_space.id expense_id=line.id %}" class="btn btn-sm btn-success">Add</a>
+                                    <a href="{% url 'add_contribution' space_id=expense_space.id expense_id=line.id %}"
+                                        class="btn btn-sm btn-success">Add</a>
 
                                 </td>
                             </tr>
@@ -138,5 +140,6 @@
     <div class="container">
         <a href="{% url 'add_expense' expense_space.id %}" class="btn btn-success">Add Expense</a>
     </div>
+
 
     {% endblock %}

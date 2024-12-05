@@ -49,6 +49,14 @@ class ExpenseLine(models.Model):
     def __str__(self):
         return self.title
 
+    def total_custom_amount(self):
+        total = 0
+        contributions = Contribution.objects.filter(expense_line=self)
+        for contribution in contributions:
+            if contribution.custom_amount is not None:
+                total += contribution.custom_amount
+        return round(total, 2)
+
     class Meta:
         ordering = ["created_on"]
 
@@ -93,6 +101,7 @@ class Contribution(models.Model):
     """
     Method to calculate the remaining balance of the expense if custom amounts are applied to some contributors.
     """
+       
     @property
     def remaining_share(self):
         # Get all contributors that are assigned to the expense line 

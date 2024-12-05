@@ -79,7 +79,7 @@ class ExpenseLineForm(forms.ModelForm):
                     attrs={'placeholder': 'Enter Description'}
                 ),
                 'amount': forms.NumberInput(
-                    attrs={'placeholder': 'Enter amount'}
+                    attrs={'placeholder': 'Enter amount', 'min': '0', 'step': '0.01'}
                 ),
                 'due_date': forms.DateInput(
                     attrs={'placeholder': 'Optional'}
@@ -90,3 +90,9 @@ class CustomAmountForm(forms.ModelForm):
     class Meta:
         model = Contribution
         fields = ['custom_amount',]
+
+        widgets = {
+                'custom_amount': forms.NumberInput(
+                    attrs={'placeholder': 'Enter Custom Amount', 'min': '0', 'step': '0.01'}
+                ),
+        }
