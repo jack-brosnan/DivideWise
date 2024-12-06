@@ -6,174 +6,177 @@
 
 {% block content %}
 
-<div class="container mt-4">
-    <div class="row justify-content-between">
-        <div class="col-12 col-md-3">
-            <img src="{{ expense_space.space_image.url }}" class="space-img card-img-top"
-                alt="{{ expense_space.name }}">
-        </div>
-        <div class="col-12 col-md-3">
-            <h1>{{ expense_space.name }}</h1>
-            <p>{{ expense_space.description }}</p>
-            <p><strong>Total Expense:</strong> {{ expense_space.get_currency_display }}
-                {{ expense_space.total_expense }}</p>
-            <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
-
-        </div>
-        <div class="col-12 col-md-5">
-            <h3>Contributors<span>
-                    <a href="{% url 'edit_contributor' expense_space.id %}" class="btn btn-primary">Edit</a></span></h3>
-            <div class="row justify-content-between border border-3 rounded">
-                {% for c in contributor %}
-                <div class="col-12 col-sm-6 col-md-6 border rounded">
-                    <div class="row justify-content-center">
-                        <div class="col-2 align-self-center line-initials">
-                            <p class="m-0">{{ c.name|slice:":1" }}</p>
-                        </div>
-                        <div class="col-6">
-                            <p class="m-0">{{ c.name }}</p>
-                            <p class="m-0">{{ expense_space.get_currency_display }} {{ c.total_contributions }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% empty %}
-                <p>No contributors assigned</p>
-                {% endfor %}
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid brand-1">
-    <div class="container my-3 p-0">
+    <div class="container mt-4 box-shadow">
         <div class="row justify-content-between">
-            <div class="col-6 text-start">
-                <h3>Expenses</h3>
+            <div class="col-12 col-md-3">
+                <img src="{{ expense_space.space_image.url }}" class="space-img card-img-top"
+                    alt="{{ expense_space.name }}">
             </div>
-            <div class="col-6 text-end">
-                <button id="toggleButton" class="btn btn-primary">Toggle Lines</button>
+            <div class="col-12 col-md-3">
+                <h1>{{ expense_space.name }}</h1>
+                <p>{{ expense_space.description }}</p>
+                <p><strong>Total Expense:</strong> {{ expense_space.get_currency_display }}
+                    {{ expense_space.total_expense }}</p>
+                <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
+
+            </div>
+            <div class="col-12 col-md-5">
+                <h3>Contributors<span>
+                        <a href="{% url 'edit_contributor' expense_space.id %}" class="btn btn-primary">Edit</a></span>
+                </h3>
+                <div class="row justify-content-between border border-3 rounded">
+                    {% for c in contributor %}
+                    <div class="col-12 col-sm-6 col-md-6 border rounded">
+                        <div class="row justify-content-center">
+                            <div class="col-2 align-self-center line-initials">
+                                <p class="m-0">{{ c.name|slice:":1" }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="m-0">{{ c.name }}</p>
+                                <p class="m-0">{{ expense_space.get_currency_display }} {{ c.total_contributions }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p>No contributors assigned</p>
+                    {% endfor %}
+                </div>
+
             </div>
         </div>
+    </div>
+
+    <div class="container-fluid brand-1 box-shadow">
+        <div class="container my-3 p-0">
+            <div class="row justify-content-between">
+                <div class="col-6 text-start">
+                    <h3>Expenses</h3>
+                </div>
+                <div class="col-6 text-end">
+                    <button id="toggleButton" class="btn btn-primary">Toggle Lines</button>
+                </div>
+            </div>
 
 
-        {% for line in expense_line %}
-        <div class="accordion" id="expenseline-{{ line.id }}">
-            <div class="accordion-item my-3">
-                <h2 class="accordion-header">
-                    <button class="accordion-button d-flex justify-content-between" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#panelsStayOpen-{{ line.id }}" aria-expanded="true"
-                        aria-controls="panelsStayOpen-{{ line.id }}">
+            {% for line in expense_line %}
+            <div class="accordion box-shadow" id="expenseline-{{ line.id }}">
+                <div class="accordion-item my-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button d-flex justify-content-between" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{ line.id }}"
+                            aria-expanded="true" aria-controls="panelsStayOpen-{{ line.id }}">
 
 
-                        <span>{{ line.title }}</span>
+                            <span>{{ line.title }}</span>
 
-                        <span>{{ expense_space.get_currency_display }} {{ line.amount}}</span>
+                            <span>{{ expense_space.get_currency_display }} {{ line.amount}}</span>
 
 
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse accordion-panel show">
-                    <div class="accordion-body">
-                        <!-- {{ line.description }} -->
-                        <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}"
-                            class="btn btn-link remove-decoration"><i class="fa-solid fa-pen-to-square edit-icon"></i>
-                            <span class="link-color"> Edit Expense</span>
-                        </a>
-                        <div class="table-scroll">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col">Contributor</th>
-                                        <th scope="col">Split</th>
-                                        <th scope="col">Custom Amount</th>
-                                        <th scope="col">Remaining</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for split in line.expense_contributions.all %}
-                                    <tr>
-                                        <th>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse accordion-panel show">
+                        <div class="accordion-body">
+                            <!-- {{ line.description }} -->
+                            <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}"
+                                class="btn btn-link remove-decoration"><i
+                                    class="fa-solid fa-pen-to-square edit-icon"></i>
+                                <span class="link-color"> Edit Expense</span>
+                            </a>
+                            <div class="table-scroll">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Contributor</th>
+                                            <th scope="col">Split</th>
+                                            <th scope="col">Custom Amount</th>
+                                            <th scope="col">Remaining</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for split in line.expense_contributions.all %}
+                                        <tr>
+                                            <th>
 
-                                            <form method="post"
-                                                action="{% url 'delete_contribution' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
-                                                class="my-2">
-                                                {% csrf_token %}
-                                                <button type="submit" class="btn btn-link p-0 delete-icon"
-                                                    title="Remove line">
-                                                    <i class="fa-solid fa-x"></i>
-                                                </button>
-                                            </form>
+                                                <form method="post"
+                                                    action="{% url 'delete_contribution' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
+                                                    class="my-2">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-link p-0 delete-icon"
+                                                        title="Remove line">
+                                                        <i class="fa-solid fa-x"></i>
+                                                    </button>
+                                                </form>
 
-                                        </th>
-                                        <td>{{ split.contributor.name }}</td>
-                                        <td>{{ split.split_type }}</td>
+                                            </th>
+                                            <td>{{ split.contributor.name }}</td>
+                                            <td>{{ split.split_type }}</td>
 
-                                        <td>
+                                            <td>
+                                                {% if split.custom_amount is none %}
+                                                <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
+                                                    class="btn btn-link add-icon"><i class="fa-solid fa-plus"></i></a>
+                                                {% else %}
+                                                {{ expense_space.get_currency_display }}
+                                                {{ split.custom_amount|default:"-" }}
+                                                <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
+                                                    class="btn btn-link edit-icon"><i
+                                                        class="fa-regular fa-pen-to-square"></i></a>
+                                                {% endif %}
+                                            </td>
+
                                             {% if split.custom_amount is none %}
-                                            <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
-                                                class="btn btn-link add-icon"><i class="fa-solid fa-plus"></i></a>
+                                            <td>
+                                                {{ expense_space.get_currency_display }}
+                                                {{ split.remaining_share }}</td>
                                             {% else %}
-                                            {{ expense_space.get_currency_display }}
-                                            {{ split.custom_amount|default:"-" }}
-                                            <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
-                                                class="btn btn-link edit-icon"><i
-                                                    class="fa-regular fa-pen-to-square"></i></a>
+                                            <td>-</td>
                                             {% endif %}
-                                        </td>
 
-                                        {% if split.custom_amount is none %}
-                                        <td>
-                                            {{ expense_space.get_currency_display }}
-                                            {{ split.remaining_share }}</td>
-                                        {% else %}
-                                        <td>-</td>
-                                        {% endif %}
+                                        </tr>
 
-                                    </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="5">No contributions for this expense</td>
+                                        </tr>
 
-                                    {% empty %}
-                                    <tr>
-                                        <td colspan="5">No contributions for this expense</td>
-                                    </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td colspan="5">
 
-                                    {% endfor %}
-                                    <tr>
-                                        <td colspan="5">
+                                                <a href="{% url 'add_contribution' space_id=expense_space.id expense_id=line.id %}"
+                                                    class="btn btn-link remove-decoration"><i
+                                                        class="fa-solid fa-circle-plus add-icon"></i>
+                                                    <span class="link-color"> Add Contributor</span>
+                                                </a>
 
-                                            <a href="{% url 'add_contribution' space_id=expense_space.id expense_id=line.id %}"
-                                                class="btn btn-link remove-decoration"><i
-                                                    class="fa-solid fa-circle-plus add-icon"></i>
-                                                <span class="link-color"> Add Contributor</span>
-                                            </a>
-
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% empty %}
-        <h1>No Expenses here</h1>
-        {% endfor %}
-        <!-- Add Expense Section -->
-        <div class="accordion my-4">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <a href="{% url 'add_expense' expense_space.id %}"
-                        class="accordion-button collapsed btn-link text-start remove-decoration">
-                        <div class="d-flex justify-content-center w-100">
-                            <span><i class="fa-solid fa-circle-plus add-icon"></i> Add New Expense</span>
-                        </div>
-                    </a>
-                </h2>
+            {% empty %}
+            <h1>No Expenses here</h1>
+            {% endfor %}
+            <!-- Add Expense Section -->
+            <div class="accordion box-shadow my-4">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <a href="{% url 'add_expense' expense_space.id %}"
+                            class="accordion-button collapsed btn-link text-start remove-decoration">
+                            <div class="d-flex justify-content-center w-100">
+                                <span><i class="fa-solid fa-circle-plus add-icon"></i> Add New Expense</span>
+                            </div>
+                        </a>
+                    </h2>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
+
 {% endblock %}

@@ -1,6 +1,36 @@
+/* Site brand colors */
+
+:root {
+    --brand-primary: #03045E;
+    --brand-secondary: #F1D302;
+    --brand-accent: #77afff;   
+    --brand-dark: #3A4454;      
+    --brand-light: #F9FAFC;     
+}
+
+.brand-1 {
+    background-color: var(--brand-accent);
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
 body {
     background-color: #F9FAFC;
+    
 }
+
+main {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    flex: 1 0 auto;
+}
+
+.box-shadow {
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+}
+
+
+
 
 .brand {
     font-family: Lato, sans-serif;
@@ -181,6 +211,7 @@ body {
 
 #footer-container {
     background-color: #3A4454;
+    margin: 0;
 }
 
 footer p {
@@ -270,6 +301,8 @@ footer .nav-link:focus {
     outline: 0;
     box-shadow: none;
 }
+
+
 
 .link-color {
     color: #000000;
