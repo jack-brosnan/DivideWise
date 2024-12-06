@@ -5,8 +5,8 @@
 {% block title %}Edit Expense{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Edit Space</h2>
+<div class="container container-v-center">
+    <h2 class="text-center header-white">Edit Space</h2>
 
     <form method="post" action="{% url 'edit_space' edit_id=edit_id %}" enctype="multipart/form-data">
         {% csrf_token %}
@@ -14,8 +14,8 @@
         {{ expense_space_form | crispy }}
 
 
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a href="{% url 'home' %}" class="btn btn-success">Cancel</a>
+        <button type="submit" class="btn--orange">Save</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 

@@ -70,7 +70,7 @@
     </nav>
 
     <!-- displaying Django messages -->
-    <!-- <div class="container" id="message-container">
+    <div class="container" id="message-container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 {% for message in messages %}
@@ -81,17 +81,21 @@
                 {% endfor %}
             </div>
         </div>
-    </div> -->
+    </div>
 
-    
+
+    <main class="flex-shrink-0">
+        <div class="container-fluid dashboard-view p-0 m-0">
             {% block content %}
             <!-- Content Goes here -->
             {% endblock content %}
-        
+        </div>
+    </main>
+
 
     <!-- Footer -->
-    <div id="footer-container" class="container-fluid">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3">
+    <footer id="footer-container" class="footer mt-auto py-3 container-fluid">
+        <footer class="container d-flex flex-wrap justify-content-between align-items-center">
             <p class="col-lg-4 mb-0">&copy;DivideWise</p>
 
             <ul class="nav col-lg-5 justify-content-end">
@@ -119,7 +123,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete this <span id="delete-item-type"></span>? This action cannot be undone.
+                    Are you sure you want to delete this <span id="delete-item-type"></span>? This action cannot be
+                    undone.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -144,4 +149,5 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/1ef2e57231.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

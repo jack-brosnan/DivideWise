@@ -6,18 +6,28 @@
 
 {% block content %}
 
-<div class="container text-center">
-    <h2>Edit contribution from {{ contribution.contributor.name }} for {{ expense_line.title }}</h2>
+<div class="mx-auto text-center container-v-center">
+    <h2 class="text-center header-white">Edit contribution from {{ contribution.contributor.name }}
+    </h2>
     
-    <form method="post" action="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=expense_line.id contribution_id=contribution.id %}">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="custom_amount" class="form-label">Custom Amount:</label>
-            {{ expense_space.get_currency_display }} {{ form.custom_amount }}
-        </div>
-        
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a href="{% url 'view_space' expense_space.id %}" class="btn btn-secondary">Cancel</a>
-    </form>
+    
+    <div class="d-flex justify-content-center align-items-center my-4">
+        <form method="post"
+            action="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=expense_line.id contribution_id=contribution.id %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <span class="input-group-text">{{ expense_space.get_currency_display }}</span>
+                {{ form.custom_amount }}
+            </div>
+
+            
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn--orange me-2">Save</button>
+                <a href="{% url 'view_space' expense_space.id %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
+
+
 {% endblock %}

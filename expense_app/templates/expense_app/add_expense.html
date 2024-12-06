@@ -5,14 +5,14 @@
 {% block title %}Add Expense{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Add Expense</h2>
+<div class="container container-v-center">
+    <h2 class="text-center header-white">Add Expense</h2>
     
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ expense_line_form | crispy }}
-        <button type="submit" class="btn btn-primary">Add Expense</button>
-        <a href="{% url 'view_space' expense_space.id %}" class="btn btn-success">Cancel</a>
+        <button type="submit" class="btn--orange">Add Expense</button>
+        <a href="{% url 'view_space' expense_space.id %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 {% endblock %}
