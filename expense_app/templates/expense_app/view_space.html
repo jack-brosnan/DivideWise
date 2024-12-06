@@ -44,10 +44,18 @@
         </div>
     </div>
 </div>
-<div class="container mt-2">
-    <button id="toggleButton" class="btn btn-primary">Toggle Expenses</button>
-</div>
+
 <div class="container mt-4 p-0">
+    <div class="row justify-content-between">
+        <div class="col-6 text-start">
+            <h3>Expenses</h3>
+        </div>
+        <div class="col-6 text-end">
+            <button id="toggleButton" class="btn btn-primary">Toggle Lines</button>
+        </div>
+    </div>
+
+
     {% for line in expense_line %}
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
@@ -66,9 +74,11 @@
             </h2>
             <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse accordion-panel show">
                 <div class="accordion-body">
-                    {{ line.description }}
+                    <!-- {{ line.description }} -->
                     <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}"
-                        class="btn btn-primary btn-sm">Edit Expense Details</a>
+                        class="btn btn-link remove-decoration"><i class="fa-solid fa-pen-to-square edit-icon"></i>
+                        <span class="link-color"> Edit Expense</span>
+                    </a>
                     <div class="table-scroll">
                         <table class="table">
                             <thead>
@@ -149,7 +159,7 @@
     <h1>No Expenses here</h1>
     {% endfor %}
     <!-- Add Expense Section -->
-    <div class="accordion mt-4">
+    <div class="accordion my-4">
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <a href="{% url 'add_expense' expense_space.id %}"

@@ -1,3 +1,13 @@
+/* Site brand colors */
+
+:root {
+    --brand-primary: #03045E;
+    --brand-secondary: #F1D302;
+    --brand-accent: #3185FC;   
+    --brand-dark: #3A4454;      
+    --brand-light: #F9FAFC;     
+  }
+
 body {
     background-color: #F9FAFC;
 }
