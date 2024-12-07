@@ -14,7 +14,13 @@
         {% for space in expense_spaces %}
         <div class="col-12 col-md-3 mb-3">
             <div class="card">
-                <img src="{{ space.space_image.url }}" class="space-img card-img-top" alt="{{ space.name }}">
+                <div class="image-container">
+                    <img src="{{ space.space_image.url }}" class="space-img card-img-top" alt="{{ space.name }}">
+                    <div class="image-flash text-center rounded">
+                        <p class="author"><i class="fa-solid fa-user brand-text-primary"></i> {{ space.contributors.count }}</p>
+                    </div>
+
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ space.name }}</h5>
                     {% if space.description is null %}

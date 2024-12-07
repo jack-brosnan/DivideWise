@@ -2,7 +2,7 @@
 
 :root {
     --brand-primary: #070eff8a;
-    --brand-secondary: #F1D302;
+    --brand-secondary: #E62C03;
     --brand-accent: #77afff;   
     --brand-dark: #3A4454;      
     --brand-light: #F9FAFC;     
@@ -12,6 +12,10 @@
     background-color: var(--brand-primary);
     /* margin-bottom: 0 !important;
     padding-bottom: 0 !important; */
+}
+
+.brand-secondary {
+    background-color: var(--brand-secondary);
 }
 
 .brand-light {
@@ -27,8 +31,8 @@
     background-color:#E84610;
 }
 
-.brand-2 {
-    background-color: var(--brand-primary);
+.brand-text-primary {
+    color: var(--brand-primary);
 }
 
 html, body {
@@ -98,7 +102,8 @@ body {
     bottom: 5%;
     min-width: 30%;
     left: -2px;
-    background-color: #188181;
+    background-color: initial;
+    background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
 }
 
 .scale {
