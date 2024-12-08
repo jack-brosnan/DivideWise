@@ -3,37 +3,52 @@
 {% block title %}Add Contribution{% endblock %}
 
 {% block content %}
-<div class="container">
-    
-    <form method="post" action="{% url 'add_contribution' space_id=expense_space.id expense_id=expense_line.id %}">
-        {% csrf_token %}
+<div class="mx-auto my-3 container-v-center">
+    <h2 class="header-white">Select Contributors:</h2>
+    <div class="p-2 my-3 container--white box-shadow rounded">
 
-        {% if unassigned_contributors %}
-        <div class="form-group">
-            <h3>Select Contributors:</h3>
-            <div>
-                <table>
-                {% for contributor in unassigned_contributors %}
-                    <tr>
-                        <td>
-                            {{ contributor.name }}
-                        </td>
-                        <td>
-                            <input type="checkbox" class="form-check-input" name="contributors" value="{{ contributor.id }}" id="contributor-{{ contributor.id }}">
-                        </td>
-                    </tr>                   
-                
-                {% endfor %}
-            </table>
+        <form method="post" action="{% url 'add_contribution' space_id=expense_space.id expense_id=expense_line.id %}">
+            {% csrf_token %}
+
+            {% if unassigned_contributors %}
+            <div class="form-group">
+
+                <div>
+                    <table>
+                        {% for contributor in unassigned_contributors %}
+                        <tr>
+                            <td>
+                                {{ contributor.name }}
+                            </td>
+                            <td>
+                                <input type="checkbox" class="form-check-input" name="contributors"
+                                    value="{{ contributor.id }}" id="contributor-{{ contributor.id }}">
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Add</button>
-        {% else %}
-        <p>All contributors assigned to this expense.</p> 
-        
-        {% endif %}
 
-        <a href="{% url 'view_space' expense_space.id %}" class="btn btn-secondary">Cancel</a>
-    </form>
+
+
+
+
+
+            <button type="submit" class="btn--orange">Add</button>
+            {% else %}
+            <p>All contributors assigned to this expense. Go to the Manage Contributors section to add more people.</p>
+            <p>Then come back here to assign them to the expense.</p>
+            <a href="{% url 'edit_contributor' expense_space.id %}" class="btn btn--orange">Manage Contributors</a>
+
+            {% endif %}
+
+            <a href="{% url 'view_space' expense_space.id %}" class="btn btn-secondary">Cancel</a>
+
+
+        </form>
+    </div>
 </div>
+
 {% endblock %}

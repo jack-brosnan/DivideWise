@@ -31,12 +31,12 @@
                 </div>
 
                 {% for c in contributor %}
-                <div class="col-sm-6 col-md-6 mb-1 brand-light rounded-pill">
+                <div class="col-sm-6 col-lg-5 mb-1 brand-light rounded-pill">
                     <div class="row justify-content-around">
                         <div class="col-2 align-self-center line-initials">
                             <p class="m-0">{{ c.name|slice:":1" }}</p>
                         </div>
-                        <div class="col-6">
+                        <div class="col-9">
                             <p class="m-0">{{ c.name }}</p>
                             <p class="m-0">{{ expense_space.get_currency_display }} {{ c.total_contributions }}</p>
                         </div>

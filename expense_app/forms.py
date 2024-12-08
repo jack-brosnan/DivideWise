@@ -51,6 +51,11 @@ class ContributorForm(forms.ModelForm):
     class Meta:
         model = Contributor
         fields = ['name',]
+        widgets = {
+                'name': forms.TextInput(
+                    attrs={'placeholder': 'Enter Name'}
+                ),
+        }
 
 class ExpenseLineForm(forms.ModelForm):
     """
