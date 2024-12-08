@@ -3,10 +3,10 @@
 :root {
     --brand-primary: #070eff8a;
     --brand-secondary: #E62C03;
-    --brand-accent: #77afff;   
-    --brand-dark: #3A4454;      
+    --brand-accent: #77afff;
+    --brand-dark: #3A4454;
     --brand-light: #F9FAFC;
-    --brand-alt: #0dcaf0;     
+    --brand-alt: #0dcaf0;
 }
 
 .brand-primary {
@@ -29,24 +29,32 @@
 
 
 .button--orange {
-    background-color:#E84610;
+    background-color: #E84610;
 }
 
 .brand-text-primary {
     color: var(--brand-primary);
 }
 
-html, body {
+html,body
+{
+    width: 100%;
     height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
 }
 
 body {
-    background-color: var(--brand-alt);    
+    background-color: var(--brand-alt);
 }
 
 .header-white {
     color: #ffffff;
+    
 }
+
+
 
 /* main {
     margin-bottom: 0 !important;
@@ -259,7 +267,7 @@ footer .nav-link:focus {
 /* Expense Line Summary */
 
 .line-initials {
-    background-color: initial;
+    background-color: #E62C03;
     background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
     color: #ffffff;
     width: 40px;
@@ -349,7 +357,7 @@ footer .nav-link:focus {
 /* contribution table */
 
 .table-scroll {
-    overflow-x: auto;       
+    overflow-x: auto;
 }
 
 .table-data-center {
@@ -380,7 +388,7 @@ td {
 
 /* General Form Styling */
 
-form label{
+form label {
     color: #FFFFFF
 }
 
@@ -402,7 +410,7 @@ form label{
     color: #FFFFFF;
     cursor: pointer;
     display: inline-block;
-    font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
     height: 40px;
     line-height: 40px;
     outline: 0;
@@ -419,16 +427,16 @@ form label{
     z-index: 9;
     border: 0;
     transition: box-shadow .2s;
-  }
-  
-  .btn--orange:hover {
+}
+
+.btn--orange:hover {
     color: #FFFFFF;
     box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
-  }
+}
 
-  .btn--orange:active {
-    color:#FFFFFF;
-  }
+.btn--orange:active {
+    color: #FFFFFF;
+}
 
 /* @media only screen and (min-width: 768px) {
     

@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div class="container brand-light my-3 pe-2 z-2 box-shadow rounded">
+<div class="container brand-light my-3 px-2 z-2 box-shadow rounded">
     <div class="row justify-content-between">
         <div class="col-12 col-md-3 align-self-center">
             <img src="{{ expense_space.space_image.url }}" class="space-img card-img-top rounded-end-circle"
@@ -20,9 +20,9 @@
             <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
 
         </div>
-        <div class="col-12 col-md-5 align-self-center me-3 p-2">
+        <div class="col-12 col-md-5 align-self-center p-2 mt-2">
             
-            <div class="row justify-content-between brand-dark rounded">
+            <div class="row g-2 p-2 justify-content-center brand-dark rounded">
                 <div class="col-12 my-2 text-center">
                     <h3 class="header-white">Contributors<span>
                             <a href="{% url 'edit_contributor' expense_space.id %}"
@@ -31,12 +31,12 @@
                 </div>
 
                 {% for c in contributor %}
-                <div class="col-sm-6 col-lg-5 mb-1 brand-light rounded-pill">
+                <div class="col-7 col-sm-6 col-md-7 col-lg-5 brand-light rounded-pill">
                     <div class="row justify-content-around">
-                        <div class="col-2 align-self-center line-initials">
+                        <div class="col-5 align-self-center line-initials">
                             <p class="m-0">{{ c.name|slice:":1" }}</p>
                         </div>
-                        <div class="col-9">
+                        <div class="col-7">
                             <p class="m-0">{{ c.name }}</p>
                             <p class="m-0">{{ expense_space.get_currency_display }} {{ c.total_contributions }}</p>
                         </div>
