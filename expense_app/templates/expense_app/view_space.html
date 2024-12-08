@@ -8,14 +8,17 @@
 
 <div class="container brand-light my-3 px-2 z-2 box-shadow rounded">
     <div class="row justify-content-between">
-        <div class="col-12 col-md-3 align-self-center">
-            <img src="{{ expense_space.space_image.url }}" class="space-img card-img-top rounded-end-circle"
+        <div class="col-5 col-md-3 align-self-center">
+            <img src="{{ expense_space.space_image.url }}" class="expense-img card-img-top"
                 alt="{{ expense_space.name }}">
         </div>
-        <div class="col-12 col-md-3 align-self-center">
+        <div class="col-7 col-md-3 align-self-center">
             <h1>{{ expense_space.name }}</h1>
             <p>{{ expense_space.description }}</p>
-            <p><strong>Total Expense:</strong> {{ expense_space.get_currency_display }}
+            
+            <p class="d-lg-none"><strong>Total:</strong> {{ expense_space.get_currency_display }}
+                {{ expense_space.total_expense }}</p>
+            <p class="d-none d-lg-inline"><strong>Total Expense:</strong> {{ expense_space.get_currency_display }}
                 {{ expense_space.total_expense }}</p>
             <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
 
