@@ -2,7 +2,7 @@
 
 :root {
     --brand-primary: #070eff8a;
-    --brand-secondary: #E62C03;
+    --brand-secondary: #E84610;
     --brand-accent: #77afff;
     --brand-dark: #3A4454;
     --brand-light: #F9FAFC;
@@ -34,6 +34,10 @@
 
 .brand-text-primary {
     color: var(--brand-primary);
+}
+
+.text--orange {
+    color: var(--brand-secondary);
 }
 
 html,body
@@ -415,6 +419,19 @@ td {
 
 form label {
     color: #FFFFFF
+}
+
+.form-text {
+    color: #FFFFFF;
+}
+
+#hint_id_password1 {
+    margin-top: 10px;
+    background-color: var(--brand-dark);
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
 }
 
 .container-v-center {
