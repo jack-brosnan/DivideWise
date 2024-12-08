@@ -4,72 +4,101 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="container mt-4">
+
     <div class="row mb-3">
-        <div class="col d-flex justify-content-end">
-            <a href="{% url 'add_space' %}" class="btn btn-success">Add Space</a>
+
+        <h1 class="d-md-none header-white text-center">Your Expense Spaces</h1>
+
+        <div class="col d-flex justify-content-end py-2">
+            <div class="col-6 d-none d-md-inline text-end">
+                <h1 class="header-white text-center">Your Expense Spaces</h1>
+            </div>
+            <div class="col-3 d-none d-md-inline align-content-center text-end">
+                <a href="{% url 'add_space' %}" class="p-2 container--white box-shadow remove-decoration rounded-pill"><i
+                    class="fa-solid fa-circle-plus add-icon"></i>
+                <span class="link-color"> Add Space</span></a>
+            </div>
         </div>
-    </div>
-    <h1 class="mb-3">Your Expense Spaces</h1>
-    <div class="row justify-content-around">
-        {% for space in expense_spaces %}
-        <div class="col-12 col-md-3 mb-3">
-            <div class="card">
-                <div class="image-container">
-                    <img src="{{ space.space_image.url }}" class="space-img card-img-top" alt="{{ space.name }}">
-                    <div class="image-flash text-center rounded">
-                        <p class="author"><i class="fa-solid fa-user brand-text-primary"></i> {{ space.contributors.count }}</p>
+
+        <div class="row justify-content-around">
+            {% for space in expense_spaces %}
+            <div class="col-8 col-md-4 col-lg-3 mb-3">
+                <div class="card box-shadow">
+                    <div class="image-container">
+                        <div class="d-flex justify-content-center">
+                            <img src="{{ space.space_image.url }}" class="space-img card-img-top"
+                                alt="{{ space.name }}">
+                            <div class="contributor-count text-center"
+                                title="{{ space.contributors.count }} contributors added">
+                                <p class="author"><i class="fa-solid fa-user"></i>
+                                    {{ space.contributors.count }}</p>
+                            </div>
+                        </div>
+
                     </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ space.name }}</h5>
+                        {% if space.description is null %}
+                        <br>
+                        {% else %}
+                        <p class="card-text">{{ space.description }}</p>
+                        {% endif %}
+                        <p class="card-text"><small class="text-muted">Created on:
+                                {{ space.created_on|date:"M d, Y" }}</small></p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-around">
 
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ space.name }}</h5>
-                    {% if space.description is null %}
-                    <br>
-                    {% else %}
-                    <p class="card-text">{{ space.description }}</p>
-                    {% endif %}
-                    <p class="card-text"><small class="text-muted">Created on:
-                            {{ space.created_on|date:"M d, Y" }}</small></p>
-                </div>
-                <div class="card-footer">
-                    <a href="{% url 'view_space' space.id %}" class="btn btn-primary">View Space</a>
-                    <a href="{% url 'edit_space' edit_id=space.id %}" class="btn btn-primary">Edit</a>
-                    <button class="btn btn-danger delete-space mr-3" data-space-id="{{ space.id }}">Delete</button>
+                            <a href="{% url 'view_space' space.id %}"
+                                class="btn btn--orange d-none d-sm-inline d-md-none d-xl-inline">View Space</a>
+                            <a href="{% url 'view_space' space.id %}"
+                                class="btn btn--orange d-sm-none d-md-inline d-xl-none">View</a>
+
+                            <a href="{% url 'edit_space' edit_id=space.id %}" class="btn btn--blue mx-1">
+                                <i class="fa-regular fa-pen-to-square"></i></a>
+                            <button class="btn--red delete-space mr-3" data-space-id="{{ space.id }}"><i
+                                    class="fa-solid fa-x"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {% empty %}
+            <div class="row">
+                <p class="text-center">No expense spaces found.</p>
+            </div>
+            {% endfor %}
         </div>
-        {% empty %}
-        <div class="row">
-            <p class="text-center">No expense spaces found.</p>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-{% else %}
-<h1>Welcome!</h1>
-<p>Please log in to view your expense spaces.</p>
-{% endif %}
-
-<!-- Modal popup to confirm deltion of record -->
-
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete expense?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete your expense? This action cannot be undone.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <form id="deleteForm" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
+        <div class="col-12 d-md-none my-3 text-center">
+            <a href="{% url 'add_space' %}" class="p-4 container--white box-shadow remove-decoration rounded-pill"><i
+                class="fa-solid fa-circle-plus add-icon"></i>
+            <span class="link-color"> Add Space</span></a>
         </div>
     </div>
-</div>
-{% endblock %}
+    {% else %}
+    <h1>Welcome!</h1>
+    <p>Please log in to view your expense spaces.</p>
+    {% endif %}
+
+    <!-- Modal popup to confirm deltion of record -->
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete expense?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete your expense? This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form id="deleteForm" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn--red">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

@@ -72,9 +72,9 @@
                         aria-controls="panelsStayOpen-{{ line.id }}">
 
 
-                        <span>{{ line.title }} <i class="fa-solid fa-user brand-text-primary"></i> {{ line.expense_contributions.count }}</span>
+                        <span class="">{{ line.title }} <i class="fa-solid fa-user count-icon"></i> {{ line.expense_contributions.count }}</span>
 
-                        <span>{{ expense_space.get_currency_display }} {{ line.amount}}</span>
+                        <span class="button-text">{{ expense_space.get_currency_display }} {{ line.amount}}</span>
 
 
                     </button>
