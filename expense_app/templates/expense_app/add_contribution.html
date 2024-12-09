@@ -14,19 +14,25 @@
             <div class="form-group">
 
                 <div>
-                    <table>
+                    <table class="contributor-table">
                         {% for contributor in unassigned_contributors %}
                         <tr>
-                            <td>
+                            <td class="contributor-name">
                                 {{ contributor.name }}
                             </td>
-                            <td>
-                                <input type="checkbox" class="form-check-input" name="contributors"
-                                    value="{{ contributor.id }}" id="contributor-{{ contributor.id }}">
+                            <td class="contributor-checkbox">
+                                <div class="custom-checkbox d-flex justify-content-center">
+                                    <div class="round">
+                                        <!-- Add the label directly after the input -->
+                                        <input type="checkbox" name="contributors" value="{{ contributor.id }}" id="contributor-{{ contributor.id }}">
+                                        <label for="contributor-{{ contributor.id }}"></label>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
 
                         {% endfor %}
+                        
                     </table>
                 </div>
             </div>
@@ -48,7 +54,11 @@
 
 
         </form>
+
+        
     </div>
 </div>
+
+
 
 {% endblock %}
