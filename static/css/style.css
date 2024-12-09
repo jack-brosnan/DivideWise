@@ -186,6 +186,26 @@ body {
     }
 }
 
+/* Django Messages */
+
+.message-overlay {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, 0);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    
+}
+
+.message-overlay .alert {    
+    max-width: 100%;
+    text-align: center;    
+}
+
 /* main {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;

@@ -13,18 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Django messages timeout after 3 secons
-    setTimeout(function () {
-        const messageContainer = document.getElementById('message-container');
-        if (messageContainer) {
-            messageContainer.style = `transition: opacity 1s ease;
+    // Set django messages to fade out after 3 seconds
+
+    const messages = document.querySelectorAll('#message-container .alert');
+    messages.forEach((message) => {
+        setTimeout(() => {
+            message.classList.remove('show');
+            message.style = `transition: opacity 1s ease;
                                       opacity: 0;
                                       `
-            setTimeout(() => {
-                messageContainer.remove();
-            }, 1000);
-        }
-    }, 3000);
+            setTimeout(() => message.remove(), 500); 
+        }, 3000); 
+    });
 
     // Toggle expense line accordion dropdown
 
