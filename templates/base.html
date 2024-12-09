@@ -25,7 +25,7 @@
 <body class="d-flex flex-column h-100 main-bg">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white z-3">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}"><span class="brand"><span class="red-o">Divide</span><span
                         class="thin">/Wise</span></span></a>
@@ -70,7 +70,7 @@
     </nav>
 
     <!-- displaying Django messages -->
-    <div class="container" id="message-container">
+    <div class="container z-3" id="message-container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 {% for message in messages %}

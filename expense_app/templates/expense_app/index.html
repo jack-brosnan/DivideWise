@@ -14,9 +14,10 @@
                 <h1 class="header-white text-center">Your Expense Spaces</h1>
             </div>
             <div class="col-3 d-none d-md-inline align-content-center text-end">
-                <a href="{% url 'add_space' %}" class="p-2 container--white box-shadow remove-decoration rounded-pill"><i
-                    class="fa-solid fa-circle-plus add-icon"></i>
-                <span class="link-color"> Add Space</span></a>
+                <a href="{% url 'add_space' %}"
+                    class="p-2 container--white box-shadow remove-decoration rounded-pill"><i
+                        class="fa-solid fa-circle-plus add-icon"></i>
+                    <span class="link-color"> Add Space</span></a>
             </div>
         </div>
 
@@ -70,13 +71,41 @@
         </div>
         <div class="col-12 d-md-none my-3 text-center">
             <a href="{% url 'add_space' %}" class="p-4 container--white box-shadow remove-decoration rounded-pill"><i
-                class="fa-solid fa-circle-plus add-icon"></i>
-            <span class="link-color"> Add Space</span></a>
+                    class="fa-solid fa-circle-plus add-icon"></i>
+                <span class="link-color"> Add Space</span></a>
         </div>
     </div>
     {% else %}
-    <h1>Welcome!</h1>
-    <p>Please log in to view your expense spaces.</p>
+    <!-- Welcome Area Start -->
+    <div class="welcome-area" id="welcome">
+
+        <!-- Header Text Start -->
+        <div class="header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12"
+                        data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                        <h1>Divide Wise simplifies group expenses <strong>for YOU</strong></h1>
+                        <h4 class="header-white">Manage, split, and settle shared costs easily—free to use and
+                            hassle-free!</h4>
+                        <div class="mt-3">
+                            <a href="{% url 'account_signup' %}" class="btn btn--orange me-2">Register</a>
+                            <a href="{% url 'account_login' %}" class="btn btn--blue">Log In</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+                        data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+                        <img src="static/images/slider-icon.png" class="rounded img-fluid d-block mx-auto"
+                            alt="First Vector Graphic">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- Welcome Area End -->
+
+
     {% endif %}
 
     <!-- Modal popup to confirm deltion of record -->
