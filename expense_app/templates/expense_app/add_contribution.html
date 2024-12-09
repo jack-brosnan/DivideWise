@@ -4,7 +4,10 @@
 
 {% block content %}
 <div class="mx-auto my-3 container-v-center">
-    <h2 class="header-white">Select Contributors:</h2>
+    <div class="header-white header-container">
+        <h2>Select Contributors</h2>
+    </div>
+
     <div class="p-2 my-3 container--white box-shadow rounded">
 
         <form method="post" action="{% url 'add_contribution' space_id=expense_space.id expense_id=expense_line.id %}">
@@ -24,7 +27,8 @@
                                 <div class="custom-checkbox d-flex justify-content-center">
                                     <div class="round">
                                         <!-- Add the label directly after the input -->
-                                        <input type="checkbox" name="contributors" value="{{ contributor.id }}" id="contributor-{{ contributor.id }}">
+                                        <input type="checkbox" name="contributors" value="{{ contributor.id }}"
+                                            id="contributor-{{ contributor.id }}">
                                         <label for="contributor-{{ contributor.id }}"></label>
                                     </div>
                                 </div>
@@ -32,7 +36,7 @@
                         </tr>
 
                         {% endfor %}
-                        
+
                     </table>
                 </div>
             </div>
@@ -55,7 +59,7 @@
 
         </form>
 
-        
+
     </div>
 </div>
 

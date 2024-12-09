@@ -54,8 +54,16 @@ body {
 }
 
 .header-white {
-    color: #ffffff;
+    color: #FFFFFF;
+    opacity: 1;
+}
 
+.header-container {
+    background-color: var(--brand-dark);
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+    
 }
 
 /* Landing Page */

@@ -6,7 +6,9 @@
 
 {% block content %}
 <div class="container container-v-center">
-    <h2 class="text-center header-white">Edit Space</h2>
+    <div class="header-white header-container">
+        <h2>Edit Space</h2>
+    </div>
 
     <form method="post" action="{% url 'edit_space' edit_id=edit_id %}" enctype="multipart/form-data">
         {% csrf_token %}
