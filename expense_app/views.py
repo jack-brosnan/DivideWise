@@ -113,6 +113,7 @@ def edit_contributor(request, space_id):
                 form = ContributorForm(request.POST, instance=contributor)
                 if form.is_valid():
                     form.save()
+                    messages.add_message(request, messages.SUCCESS, 'Contributor edited!')
                     
             else:  
                 form = ContributorForm(request.POST)
@@ -120,6 +121,7 @@ def edit_contributor(request, space_id):
                     contributor = form.save(commit=False)
                     contributor.expense_space = expense_space
                     contributor.save()
+                    messages.add_message(request, messages.SUCCESS, 'Contributor added!')
                     
             form = ContributorForm()
             
@@ -128,6 +130,7 @@ def edit_contributor(request, space_id):
             if pk:
                 contributor = get_object_or_404(Contributor, id=pk, expense_space=expense_space)
                 contributor.delete()
+                messages.add_message(request, messages.SUCCESS, 'Contributor deleted!')
                 
         elif 'cancel' in request.POST:
             return redirect('edit_contributor', space_id=space_id)
