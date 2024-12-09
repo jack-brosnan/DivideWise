@@ -227,7 +227,7 @@ body {
 }
 
 .red-o {
-    color: #E84610;
+    color: #f79776;
 }
 
 .thin {
@@ -643,6 +643,26 @@ form label {
 .form-text {
     color: #FFFFFF;
 }
+
+/* login and registration forms */
+
+.auth-text-link {
+    color: #000000;
+}
+
+.signup label,.login label {
+    display: none;
+}
+
+.login .form-check-label {
+    display: block;
+    color: #000000;
+}
+
+.container.h-100 {
+    min-height: 80vh;
+}
+
 
 #hint_id_password1 {
     margin-top: 10px;
