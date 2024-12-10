@@ -436,6 +436,7 @@ footer .nav-link:focus {
     border-top-left-radius: 5px;
 }
 
+
 .line-initials {
     background-color: #E62C03;
     background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
@@ -448,6 +449,11 @@ footer .nav-link:focus {
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
+}
+
+.amount-warning {
+    color: red;
+    font-weight: bold;
 }
 
 /* Class to stop users updating required fields on form: ExpenseSpace[edit] */
@@ -536,7 +542,9 @@ footer .nav-link:focus {
 /* contribution table */
 
 .table-scroll {
+    max-width: 100%;
     overflow-x: auto;
+    white-space: nowrap;
 }
 
 .table-data-center {

@@ -82,4 +82,41 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Select all accordion items
+    
+    expenseLines.forEach(expenseLine => {
+        const totalAmount = parseFloat(expenseLine.dataset.totalAmount || 0);
+        const expenseLineId = expenseLine.dataset.id; 
+        const contributionRows = expenseLine.querySelectorAll('tbody tr[data-contributor-id]');
+
+        let customAmountTotal = 0;
+        let allContributorsHaveCustomAmounts = true;
+
+        
+        contributionRows.forEach(row => {
+            const customAmount = parseFloat(row.dataset.customAmount || 0);
+            customAmountTotal += customAmount;
+
+            if (!row.dataset.customAmount || customAmount === 0) {
+                allContributorsHaveCustomAmounts = false;
+            }
+        });
+
+        
+        if (allContributorsHaveCustomAmounts && customAmountTotal < totalAmount) {
+            const warningIcon = expenseLine.querySelector(`#expense-warning-${expenseLineId}`);
+            const amountElement = expenseLine.querySelector(`#expense-amount-${expenseLineId} .amount`);
+
+            if (warningIcon) {
+                warningIcon.removeAttribute('hidden'); 
+                warningIcon.setAttribute('title', 'Custom amounts do not match the total expense.')
+
+            }
+
+            if (amountElement) {
+                amountElement.classList.add('amount-warning');
+            }
+        }
+    });
+
 });

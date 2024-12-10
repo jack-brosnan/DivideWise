@@ -78,14 +78,23 @@
 
         {% for line in expense_line %}
         <div class="accordion box-shadow">
-            <div class="accordion-item my-3" id="expense-line-{{ line.id }}" data-contributors="{% for contributor in line.expense_contributions.all %}{{ contributor.contributor.id }}, {% endfor %}">
+            <div class="accordion-item my-3" id="expense-line-{{ line.id }}" 
+            data-total-amount="{{ line.amount }}"
+            data-id="{{ line.id }}"
+            data-contributors="{% for contributor in line.expense_contributions.all %}{{ contributor.contributor.id }}{% if not forloop.last %}, {% endif %}{% endfor %}">
+            
                 <h2 class="accordion-header">
                     <button class="accordion-button d-flex justify-content-between" type="button"
                         data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{ line.id }}" aria-expanded="true"
                         aria-controls="panelsStayOpen-{{ line.id }}">
                         <span>{{ line.title }} <i class="fa-solid fa-user count-icon"></i>
                             {{ line.expense_contributions.count }}</span>
-                        <span class="button-text">{{ expense_space.get_currency_display }} {{ line.amount }}</span>
+                        
+                            <span class="button-text" id="expense-amount-{{ line.id }}">
+                                <span class="amount">
+                                {{ expense_space.get_currency_display }} {{ line.amount }} 
+                                <i id="expense-warning-{{ line.id }}" class="fa-solid fa-circle-info" hidden></i></span>
+                            </span>
                     </button>
                 </h2>
                 <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse accordion-panel show">
@@ -101,14 +110,14 @@
                                     <tr>
                                         <th scope="col"></th>
                                         <th scope="col">Contributor</th>
-                                        <th scope="col">Split</th>
+                                        <th scope="col">Share Type</th>
                                         <th scope="col" class="text-end">Custom Amount</th>
                                         <th scope="col" class="text-end">Remaining</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for split in line.expense_contributions.all %}
-                                    <tr data-contributor-id="{{ split.contributor.id }}">
+                                    <tr data-contributor-id="{{ split.contributor.id }}" data-custom-amount="{{ split.custom_amount }}">
                                         <th>
 
                                             <form method="post"
@@ -125,25 +134,30 @@
                                         <td>{{ split.contributor.name }}</td>
                                         <td>{{ split.split_type }}</td>
 
+
+                                        {% if split.custom_amount is none %}
                                         <td class="text-end">
-                                            {% if split.custom_amount is none %}
                                             <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
-                                                class="btn btn-link add-icon"><i class="fa-solid fa-plus"></i></a>
-                                            {% else %}
+                                                class="text-center btn btn-link add-icon"><i
+                                                    class="fa-solid fa-plus"></i></a>
+                                        </td>
+                                        {% else %}
+                                        <td class="text-end">
                                             {{ expense_space.get_currency_display }}
                                             {{ split.custom_amount|default:"-" }}
                                             <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
                                                 class="btn btn-link edit-icon"><i
                                                     class="fa-regular fa-pen-to-square"></i></a>
-                                            {% endif %}
                                         </td>
+                                        {% endif %}
+
 
                                         {% if split.custom_amount is none %}
                                         <td class="text-end">
                                             {{ expense_space.get_currency_display }}
                                             {{ split.remaining_share }}</td>
                                         {% else %}
-                                        <td>-</td>
+                                        <td class="text-end">-</td>
                                         {% endif %}
 
                                     </tr>
