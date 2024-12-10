@@ -6,41 +6,48 @@
 
 {% block content %}
 
-<div class="container brand-light my-3 px-2 z-2 box-shadow rounded">
+<div class="container my-3 px-2 z-2">
     <div class="row justify-content-between">
-        <div class="col-5 col-md-3 align-self-center">
-            <img src="{{ expense_space.space_image.url }}" class="expense-img card-img-top"
-                alt="{{ expense_space.name }}">
+        <div class="col-md-6 align-self-center brand-light box-shadow rounded">
+            <div class="row">
+                <div class="col-12 col-md-4 align-self-center">
+                    <img src="{{ expense_space.space_image.url }}" class="expense-img card-img-top"
+                        alt="{{ expense_space.name }}">
+                </div>
+                <div class="col-12 col-md-8 align-self-center">
+                    <h1>{{ expense_space.name }}</h1>
+                    <p>{{ expense_space.description }}</p>
+
+                    <p class="d-lg-none"><strong>Total:</strong> {{ expense_space.get_currency_display }}
+                        {{ expense_space.total_expense }}</p>
+                    <p class="d-none d-lg-inline"><strong>Total Expense:</strong>
+                        {{ expense_space.get_currency_display }}
+                        {{ expense_space.total_expense }}</p>
+                    <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
+
+                </div>
+            </div>
         </div>
-        <div class="col-7 col-md-3 align-self-center">
-            <h1>{{ expense_space.name }}</h1>
-            <p>{{ expense_space.description }}</p>
+        <div class="col-12 col-md-6 align-self-center p-2 mt-2">
 
-            <p class="d-lg-none"><strong>Total:</strong> {{ expense_space.get_currency_display }}
-                {{ expense_space.total_expense }}</p>
-            <p class="d-none d-lg-inline"><strong>Total Expense:</strong> {{ expense_space.get_currency_display }}
-                {{ expense_space.total_expense }}</p>
-            <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
-
-        </div>
-        <div class="col-12 col-md-5 align-self-center p-2 mt-2">
-
-            <div class="row g-2 p-2 justify-content-center brand-dark rounded">
-                <div class="col-12 my-2 text-center">
+            <div class="row justify-content-center contributor-container brand-dark rounded">
+                <div class="col-12 mt-2 text-center">
                     <h3 class="header-white">Contributors<span>
                             <a href="{% url 'edit_contributor' expense_space.id %}"
                                 class="btn btn--orange">Edit</a></span>
                     </h3>
                 </div>
 
+
                 {% for c in contributor %}
-                <div class="col-7 col-sm-6 col-md-7 col-lg-5 brand-light rounded-pill">
-                    <div class="row justify-content-around">
-                        <div class="col-5 align-self-center line-initials">
-                            <p class="m-0">{{ c.name|slice:":1" }}</p>
-                        </div>
-                        <div class="col-7">
-                            <p class="m-0">{{ c.name }}</p>
+                <div class="contributor-filter col-6 pb-2">
+                    <div class="filter-wrapper">
+                        <input type="checkbox" id="filter-checkbox-{{ c.id }}">
+                        <label class="filter-bg" for="filter-checkbox-{{ c.id }}">
+                            <span class="filter-btn"></span>
+                        </label>
+                        <div class="filter-content">
+                            <p class="m-0 text-start">{{ c.name }}</p>
                             <p class="m-0">{{ expense_space.get_currency_display }} {{ c.total_contributions }}</p>
                         </div>
                     </div>
@@ -48,6 +55,7 @@
                 {% empty %}
                 <p>No contributors assigned</p>
                 {% endfor %}
+
             </div>
 
         </div>
@@ -99,8 +107,8 @@
                                         <th scope="col"></th>
                                         <th scope="col">Contributor</th>
                                         <th scope="col">Split</th>
-                                        <th scope="col">Custom Amount</th>
-                                        <th scope="col">Remaining</th>
+                                        <th scope="col" class="text-end">Custom Amount</th>
+                                        <th scope="col" class="text-end">Remaining</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -122,7 +130,7 @@
                                         <td>{{ split.contributor.name }}</td>
                                         <td>{{ split.split_type }}</td>
 
-                                        <td>
+                                        <td class="text-end">
                                             {% if split.custom_amount is none %}
                                             <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
                                                 class="btn btn-link add-icon"><i class="fa-solid fa-plus"></i></a>
@@ -136,7 +144,7 @@
                                         </td>
 
                                         {% if split.custom_amount is none %}
-                                        <td>
+                                        <td class="text-end">
                                             {{ expense_space.get_currency_display }}
                                             {{ split.remaining_share }}</td>
                                         {% else %}

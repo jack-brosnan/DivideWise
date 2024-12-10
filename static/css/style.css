@@ -58,13 +58,21 @@ body {
     opacity: 1;
 }
 
-.header-container {
-    background-color: var(--brand-dark);
-    padding: 10px;
-    border-radius: 25px;
+/* .header-container {
+    background-color: #472fd4;
+    background-image: linear-gradient(-180deg, #7a6ad8, #472fd4);
+    
+
+    --s: 20px;
+  
+    line-height: 1.8; 
+    padding-inline: .3em calc(var(--s) + .3em);
+    clip-path: polygon(0 0,calc(100% - var(--s)) 0,100% 50%,calc(100% - var(--s)) 100%,0 100%);
+    
+    width: fit-content;
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
     
-}
+} */
 
 /* Landing Page */
 
@@ -206,12 +214,12 @@ body {
     display: flex;
     justify-content: center;
     cursor: pointer;
-    
+
 }
 
-.message-overlay .alert {    
+.message-overlay .alert {
     max-width: 100%;
-    text-align: center;    
+    text-align: center;
 }
 
 /* main {
@@ -251,7 +259,9 @@ body {
 }
 
 .main-bg {
-    background-color: var(--brand-alt);
+    /* background-color: var(--brand-alt); */
+    background-color: #0252f1;
+    background-image: linear-gradient(-180deg, #0dcaf0, #0252f1);
 }
 
 /* .card {
@@ -270,9 +280,8 @@ body {
     left: 2%;
     border-radius: 50%;
     padding: 5px;
-    background-color: var(--brand-primary);
-    ;
-    background-image: linear-gradient(-180deg, #6e73f88a, #070eff8a);
+    background-color: #472fd4;
+    background-image: linear-gradient(-180deg, #7a6ad8, #472fd4);
 }
 
 .contributor-count:hover {
@@ -583,12 +592,12 @@ td {
     text-align: left;
     padding-right: 20px;
     white-space: nowrap;
-   
+
 }
 
 .contributor-checkbox {
     text-align: center;
-    width: 50px;    
+    width: 50px;
 }
 
 /* custom checkbox credit: Matt Smith via CSS Scanner */
@@ -658,7 +667,8 @@ form label {
     color: #000000;
 }
 
-.signup label,.login label {
+.signup label,
+.login label {
     display: none;
 }
 
@@ -799,13 +809,177 @@ form label {
     color: #FFFFFF;
 }
 
-/* @media only screen and (min-width: 768px) {
-    
-    .contributor-table{
-        width: 40%;
+.btn--purple {
+    background-color: initial;
+    background-image: linear-gradient(-180deg, #7a6ad8, #472fd4);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    pointer-events: auto;
+    position: relative;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: top;
+    white-space: nowrap;
+    z-index: 9;
+    border: 0;
+    transition: box-shadow .2s;
+}
+
+.btn--purple:hover {
+    color: #FFFFFF;
+    box-shadow: rgba(110, 0, 253, 0.5) 0 3px 8px;
+}
+
+.btn--purple:active {
+    color: #FFFFFF;
+}
+
+/* Custom contributor filter switches (checkboxes) */
+
+.filter-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.contributor-container {
+    max-width: 500px;
+    transform: scale(0.9);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.contributor-filter {
+    flex: 0 0 48%;
+    max-width: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contributor-filter input[type="checkbox"] {
+    display: none;
+}
+
+.filter-bg {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    background-color: #FFFFFF;
+    max-width: 300px;
+    border-radius: 9999px;
+    cursor: pointer;
+    height: 50px;
+    margin: 0 auto 5px;
+}
+
+.filter-btn {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 28%;
+    height: 100%;
+    background-color: #E62C03;
+    background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+    border-radius: 50%;
+    transition: 0.4s ease left, 0.4s ease background-position;
+    z-index: 2;
+}
+
+.filter-content {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translateY(-50%);
+    color: #000000;
+    font-size: 1.0rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 1;
+    transition: 0.4s ease left;
+    max-width: 90%;
+    text-align: center;
+}
+
+
+input[type="checkbox"]:checked + .filter-bg .filter-btn {
+    left: 72%;
+    background-color: initial;
+    background-image: linear-gradient(-180deg, #7a6ad8, #472fd4);
+}
+
+input[type="checkbox"]:checked + .filter-bg {
+    background-color: #E62C03;
+    background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
+}
+
+input[type="checkbox"]:checked ~ .filter-content {
+    left: 10%;
+    color: #FFFFFF;
+}
+
+@media only screen and (min-width: 576px) {
+    .filter-bg {
+        max-width: 200px;
+        
     }
 
+    .filter-btn {
+        width: 25%;
+    }
 
+    .filter-content {
+        font-size: 0.9rem;       
+    }
 
+    input[type="checkbox"]:checked + .filter-bg .filter-btn {
+        left: 75%;
+    }
+}
 
-} */
+@media only screen and (min-width: 768px) {
+    .filter-bg {
+        max-width: 200px;
+    }
+
+    .filter-btn {
+        width: 35%;
+    }
+
+    .filter-content {
+        font-size: 1rem;
+    }
+
+    input[type="checkbox"]:checked + .filter-bg .filter-btn {
+        left: 65%;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .filter-content {
+        font-size: 1rem;
+    }
+
+    .filter-btn {
+        width: 25%;
+    }
+
+    input[type="checkbox"]:checked+ .filter-bg .filter-btn {
+        left: 75%;
+    }
+}
