@@ -13,21 +13,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Django messages timeout after 3 secons
-    setTimeout(function () {
-        const messageContainer = document.getElementById('message-container');
-        if (messageContainer) {
-            messageContainer.style = `transition: opacity 1s ease;
+    // Set django messages to fade out after 3 seconds
+
+    const messages = document.querySelectorAll('#message-container .alert');
+    messages.forEach((message) => {
+        setTimeout(() => {
+            message.classList.remove('show');
+            message.style = `transition: opacity 1s ease;
                                       opacity: 0;
                                       `
-            setTimeout(() => {
-                messageContainer.remove();
-            }, 1000);
-        }
-    }, 3000);
+            setTimeout(() => message.remove(), 500);
+        }, 3000);
+    });
 
     // Toggle expense line accordion dropdown
-
     const toggleButton = document.getElementById('toggleButton');
     const panels = document.querySelectorAll('.accordion-panel');
 
@@ -44,6 +43,80 @@ document.addEventListener("DOMContentLoaded", function () {
 
         status = !status;
         toggleButton.textContent = status ? 'Collapse All' : 'Show All';
+    });
+
+    // Contributor filter
+    
+    const contributorCheckboxes = document.querySelectorAll('.contributor-filter input[type="checkbox"]');
+    const expenseLines = document.querySelectorAll('.accordion-item');
+
+    contributorCheckboxes.forEach(checkbox =>
+        checkbox.addEventListener('change', () => filterExpenses())
+    );
+
+    function filterExpenses() {
+        
+        const selectedContributorIds = Array.from(contributorCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.id.replace('filter-checkbox-', ''));
+
+        expenseLines.forEach(expenseLine => {
+            
+            const contributorsInLine = (expenseLine.dataset.contributors || '').split(',').map(id => id.trim());
+            const matchesFilter = selectedContributorIds.length === 0 ||
+                contributorsInLine.some(id => selectedContributorIds.includes(id));
+
+            expenseLine.style.display = matchesFilter ? '' : 'none';
+
+            if (matchesFilter) filterContributionRows(expenseLine, selectedContributorIds);
+        });
+    }
+
+    function filterContributionRows(expenseLine, selectedContributorIds) {
+        const contributionRows = expenseLine.querySelectorAll('tbody tr[data-contributor-id]');
+
+        contributionRows.forEach(row => {
+            const contributorId = row.dataset.contributorId;
+            const rowMatches = selectedContributorIds.length === 0 || selectedContributorIds.includes(contributorId);
+            row.style.display = rowMatches ? '' : 'none';
+        });
+    }
+
+    // Select all accordion items
+    
+    expenseLines.forEach(expenseLine => {
+        const totalAmount = parseFloat(expenseLine.dataset.totalAmount || 0);
+        const expenseLineId = expenseLine.dataset.id; 
+        const contributionRows = expenseLine.querySelectorAll('tbody tr[data-contributor-id]');
+
+        let customAmountTotal = 0;
+        let allContributorsHaveCustomAmounts = true;
+
+        
+        contributionRows.forEach(row => {
+            const customAmount = parseFloat(row.dataset.customAmount || 0);
+            customAmountTotal += customAmount;
+
+            if (!row.dataset.customAmount || customAmount === 0) {
+                allContributorsHaveCustomAmounts = false;
+            }
+        });
+
+        
+        if (allContributorsHaveCustomAmounts && customAmountTotal < totalAmount) {
+            const warningIcon = expenseLine.querySelector(`#expense-warning-${expenseLineId}`);
+            const amountElement = expenseLine.querySelector(`#expense-amount-${expenseLineId} .amount`);
+
+            if (warningIcon) {
+                warningIcon.removeAttribute('hidden'); 
+                warningIcon.setAttribute('title', 'Custom amounts do not match the total expense.')
+
+            }
+
+            if (amountElement) {
+                amountElement.classList.add('amount-warning');
+            }
+        }
     });
 
 });
