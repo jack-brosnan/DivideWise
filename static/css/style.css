@@ -649,7 +649,21 @@ form label {
 /* login and registration forms */
 
 .auth-text-link {
-    color: #000000;
+    color: #FFFFFF;
+    text-decoration-line: none;
+}
+
+.auth-link-bg {
+    background-color: initial;
+    background-image: linear-gradient(-180deg, #7a6ad8, #472fd4);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+    padding: 0 10px 8px;
+    border-radius: 10px;
+
+}
+
+.v-space {
+    line-height: 35px;    
 }
 
 .signup label,
@@ -659,7 +673,7 @@ form label {
 
 .login .form-check-label {
     display: block;
-    color: #000000;
+    color: #FFFFFF;
 }
 
 .container.h-100 {
