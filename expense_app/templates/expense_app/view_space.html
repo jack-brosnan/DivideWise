@@ -77,20 +77,15 @@
 
 
         {% for line in expense_line %}
-        <div class="accordion box-shadow" id="expenseline-{{ line.id }}">
-            <div class="accordion-item my-3">
+        <div class="accordion box-shadow">
+            <div class="accordion-item my-3" id="expense-line-{{ line.id }}" data-contributors="{% for contributor in line.expense_contributions.all %}{{ contributor.contributor.id }}, {% endfor %}">
                 <h2 class="accordion-header">
                     <button class="accordion-button d-flex justify-content-between" type="button"
                         data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{ line.id }}" aria-expanded="true"
                         aria-controls="panelsStayOpen-{{ line.id }}">
-
-
-                        <span class="">{{ line.title }} <i class="fa-solid fa-user count-icon"></i>
+                        <span>{{ line.title }} <i class="fa-solid fa-user count-icon"></i>
                             {{ line.expense_contributions.count }}</span>
-
-                        <span class="button-text">{{ expense_space.get_currency_display }} {{ line.amount}}</span>
-
-
+                        <span class="button-text">{{ expense_space.get_currency_display }} {{ line.amount }}</span>
                     </button>
                 </h2>
                 <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse accordion-panel show">
@@ -113,7 +108,7 @@
                                 </thead>
                                 <tbody>
                                     {% for split in line.expense_contributions.all %}
-                                    <tr>
+                                    <tr data-contributor-id="{{ split.contributor.id }}">
                                         <th>
 
                                             <form method="post"
