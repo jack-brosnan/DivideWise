@@ -48,7 +48,7 @@
 
             <button type="submit" class="btn--orange">Add</button>
             {% else %}
-            <p>All contributors assigned to this expense. Go to the Manage Contributors section to add more people.</p>
+            <p>No contributors to assign. Go to the Manage Contributors section to add more people.</p>
             <p>Then come back here to assign them to the expense.</p>
             <a href="{% url 'edit_contributor' expense_space.id %}" class="btn btn--orange">Manage Contributors</a>
 

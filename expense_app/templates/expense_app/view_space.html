@@ -53,7 +53,11 @@
                     </div>
                 </div>
                 {% empty %}
-                <p>No contributors assigned</p>
+
+                <div id="container-empty-container"class="p-2 m-3 container--white box-shadow rounded">
+                    <p class="m-0"><i class="fa-solid fa-circle-info text-success"></i> Click Edit above to add contributors to the space.</p>
+                </div>
+
                 {% endfor %}
 
             </div>
@@ -186,8 +190,7 @@
                 </div>
             </div>
         </div>
-        {% empty %}
-        <h1>No Expenses here</h1>
+
         {% endfor %}
         <!-- Add Expense Section -->
         <div class="accordion box-shadow my-4">
@@ -227,7 +230,7 @@
     });
 
     // Contributor filter
-    
+
     const contributorCheckboxes = document.querySelectorAll('.contributor-filter input[type="checkbox"]');
     const expenseLines = document.querySelectorAll('.accordion-item');
 
@@ -236,13 +239,13 @@
     );
 
     function filterExpenses() {
-        
+
         const selectedContributorIds = Array.from(contributorCheckboxes)
             .filter(checkbox => checkbox.checked)
             .map(checkbox => checkbox.id.replace('filter-checkbox-', ''));
 
         expenseLines.forEach(expenseLine => {
-            
+
             const contributorsInLine = (expenseLine.dataset.contributors || '').split(',').map(id => id.trim());
             const matchesFilter = selectedContributorIds.length === 0 ||
                 contributorsInLine.some(id => selectedContributorIds.includes(id));
@@ -258,22 +261,23 @@
 
         contributionRows.forEach(row => {
             const contributorId = row.dataset.contributorId;
-            const rowMatches = selectedContributorIds.length === 0 || selectedContributorIds.includes(contributorId);
+            const rowMatches = selectedContributorIds.length === 0 || selectedContributorIds.includes(
+                contributorId);
             row.style.display = rowMatches ? '' : 'none';
         });
     }
 
 
-    
+
     expenseLines.forEach(expenseLine => {
         const totalAmount = parseFloat(expenseLine.dataset.totalAmount || 0);
-        const expenseLineId = expenseLine.dataset.id; 
+        const expenseLineId = expenseLine.dataset.id;
         const contributionRows = expenseLine.querySelectorAll('tbody tr[data-contributor-id]');
 
         let customAmountTotal = 0;
         let allContributorsHaveCustomAmounts = true;
 
-        
+
         contributionRows.forEach(row => {
             const customAmount = parseFloat(row.dataset.customAmount || 0);
             customAmountTotal += customAmount;
@@ -283,13 +287,13 @@
             }
         });
 
-        
+
         if (allContributorsHaveCustomAmounts && customAmountTotal < totalAmount) {
             const warningIcon = expenseLine.querySelector(`#expense-warning-${expenseLineId}`);
             const amountElement = expenseLine.querySelector(`#expense-amount-${expenseLineId} .amount`);
 
             if (warningIcon) {
-                warningIcon.removeAttribute('hidden'); 
+                warningIcon.removeAttribute('hidden');
                 warningIcon.setAttribute('title', 'Custom amounts do not match the total expense.')
 
             }

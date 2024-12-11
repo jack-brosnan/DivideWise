@@ -572,6 +572,14 @@ td {
     background-color: #FFFFFF;
 }
 
+#container-empty-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-shrink: 1;
+    font-weight: 700;
+}
+
 /* Add contribution page table */
 
 .contributor-table {
