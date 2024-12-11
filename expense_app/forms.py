@@ -38,13 +38,7 @@ class ExpenseSpaceForm(forms.ModelForm):
                 ),
                 'description': forms.TextInput(
                     attrs={'placeholder': 'Enter Description'}
-                ),
-                'space_image': forms.ClearableFileInput(
-                    attrs={'placeholder': 'Upload an image'}
-                ),
-                'currency': forms.Select(
-                    attrs={'placeholder': 'Enter currency'}
-                ),
+                ),                
             }
 
 class ContributorForm(forms.ModelForm):
