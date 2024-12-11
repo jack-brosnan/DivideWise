@@ -10,26 +10,30 @@
         <h2>Edit Expense</h2>
     </div>
 
-    <form method="post" action="{% url 'edit_expense' space_id=expense_space.id expense_id=expense_line.id %}" enctype="multipart/form-data">
+    <!-- Save Form -->
+    <form 
+        method="post" 
+        action="{% url 'edit_expense' space_id=expense_space.id expense_id=expense_line.id %}" 
+        enctype="multipart/form-data"
+    >
         {% csrf_token %}
         {{ expense_line_form | crispy }}
-    </form>
-    
-    <div class="d-flex justify-content-between m-3 align-items-center">
-        
-        <form method="post" action="{% url 'edit_expense' space_id=expense_space.id expense_id=expense_line.id %}" class="d-inline">
-            {% csrf_token %}
+
+        <!-- Save and Cancel Buttons -->
+        <div class="d-flex justify-content-around m-3 align-items-center">
             <button type="submit" class="btn--orange">Save</button>
-        </form>
+            <a href="{% url 'view_space' expense_space.id %}" class="btn btn-secondary mx-2">Cancel</a>
+        </div>
+    </form>
 
-        
-        <a href="{% url 'view_space' expense_space.id %}" class="btn btn-secondary mx-2">Cancel</a>
-
-        
-        <form method="post" action="{% url 'delete_expense' space_id=expense_space.id expense_id=expense_line.id %}" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="btn--red">Delete</button>
-        </form>
-    </div>
+    <!-- Delete Form -->
+    <form 
+        method="post" 
+        action="{% url 'delete_expense' space_id=expense_space.id expense_id=expense_line.id %}" 
+        class=""
+    >
+        {% csrf_token %}
+        <button type="submit" class="btn--red">Delete</button>
+    </form>
 </div>
 {% endblock %}
