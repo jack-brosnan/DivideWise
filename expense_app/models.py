@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
-# Constants for paid status and currency options
 PAID_STATUS = ((0, "Not Paid"), (1, "Paid"))
 CURRENCY = ((0, "€"), (1, "£"), (2, "$"))
 
