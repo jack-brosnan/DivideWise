@@ -9,62 +9,62 @@
         <h2>Contributors</h2>
     </div>
     <div class="p-2 my-3 container--white box-shadow rounded">
-    <table class="table">
-        
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for c in contributor %}
-            <tr>
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in contributor %}
                 {% if form.instance.id == c.id %}
-
-                {% include 'expense_app/save_contributor.html' %}
+                    {% include 'expense_app/save_contributor.html' %}
                 {% else %}
+                <tr>
+                    <td>{{ c.name }}</td>
+                    <td class="text-end">
+                        <form method="post" action="{% url 'edit_contributor' expense_space.id %}"
+                            style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" name="edit" value="{{ c.id }}" class="btn btn-link edit-icon"
+                                title="Edit Contributor"><i class="fa-regular fa-pen-to-square"></i></button>
+                        </form>
+                        <form method="post" action="{% url 'edit_contributor' expense_space.id %}"
+                            style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" name="delete" value="{{ c.id }}" class="btn btn-link p-0 delete-icon"
+                                title="Remove Contributor">
+                                <i class="fa-solid fa-x"></i></button>
+                        </form>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">No contributors assigned</td>
+                </tr>
+                {% endfor %}
+                {% if not form.instance.id == c.id %}
 
-                <td>{{ c.name }}</td>
-                <td>
-                    <form method="post" action="{% url 'edit_contributor' expense_space.id %}" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" name="edit" value="{{ c.id }}" class="btn btn-link edit-icon"
-                            title="Edit Contributor"><i class="fa-regular fa-pen-to-square"></i></button>
-                    </form>
-                    <form method="post" action="{% url 'edit_contributor' expense_space.id %}" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" name="delete" value="{{ c.id }}" class="btn btn-link p-0 delete-icon"
-                            title="Remove Contributor">
-                            <i class="fa-solid fa-x"></i></button>
-                    </form>
-                </td>
+                {% else %}
+                <tr>
+                    <td colspan="2">
+                        <!-- Use colspan to span two columns -->
+                        <form method="post" action="{% url 'edit_contributor' expense_space.id %}">
+                            {% csrf_token %}
+                            {{ form.name }}
+                            <button type="submit" name="save" class="btn btn-link add-icon">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
                 {% endif %}
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="2">No contributors assigned</td>
-            </tr>
-            {% endfor %}
-            {% if not form.instance.id == c.id %}
 
-            {% else %}
-            <tr>
-                <td>
-                    <form method="post" action="{% url 'edit_contributor' expense_space.id %}">
-                        {% csrf_token %}
-                        {{ form.name }}
-                </td>
-                <td>
-                    <button type="submit" name="save" class="btn btn-link add-icon"><i
-                            class="fa-solid fa-plus"></i></button>
-                    </form>
-                </td>
-            </tr>
-            {% endif %}
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
     <div class="d-flex justify-content-center">
         <a href="{% url 'view_space' expense_space.id %}" class="btn btn--orange mx-auto">Back to Space</a>

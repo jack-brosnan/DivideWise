@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    
     const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
     const deleteButtons = document.getElementsByClassName("delete-space");
     const deleteForm = document.getElementById("deleteForm");
@@ -82,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Select all accordion items
+
     
     expenseLines.forEach(expenseLine => {
         const totalAmount = parseFloat(expenseLine.dataset.totalAmount || 0);

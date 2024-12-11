@@ -505,8 +505,7 @@ footer .nav-link:focus {
 }
 
 .count-icon {
-    color: linear-gradient(-180deg, #6e73f88a, #070eff8a);
-    ;
+    color: #472fd4;   
 }
 
 .accordion-button::after {
@@ -636,7 +635,7 @@ td {
 
 .custom-checkbox .round input[type="checkbox"]:checked+label {
     background-color: #66bb6a;
-    border-color: #66bb6a;
+    border-color: #4eb453;  
 }
 
 .custom-checkbox .round input[type="checkbox"]:checked+label:after {
@@ -722,7 +721,6 @@ form label {
     outline: 0;
     overflow: hidden;
     padding: 0 10px;
-    pointer-events: auto;
     position: relative;
     text-align: center;
     touch-action: manipulation;
@@ -758,7 +756,6 @@ form label {
     outline: 0;
     overflow: hidden;
     padding: 0 20px;
-    pointer-events: auto;
     position: relative;
     text-align: center;
     touch-action: manipulation;
@@ -794,7 +791,6 @@ form label {
     outline: 0;
     overflow: hidden;
     padding: 0 20px;
-    pointer-events: auto;
     position: relative;
     text-align: center;
     touch-action: manipulation;
@@ -830,7 +826,6 @@ form label {
     outline: 0;
     overflow: hidden;
     padding: 0 20px;
-    pointer-events: auto;
     position: relative;
     text-align: center;
     touch-action: manipulation;
@@ -910,17 +905,19 @@ form label {
 }
 
 .filter-content {
+    cursor: pointer;
     position: absolute;
     top: 50%;
     left: 45%;
     transform: translateY(-50%);
     color: #000000;
     font-size: 1.0rem;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
     z-index: 1;
     transition: 0.4s ease left;
     max-width: 90%;
     text-align: center;
+    
 }
 
 
@@ -951,7 +948,8 @@ input[type="checkbox"]:checked ~ .filter-content {
     }
 
     .filter-content {
-        font-size: 1rem;       
+        font-size: 1rem;
+        font-weight: 700;  
     }
 
     input[type="checkbox"]:checked + .filter-bg .filter-btn {
