@@ -54,8 +54,9 @@
                 </div>
                 {% empty %}
 
-                <div id="container-empty-container"class="p-2 m-3 container--white box-shadow rounded">
-                    <p class="m-0"><i class="fa-solid fa-circle-info text-success"></i> Click Edit above to add contributors to the space.</p>
+                <div id="container-empty-container" class="p-2 m-3 container--white box-shadow rounded">
+                    <p class="m-0"><i class="fa-solid fa-circle-info text-success"></i> Click Edit above to add
+                        contributors to the space.</p>
                 </div>
 
                 {% endfor %}
@@ -103,6 +104,7 @@
                 <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse accordion-panel show">
                     <div class="accordion-body">
                         <!-- {{ line.description }} -->
+                        <p id="expense-warning-message-{{ line.id }}" class="amount-warning" hidden></p>
                         <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}"
                             class="btn btn-link remove-decoration"><i class="fa-solid fa-pen-to-square edit-icon"></i>
                             <span class="link-color"> Edit Expense</span>
@@ -210,6 +212,17 @@
 </div>
 
 <script>
+    const messages = document.querySelectorAll('#message-container .alert');
+    messages.forEach((message) => {
+        setTimeout(() => {
+            message.classList.remove('show');
+            message.style = `transition: opacity 1s ease;
+                                      opacity: 0;
+                                      `
+            setTimeout(() => message.remove(), 500);
+        }, 3000);
+    });
+
     // Toggle expense line accordion dropdown
     const toggleButton = document.getElementById('toggleButton');
     const panels = document.querySelectorAll('.accordion-panel');
@@ -274,6 +287,10 @@
         const expenseLineId = expenseLine.dataset.id;
         const contributionRows = expenseLine.querySelectorAll('tbody tr[data-contributor-id]');
 
+        if (contributionRows.length === 0) {
+            return;
+        }
+
         let customAmountTotal = 0;
         let allContributorsHaveCustomAmounts = true;
 
@@ -291,16 +308,23 @@
         if (allContributorsHaveCustomAmounts && customAmountTotal < totalAmount) {
             const warningIcon = expenseLine.querySelector(`#expense-warning-${expenseLineId}`);
             const amountElement = expenseLine.querySelector(`#expense-amount-${expenseLineId} .amount`);
+            const warningMessage = expenseLine.querySelector(`#expense-warning-message-${expenseLineId}`);
 
             if (warningIcon) {
                 warningIcon.removeAttribute('hidden');
-                warningIcon.setAttribute('title', 'Custom amounts do not match the total expense.')
-
             }
 
             if (amountElement) {
                 amountElement.classList.add('amount-warning');
             }
+
+            if (warningMessage) {
+                warningMessage.removeAttribute('hidden');
+                warningMessage.innerHTML =
+                    '<i class="fa-solid fa-circle-info text-primary"></i> Custom amounts do not align with the total expense. Please review the assigned custom amounts.';
+            }
+
+
         }
     });
 </script>
