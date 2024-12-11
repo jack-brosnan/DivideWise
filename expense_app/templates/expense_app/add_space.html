@@ -13,8 +13,8 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ expense_space_form | crispy }}
-        <button type="submit" class="btn--orange">Add Expense</button>
-        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn--orange px-4">Add Expense</button>
+        <a href="{% url 'home' %}" class="btn btn--gray">Cancel</a>
     </form>
 </div>
 {% endblock %}
