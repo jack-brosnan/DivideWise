@@ -200,14 +200,12 @@ def edit_custom_amount(request, space_id, expense_id, contribution_id):
     expense_line = get_object_or_404(ExpenseLine, pk=expense_id, expense_space=expense_space)
     contribution = get_object_or_404(Contribution, pk=contribution_id, expense_line=expense_line)
 
-    if request.method == 'POST':
-        form = CustomAmountForm(request.POST, instance=contribution)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Updated custom amount')
-            return redirect('view_space', space_id=space_id)
-    else:
-        form = CustomAmountForm(instance=contribution)
+    form = CustomAmountForm(request.POST or None, instance=contribution, expense_line=expense_line)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Custom amount updated successfully.')
+        return redirect('view_space', space_id=space_id)
 
     return render(request, 'expense_app/edit_custom_amount.html', {
         'expense_space': expense_space,

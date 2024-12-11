@@ -95,3 +95,37 @@ class CustomAmountForm(forms.ModelForm):
                     attrs={'placeholder': 'Enter Custom Amount', 'min': '0', 'step': '0.01'}
                 ),
         }
+
+    # Custom amount form validation
+
+    def __init__(self, *args, expense_line=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.expense_line = expense_line
+        self.update_help_text()
+
+    def update_help_text(self):
+        if self.expense_line:
+            remaining_amount = self.calculate_remaining_amount()
+            self.fields['custom_amount'].help_text = f"{remaining_amount}"
+
+    def calculate_remaining_amount(self):
+        total_custom_amount = self.get_total_custom_amount()
+        return max(self.expense_line.amount - total_custom_amount, 0)
+
+    def get_total_custom_amount(self):
+        contributions = self.expense_line.expense_contributions.exclude(pk=self.instance.pk)
+        return sum(c.custom_amount or 0 for c in contributions)
+
+    def clean_custom_amount(self):
+        custom_amount = self.cleaned_data.get('custom_amount', 0)
+        if custom_amount is None:
+            return custom_amount
+
+        total_custom_amount = self.get_total_custom_amount() + custom_amount
+        if self.expense_line and total_custom_amount > self.expense_line.amount:
+            currency = self.expense_line.expense_space.get_currency_display()
+            raise forms.ValidationError(
+                f"Custom amount exceeds the remaining allowable amount. "
+                f"Maximum allowed: {currency} {self.calculate_remaining_amount()}"
+            )
+        return custom_amount
