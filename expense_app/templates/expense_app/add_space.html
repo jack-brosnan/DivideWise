@@ -5,16 +5,22 @@
 {% block title %}Add Space{% endblock %}
 
 {% block content %}
-<div class="container container-v-center">
-    <div class="header-white header-container">
-        <h2>Add Space</h2>
-    </div>
-    
+<section class="container container-v-center">
+
+    <h2 class="header-white">Add Space</h2>
+
+    <!-- Form to create a new expense space -->
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
+        <!-- Display the form fields with crispy layout -->
         {{ expense_space_form | crispy }}
+
+        <!-- Submit button for adding a new space -->
         <button type="submit" class="btn--orange px-4">Add Expense</button>
+
+        <!-- Cancel button to navigate back to the home page -->
         <a href="{% url 'home' %}" class="btn btn--gray">Cancel</a>
     </form>
-</div>
+</section>
 {% endblock %}

@@ -6,30 +6,36 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
-<div class="container h-100 d-flex align-items-center justify-content-center">
+<section class="container h-100 d-flex align-items-center justify-content-center">
   <div class="row w-100">
     <div class="col-md-10 col-lg-6 mx-auto">
 
+      <!-- Welcome message start -->
+      <h3 class="text-center header-white">Welcome to DivideWise!</h3>
 
-      <h3 class="text-center header-white">{% blocktrans %}
-        Welcome to DivideWise!</h3>
-      <h4 class="text-center header-white mb-3">Do you already have an account? Then please
+      {% blocktrans %}
+      <h5 class="text-center header-white mb-3">Do you already have an account? Then please
         <a class="auth-text-link" href="{{ login_url }}"><span class="auth-link-bg">Login</span></a>
         instead.
-        {% endblocktrans %}</h4>
+        {% endblocktrans %}</h5>
+      <!-- Welcome message end -->
 
+      <!-- Signup Form -->
       <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
+
+        <!-- Display the form fields using Crispy Forms -->
         {{ form|crispy }}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <button class="btn--orange" type="submit">
+        <!-- Signup Button -->
+        <button class="btn--orange px-4" type="submit">
           {% trans "Sign Up" %}</button>
       </form>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Updated placeholder text for email field input -->
 <script>

@@ -6,6 +6,7 @@
 
 {% block content %}
 
+<!-- Display form validation error defined in forms.py - CustomAmountForm -->
 {% if form.errors %}
 
 <div class="container message-overlay z-3">
@@ -16,19 +17,19 @@
 </div>
 {% endif %}
 
-<div class="mx-auto text-center container-v-center">
-    <div class="header-white header-container">
-        <h2>Edit contribution</h2>
-    </div>
+<section class="mx-auto text-center container-v-center">
 
-
+    <h2 class="header-white">Edit contribution</h2>
 
     <form method="post"
         action="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=expense_line.id contribution_id=contribution.id %}">
         {% csrf_token %}
         <div class="input-group d-flex justify-content-center">
+            <!-- Currency symbol associated to space -->
             <span class="input-group-text">{{ expense_space.get_currency_display }}</span>
             {{ form.custom_amount }}
+
+            <!-- Display text for maximum allowed amount, defined in forms.py - CustomAmountForm -->
             {% if form.custom_amount.help_text %}
             <div class="col-12">
                 <p class="header-white mt-2">Maximum allowed: {{ expense_space.get_currency_display }}
@@ -37,15 +38,14 @@
             {% endif %}
         </div>
 
-
-
+        <!-- Save and Cancel buttons -->
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn--orange px-4 me-2">Save</button>
             <a href="{% url 'view_space' expense_space.id %}" class="btn btn--gray">Cancel</a>
         </div>
     </form>
 
-</div>
+</section>
 
 
 {% endblock %}

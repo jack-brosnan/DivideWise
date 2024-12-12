@@ -3,66 +3,78 @@
 {% block title %}Add Contribution{% endblock %}
 
 {% block content %}
-<div class="mx-auto my-3 container-v-center">
-    <div class="header-white header-container">
-        <h2>Select Contributors</h2>
-    </div>
+<section class="mx-auto my-3 container-v-center">
+
+    <h2 class="header-white header-container">Select Contributors</h2>
+
 
     <div class="p-2 my-3 container--white box-shadow rounded">
-
+        <h3 class="visually-hidden">Selection Table</h3>
+        <!-- Adding contributors to the expense line. Updates contribution model -->
         <form method="post" action="{% url 'add_contribution' space_id=expense_space.id expense_id=expense_line.id %}">
             {% csrf_token %}
 
+            <!-- Check if there are any contributors who are not already assigned -->
             {% if unassigned_contributors %}
             <div class="form-group">
 
-                <div>
-                    <table class="contributor-table">
+
+                <!-- Table to display unassigned contributors -->
+                <table class="contributor-table">
+                    <!-- Bootstrap class 'visually-hidden' to hide content, but remain accessible to assistive technologies -->
+                    <caption class="visually-hidden">
+                        List of contributors available to be added to the expense line.
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th class="visually-hidden">Name</th>
+                            <th class="visually-hidden">Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {% for contributor in unassigned_contributors %}
                         <tr>
+                            <!-- Display contributor's name -->
                             <td class="contributor-name">
                                 {{ contributor.name }}
                             </td>
                             <td class="contributor-checkbox">
+                                <!-- Checkbox to select contributor. Custom styling applied -->
                                 <div class="custom-checkbox d-flex justify-content-center">
                                     <div class="round">
-                                        <!-- Add the label directly after the input -->
+                                        <!-- Input for selecting the contributor -->
                                         <input type="checkbox" name="contributors" value="{{ contributor.id }}"
                                             id="contributor-{{ contributor.id }}">
+                                        <!-- Label associated with the checkbox for better accessibility -->
                                         <label for="contributor-{{ contributor.id }}"></label>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-
                         {% endfor %}
+                    </tbody>
 
-                    </table>
-                </div>
+                </table>
+
             </div>
 
-
-
-
-
-
-            <button type="submit" class="btn--orange">Add</button>
+            <!-- Button to add the selected contributors to the expense line -->
+            <button type="submit" class="btn--orange px-4">Add</button>
             {% else %}
+
+            <!-- Message if there are no unassigned contributors -->
             <p>No contributors to assign. Go to the Manage Contributors section to add more people.</p>
             <p>Then come back here to assign them to the expense.</p>
+
+            <!-- Link to manage contributors -->
             <a href="{% url 'edit_contributor' expense_space.id %}" class="btn btn--orange">Manage Contributors</a>
 
             {% endif %}
-
+            <!-- Cancel button to return to the space view -->
             <a href="{% url 'view_space' expense_space.id %}" class="btn btn--gray">Cancel</a>
 
-
         </form>
-
-
     </div>
-</div>
-
-
+</section>
 
 {% endblock %}

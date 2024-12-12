@@ -5,16 +5,23 @@
 {% block title %}Add Expense{% endblock %}
 
 {% block content %}
-<div class="container container-v-center">
-    <div class="header-white header-container">
-        <h2>Add Expense</h2>
-    </div>
-     
+<section class="container container-v-center">
+
+    <h2 class="header-white">Add Expense</h2>
+
+    <!-- Form to add a new expense line -->
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
+        <!-- Display the form fields with crispy layout -->
         {{ expense_line_form | crispy }}
+
+        <!-- Submit button for adding an expense -->
         <button type="submit" class="btn--orange">Add Expense</button>
+
+        <!-- Cancel button to navigate back to the expense space -->
         <a href="{% url 'view_space' expense_space.id %}" class="btn btn--gray">Cancel</a>
+        
     </form>
-</div>
+</section>
 {% endblock %}

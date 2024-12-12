@@ -4,13 +4,15 @@
 
 {% block content %}
 
-<div class="mx-auto my-3 container-v-center">
-    <div class="header-white header-container">
-        <h2>Contributors</h2>
-    </div>
+<section class="mx-auto my-3 container-v-center">
+
+    <h2 class="header-white">Contributors</h2>
+
+    <!-- Table to display contributors and available actions -->
     <div class="p-2 my-3 container--white box-shadow rounded">
         <table class="table">
-
+            <!-- Bootstrap class 'visually-hidden' to hide content, but remain accessible to assistive technologies -->
+            <caption class="visually-hidden">List of contributors with edit and delete actions</caption>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -20,7 +22,8 @@
             <tbody>
                 {% for c in contributor %}
                 {% if form.instance.id == c.id %}
-                    {% include 'expense_app/save_contributor.html' %}
+                <!-- Include form from save_contributor.html to save contributor -->
+                {% include 'expense_app/save_contributor.html' %}
                 {% else %}
                 <tr>
                     <td>{{ c.name }}</td>
@@ -31,28 +34,36 @@
                             <button type="submit" name="edit" value="{{ c.id }}" class="btn btn-link edit-icon"
                                 title="Edit Contributor"><i class="fa-regular fa-pen-to-square"></i></button>
                         </form>
+
+                        <!-- Form to delete the contributor -->
                         <form method="post" action="{% url 'edit_contributor' expense_space.id %}"
                             style="display:inline;">
                             {% csrf_token %}
                             <button type="submit" name="delete" value="{{ c.id }}" class="btn btn-link p-0 delete-icon"
                                 title="Remove Contributor">
-                                <i class="fa-solid fa-x"></i></button>
+                                <i class="fa-solid fa-x"></i>
+                            </button>
                         </form>
                     </td>
                 </tr>
-                    {% endif %}
-                
+                {% endif %}
+
                 {% empty %}
+
                 <tr>
                     <td colspan="2">No contributors assigned</td>
                 </tr>
+
                 {% endfor %}
+
                 {% if not form.instance.id == c.id %}
 
                 {% else %}
+
+                <!-- Form to add or save a new contributor -->
                 <tr>
                     <td colspan="2">
-                        <!-- Use colspan to span two columns -->
+
                         <form method="post" action="{% url 'edit_contributor' expense_space.id %}">
                             {% csrf_token %}
                             {{ form.name }}
@@ -63,14 +74,13 @@
                     </td>
                 </tr>
                 {% endif %}
-
             </tbody>
         </table>
     </div>
+
+    <!-- Back to Space button -->
     <div class="d-flex justify-content-center">
         <a href="{% url 'view_space' expense_space.id %}" class="btn btn--orange mx-auto">Back to Space</a>
     </div>
-</div>
-
-
+</section>
 {% endblock %}

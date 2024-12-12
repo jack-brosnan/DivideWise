@@ -6,27 +6,35 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-<div class="container h-100 d-flex align-items-center justify-content-center">
+<section class="container h-100 d-flex align-items-center justify-content-center">
     <div class="row w-100">
         <div class="col-md-8 col-lg-6 mx-auto">
+            <!-- Welcome message start-->
             <h3 class="text-center header-white">{% blocktrans %}Welcome back to DivideWise!{% endblocktrans %}</h3>
-            <h4 class="v-space header-white">
+            <h5 class="v-space header-white">
                 {% blocktrans %}
                 To start creating expense spaces, please log in. If you have not created an account yet, then
-                  
+
                 <a class="auth-text-link" href="{{ signup_url }}"><span class="auth-link-bg">Register</span></a> first.
-                
+
                 {% endblocktrans %}
-            </h4>
+            </h5>
+            <!-- Welcome message end -->
+
+            <!-- Login Form -->
             <form class="login mt-4" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
+
+                <!-- Display the form fields using Crispy Forms -->
                 {{ form|crispy }}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
+
+                <!-- Login Button -->
                 <button class="btn--orange" type="submit">{% trans "Sign In" %}</button>
             </form>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}

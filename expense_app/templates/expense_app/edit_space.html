@@ -5,23 +5,27 @@
 {% block title %}Edit Expense{% endblock %}
 
 {% block content %}
-<div class="container container-v-center">
-    <div class="header-white header-container">
-        <h2>Edit Space</h2>
-    </div>
+<section class="container container-v-center">
 
+    <h2 class="header-white">Edit Space</h2>
+
+    <!-- Form for editing the expense space -->
     <form method="post" action="{% url 'edit_space' edit_id=edit_id %}" enctype="multipart/form-data">
         {% csrf_token %}
 
+        <!-- Display the form fields using Crispy Forms -->
         {{ expense_space_form | crispy }}
 
-
+        <!-- Save and Cancel -->
         <button type="submit" class="btn--orange px-4">Save</button>
         <a href="{% url 'home' %}" class="btn btn--gray">Cancel</a>
     </form>
-</div>
+</section>
 
 <script>
+
+    //Script to hide 'image currently' field and disable currency field
+
     const pageUrl = window.location.href;
 
     if (pageUrl.includes('edit_space')) {
@@ -29,7 +33,9 @@
         const imageContainer = document.getElementById('div_id_space_image');
         const imageCurrentField = imageContainer.querySelector('div');
 
-        imageCurrentField.setAttribute('hidden', true);
+        if (imageCurrentField) {
+            imageCurrentField.setAttribute('hidden', true);
+        }
 
         if (currencyField) {
             currencyField.classList.add('readonly');
