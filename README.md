@@ -1,150 +1,536 @@
 # **DivideWise**
 
-DivideWise is a web application designed to help users efficiently track and manage shared expenses. Users can create shared expense spaces, add contributors, split costs, and monitor contributions in real time.
+DivideWise is a web application designed to help users efficiently track and manage shared expenses. Users can create shared expense spaces, add contributors, split costs, and assign contribution amounts.
+
+The responsive website allows users to manage expenses seamlessly, making it ideal for shared living spaces, group vacations, and collaborative events.
+
+# **[Link to Live Site](https://dividewise-a9f60e19a4b9.herokuapp.com/)**  
+
+*This project was built as part of a full-stack development portfolio.*
+
+**Built by Jack Brosnan**
 
 ---
 
-## **Table of Contents**
+# **Table of Contents**
 
-1. [User Demographic](#user-demographic)
-2. [UX](#ux)
+1. [UX](#ux)
    - [Overview](#overview)
+   - [Entity Relationship Model](#entity-relationship-model)
    - [Wireframes](#wireframes)
-3. [Agile Methodology](#agile-methodology)
-   - [Overview](#agile-overview)
+2. [Agile Development](#agile-development)
+   - [Kanban Board](#kanban-board)
    - [User Stories](#user-stories)
-   - [Wireframes](#agile-wireframes)
-4. [Features Implemented](#features-implemented)
-5. [Technology Used](#technology-used)
-6. [Installation Instructions](#installation-instructions)
-7. [Usage Guide](#usage-guide)
-8. [Testing](#testing)
-9. [Deployment](#deployment)
-10. [Future Enhancements](#future-enhancements)
-11. [Resources](#resources)
-12. [Credits and Acknowledgements](#credits-and-acknowledgements)
+3. [Features Implemented](#features-implemented)  
+4. [Future Enhancements](#future-enhancements)  
+5. [Technology Used](#technology-used) 
+6. [Testing](#testing-and-validation)  
+7. [Bugs](#known-bugs)  
+8. [Deployment](#deployment)
+9. [Resources](#resources)  
+10. [Credits and Acknowledgements](#credits-and-acknowledgements)
 
 ---
 
-## **1. User Demographic**
+# **UX**
 
-DivideWise is tailored for users who frequently engage in group activities or shared expenses, such as roommates, friends, or colleagues. The app is ideal for managing expenses for:
+## **Overview**
+DivideWise is tailored for users who engage in shared expenses, providing a seamless way to manage group costs. The app simplifies tracking contributions, ensuring transparency and fairness.
 
-- Shared living spaces.
-- Group vacations.
-- Event planning and more.
+## Entity Relationship Model
 
----
+I used draw.io to create my database entity relationship diagrams. See diagram and supporting text below.
 
-## **2. UX**
+![Database Entity Relationship DivideWise Diagram](static/images/readme/dividewse-erd.png)
 
-### **Overview**
-The DivideWise interface is designed with simplicity and accessibility in mind. It ensures users can easily navigate between creating expense spaces, managing contributions, and tracking balances.
+### Relationships
 
-### **Wireframes**
-The app's wireframes were created using Figma and showcase layouts for various screen sizes (desktop, tablet, and mobile).
+#### ExpenseSpace ↔ ExpenseLine
 
----
-
-## **3. Agile Methodology**
-
-### **Overview**
-DivideWise was developed using Agile principles to ensure iterative progress and user-focused design.
-
-### **User Stories**
-User stories were collected to address real-world use cases. Some examples include:
-
-- "As a user, I want to create an expense space so that I can track group expenses."
-- "As a user, I want to add custom contributions so that expenses can be fairly divided."
-
-### **Wireframes**
-Wireframes for Agile sprints were created to visualize progress during development.
+- **A space can have multiple expense lines (1-to-many).**
+- Each expense line belongs to one space.
+- **Relationship:** `ExpenseSpace (1) ↔ ExpenseLine (∞)`
 
 ---
 
-## **4. Features Implemented**
+#### ExpenseSpace ↔ Contributor
 
-### **Key Features**
-- Create and manage expense spaces.
-- Add contributors and customize contributions.
-- Track remaining balances in real-time.
-- Mobile-first responsive design for seamless use across devices.
+- **A space can have multiple contributors (1-to-many).**
+- Each contributor belongs to one space.
+- **Relationship:** `ExpenseSpace (1) ↔ Contributor (∞)`
 
 ---
 
-## **5. Technology Used**
+#### ExpenseLine ↔ Contribution
 
-- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap.
-- **Backend**: Django (Python).
-- **Database**: PostgreSQL.
-- **Hosting**: Heroku, Cloudinary (for media storage).
-- **Version Control**: Git and GitHub.
+- **An expense line can have multiple contributions (1-to-many).**
+- Each contribution is tied to one expense line.
+- **Relationship:** `ExpenseLine (1) ↔ Contribution (∞)`
 
 ---
 
-## **6. Installation Instructions**
+#### Contributor ↔ Contribution
 
-*Instructions for setting up the application will be provided here.*
+- **A contributor can have multiple contributions (1-to-many).**
+- Each contribution is associated with one contributor.
+- **Relationship:** `Contributor (1) ↔ Contribution (∞)`
 
----
 
-## **7. Usage Guide**
+## Wireframes
 
-1. Visit `http://127.0.0.1:8000` in your browser.
-2. Create an account or log in.
-3. Add an expense space, contributors, and start managing expenses.
+The following wireframes illustrate the design and functionality envisioned for key pages and views in the application. Each layout ensures a responsive and user-friendly experience across various devices, including mobile.
 
----
+### Index Page (Desktop and Mobile)
 
-## **8. Testing**
+The index page serves as the main dashboard for users, displaying a list of their created spaces. It includes clear navigation options and responsive design to ensure seamless accessibility on smaller screens.
 
-### **Test Cases**
-Manual and automated tests were performed to ensure:
+- **Desktop View:**  
+  The layout includes a navigation bar, a list of spaces with quick access to view details, and action buttons for creating new spaces. Pagination is implemented for large lists of spaces.  
+  
+- **Mobile View:**  
+  The mobile layout stacks elements vertically for better usability on smaller screens. The navigation bar is replaced with a collapsible menu for easy navigation.  
 
-- Proper functioning of expense calculations.
-- Accurate data validation for contributions.
-- Responsiveness on various devices.
-
-### **Testing Tools**
-- Django Test Framework
-- Postman for API testing
+![Index Page Desktop Placeholder](static/images/readme/dividewise_wireframe-index.png)
 
 ---
 
-## **9. Deployment**
+### View Space (Desktop and Mobile)
 
-DivideWise is deployed on Heroku. Steps to deploy:
+The view space page provides detailed information about a specific space, including the associated expense lines and contributors. It ensures clear and organized presentation of data.
 
-1. Push changes to the GitHub repository.
-2. Connect the Heroku app to the repository.
-3. Configure the necessary environment variables:
-   - `DATABASE_URL`
-   - `SECRET_KEY`
-   - `CLOUDINARY_URL`
+- **Desktop View:**  
+  A structured layout displays space details, a list of expense lines, and contributors. Users can add, edit, or delete expense lines and contributors directly from this page.  
+  
+- **Mobile View:**  
+  On smaller screens, the design adapts by stacking elements vertically. Key actions remain accessible through prominent buttons and collapsible sections.
 
----
-
-## **10. Future Enhancements**
-
-- Integration of a mobile app.
-- Advanced analytics for expense tracking.
-- Multi-currency support.
+![View Space Mobile Placeholder](static/images/readme/dividewise_wireframe-viewspace.png)
 
 ---
 
-## **11. Resources**
+### Forms and Confirmation Messages
 
-- **Django Documentation**: [https://docs.djangoproject.com](https://docs.djangoproject.com)
-- **Bootstrap Documentation**: [https://getbootstrap.com](https://getbootstrap.com)
+The wireframes for the forms include layouts for creating or editing spaces, expenses, and contributors. These forms prioritize simplicity and clarity for user input.
+
+- **Form Layouts:**  
+  Forms are designed with intuitive labels and placeholders. Error messages and validation feedback are displayed inline for clarity. The layout ensures responsive alignment on all devices.
+
+- **Django Confirmation Message:**  
+  A confirmation message appears on the index page after actions like adding or editing spaces. This feedback ensures users are informed about the success of their actions.
+
+![Confirmation Message Placeholder](static/images/readme/dividewise_wireframe-forms.png)
+
 
 ---
 
-## **12. Credits and Acknowledgements**
+# **Agile Development**
 
-Special thanks to:
+## **Kanban Board**
+DivideWise followed Agile methodologies, with a Kanban board hosted on GitHub Projects. The board included:
+- **Backlog**: Unprioritized tasks.
+- **In Progress**: Tasks actively being worked on.
+- **Done**: Completed tasks.
 
-- Open-source contributors and libraries.
-- Bootstrap for styling components.
-- Django community for invaluable support.
+[View Kanban Board](#)
+
+## **User Stories**
+### User Story 1: User Authentication
+As a **user**, I can **register and log in to the app** so that **my data and spaces are securely accessible only to me.**
+
+#### Acceptance Criteria
+- Users must be able to register with an email and password.
+- Logged-in users can access their personal dashboard.
+- Invalid login attempts display error messages (e.g., wrong password, unregistered email).
+
+---
+
+### User Story 2: Create and Manage Spaces
+As a **user**, I can **create, view, update, and delete spaces** so that **I can organize my expenses by event or activity.**
+
+#### Acceptance Criteria
+- Users can create a new space by entering a name and optional description.
+- A list of all spaces is displayed on the user's dashboard.
+- Users can update or delete spaces they created, with confirmation prompts for deletions.
+
+---
+
+### User Story 3: Add and Manage Expenses
+As a **user**, I can **add expenses to a space** so that **I can track costs associated with specific events.**
+
+#### Acceptance Criteria
+- Expenses must include a title, amount.
+- Users can associate contributors with each expense and define how costs are split.
+- Users can view, edit, or delete any expense within their spaces.
+
+---
+
+### User Story 4: Expense Split View
+As a **user**, I can **view how expenses are split among contributors** so that **I know who owes what.**
+
+#### Acceptance Criteria
+- Each expense can display the breakdown of contributors and their owed amounts.
+- Split calculations are accurate based on predefined rules (equal or custom).
+- The total split amount matches the expense amount.
+
+---
+
+### User Story 5: View List of Spaces on the Homepage
+As a **user**, I can **see a list of all spaces I have created on the homepage** so that **I can quickly access and manage my existing spaces.**
+
+#### Acceptance Criteria
+- The homepage displays a list of spaces with their names and descriptions.
+- Each space in the list has a clickable link to view its details.
+- The list is paginated if there are many spaces and sorted by date created.
+
+---
+
+### User Story 6: View Space Summary
+As a **user**, I can **view a summary of total expenses and balances for a space** so that **I can understand the overall financial picture.**
+
+#### Acceptance Criteria
+- Users can access the summary from the space view.
+- The summary dynamically updates when expenses or contributors change.
+
+---
+
+### User Story 7: View List of Expenses in a Space
+As a **user**, I can **see a list of all expenses associated with a specific space** so that **I can review the expenses for that event or activity.**
+
+#### Acceptance Criteria
+- Clicking on a space from the dashboard displays a detailed view with a list of all expenses associated.
+- Each expense in the list shows a title, description (if provided), date (if provided), and amount.
+
+---
+
+### User Story 8: Add and Manage Contributors
+As a **user**, I can **add and manage contributors assigned to a space** so that **I can see who is involved and split expenses accurately.**
+
+#### Acceptance Criteria
+- Users can add contributors to a space by entering their name and an email address (if provided).
+- Users can view the list of contributors assigned to a space.
+- Users can update or remove contributors from the space. A confirmation prompt is displayed for removals.
+
+---
+
+# **Features Implemented**
+
+## Home Page:
+- Displays a list of expense spaces for logged-in users.
+- Anonymous users are unable to see any expense spaces.
+- Provides quick navigation to view, edit, or delete expense spaces.
+- Displays the total expense amount for each expense space.
+- Includes a responsive design to ensure usability on various screen sizes.
+
+## View Space Page:
+- Displays detailed information about the selected expense space.
+- Lists associated expense lines in descending order of creation.
+- Shows contributors and their contributions for the expense space.
+- Includes options to add, edit, or delete expense lines and contributors.
+- Provides an intuitive filter for contributors, allowing users to view specific details.
+
+## Add Space Page:
+- Allows users to create a new expense space.
+- Includes fields for the space name, description, currency, and image upload.
+- Provides validation to ensure required fields are completed before submission.
+- Displays a success message upon successful creation.
+
+## Edit Space Page:
+- Displays a pre-filled form for editing an existing expense space.
+- Allows users to update the name, description, currency, and image.
+- Ensures validation on all fields before saving changes.
+- Includes a cancel button to return to the home page without making changes.
+
+## Add Expense Page:
+- Enables users to add a new expense line to an expense space.
+- Includes fields for title, description, amount, and due date.
+- Validates all fields to ensure accurate input.
+- Displays a success message upon successful addition.
+
+## Edit Expense Page:
+- Displays a pre-filled form for editing an existing expense line.
+- Allows users to update the title, description, amount, and due date.
+- Provides options to save changes or delete the expense line.
+- Includes validation to ensure no fields are left incomplete.
+
+## Add Contribution Page:
+- Displays a list of unassigned contributors for the selected expense line.
+- Allows users to select contributors and assign them to the expense line.
+- Provides a cancel button to return to the view space page without adding contributors.
+- Displays a success message upon successful addition of contributors.
+
+## Edit Contributor Page:
+- Lists all contributors associated with the selected expense space.
+- Provides options to edit or delete contributors.
+- Includes a form to add new contributors to the expense space.
+- Ensures validation for contributor details before saving changes.
+
+## Edit Custom Amount Page:
+- Displays a form to update the custom amount for a specific contribution.
+- Ensures the total custom amounts do not exceed the expense line amount.
+- Displays a calculated maximum allowable amount for user reference.
+- Includes validation and provides clear error messages for invalid input.
+
+## Login Page:
+- Allows registered users to log in securely.
+- Includes a "forgot password" option for users who need to reset their password.
+- Redirects successfully logged-in users to the home page.
+
+## Registration Page:
+- Allows new users to create an account securely.
+- Includes fields for username, email, and password.
+- Ensures validation on all fields before account creation.
+- Redirects successfully registered users to the home page.
+
+## Logout Page:
+- Allows users to securely log out of their account.
+- Redirects users to the login page after successful logout.
+
+### Responsive Design:
+- Ensures all pages are optimized for use on mobile, tablet, and desktop devices.
+- The navbar collapses into a burger menu on smaller screens for improved navigation.
+- Page elements adjust to ensure readability and usability on smaller screens.
+
+## Additional Security Features:
+- Restricts access to expense spaces and features for unauthorized users.
+- Validates form inputs to prevent malicious submissions.
+- Prevents users from accessing or modifying data they do not own.
+- Redirects unauthorized users attempting restricted actions to the login page.
+
+##### [ Back to Top ](#table-of-contents)
+
+---
+
+# **Future Enhancements**
+
+1. **Analytics**: Integrate charts for expense insights.
+2. **Multi-Currency Support**: Allow users to manage expenses in various currencies.
+
+---
+
+# **Technology Used**
+
+- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap
+- **Backend**: Django (Python)
+- **Database**: PostgreSQL
+- **Hosting**: Heroku, Cloudinary (media storage)
+- **Version Control**: Git and GitHub
+- **Wireframes**: Balsamiq
+
+---
+
+# **Testing and Validation**
+
+## **Responsiveness**
+The app was tested across multiple devices (desktop, tablet, mobile) using Chrome DevTools.
+
+### Manual Testing Results
+
+#### **Viewing Expense Spaces**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Displays a list of expense spaces for logged-in users         | Pass       |
+| Hides expense spaces for anonymous users                      | Pass       |
+| Filters expense spaces by the logged-in user                  | Pass       |
+
+---
+
+#### **Adding Space**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Displays a form to add a new expense space                    | Pass       |
+| Validates input fields (e.g., name, description)              | Pass       |
+| Displays success message on valid form submission             | Pass       |
+| Redirects to the homepage after successful form submission    | Pass       |
+| Handles file uploads for space image                         | Pass       |
+
+---
+
+#### **Editing Space**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Displays pre-filled form for editing an expense space         | Pass       |
+| Updates expense space details on valid form submission        | Pass       |
+| Validates fields (e.g., name, description)                    | Pass       |
+| Displays success message on update                           | Pass       |
+| Redirects to homepage after updating the space                | Pass       |
+| Restricts access to expense spaces not owned by the user      | Pass       |
+
+---
+
+#### **Delete Space**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Deletes the specified expense space                          | Pass       |
+| Displays success message upon deletion                       | Pass       |
+| Redirects to the homepage after deletion                     | Pass       |
+| Restricts deletion of spaces not owned by the user            | Pass       |
+
+---
+
+#### **View Space**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Displays the details of a selected expense space             | Pass       |
+| Lists associated expense lines in descending order by date    | Pass       |
+| Displays contributors associated with the space               | Pass       |
+| Restricts access to spaces not owned by the user              | Pass       |
+
+---
+
+#### **Manage Contributors**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Displays a list of contributors for a specific expense space | Pass       |
+| Allows editing of existing contributor details               | Pass       |
+| Adds a new contributor to the expense space                  | Pass       |
+| Deletes a contributor from the expense space                 | Pass       |
+| Displays success messages for add, edit, and delete actions  | Pass       |
+| Restricts access to contributors not associated with the user | Pass       |
+
+---
+
+#### **Add Expense Line**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Displays a form to add a new expense line                    | Pass       |
+| Validates input fields (e.g., title, amount, due date)        | Pass       |
+| Displays success message upon successful addition            | Pass       |
+| Redirects to the associated expense space                    | Pass       |
+
+---
+
+#### **Edit Expense Line**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Displays a pre-filled form to edit an expense line            | Pass       |
+| Updates expense details on valid submission                  | Pass       |
+| Validates input fields (e.g., title, amount, due date)        | Pass       |
+| Displays success message on update                           | Pass       |
+| Redirects to the associated expense space after update        | Pass       |
+
+---
+
+#### **Delete Expense Line**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Deletes the specified expense line                           | Pass       |
+| Displays success message upon deletion                       | Pass       |
+| Redirects to the associated expense space                    | Pass       |
+
+---
+
+#### **Edit Custom Amount**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Displays a form to edit the custom amount for a contribution | Pass       |
+| Validates the custom amount does not exceed the total expense | Pass       |
+| Displays success message on update                           | Pass       |
+| Redirects to the associated expense space after update        | Pass       |
+
+---
+
+#### **Add Contribution Line**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Displays a list of unassigned contributors                  | Pass       |
+| Adds selected contributors to the expense line               | Pass       |
+| Displays success message after adding contributors           | Pass       |
+| Redirects to the associated expense space after addition      | Pass       |
+
+---
+
+#### **Delete Contribution Line**
+
+| **Test**                                                      | **Result** |
+|---------------------------------------------------------------|------------|
+| Deletes the specified contribution                           | Pass       |
+| Displays success message upon deletion                       | Pass       |
+| Redirects to the associated expense space                    | Pass       |
+
+---
+
+
+## **Automated Testing**
+Django's test framework was used to validate models and views.
+
+---
+
+# **Known Bugs**
+
+1. **Alert Messages**: Some alert messages may not display properly on smaller devices. This will be addressed in a future update.
+2. **Contribution Validation**: Rare edge cases for custom amounts exceeding limits may bypass validation.
+
+---
+
+### Deployment Steps:
+
+#### Creating the Heroku App
+
+- Begin by signing up or logging in to Heroku.
+- In the Heroku Dashboard, click on 'New' and then select 'Create New App'.
+- Choose a unique name for your project, like "SplitBuddy".
+- Select the EU region.
+- Click on "Create App".
+- In the "Deploy" tab, choose GitHub as the deployment method.
+- Connect your GitHub account and find/connect your GitHub repository.
+
+#### Setting Up Environment Variables
+
+- Create `env.py` in the top level of the Django app.
+- Import `os` in `env.py`.
+- Set up necessary environment variables in `env.py`, including the secret key and database URL.
+- Update `settings.py` to use environment variables for secret key and database.
+- Configure environment variables in the Heroku "Settings" tab under "Config Vars".
+- Migrate the models to the new database connection in the terminal.
+- Configure static files and templates directories in `settings.py`.
+- Add Heroku to the `ALLOWED_HOSTS` list.
+
+#### Creating Procfile and Pushing Changes
+
+- Create a `Procfile` in the top level directory.
+- Add the command to run the project in the `Procfile`.
+- Add, commit, and push the changes to GitHub.
+
+#### Heroku Deployment
+
+- In Heroku, navigate to the Deployment tab and deploy the branch manually.
+- Monitor the build logs for any errors.
+- Upon successful deployment, Heroku will display a link to the live site.
+- Make sure to resolve any deployment errors by adjusting the code as necessary.
+
+### Forking the Repository
+
+Forking the GitHub Repository allows you to create a copy of the original repository without affecting it. Follow these steps:
+
+- Log in to GitHub or create an account.
+- Visit the [repository link](https://github.com/jack-brosnan/DivideWise).
+- Click on "Fork" at the top of the repository.
+
+### Creating a Clone of the Repository
+
+Creating a clone enables you to make a local copy of the repository. Follow these steps:
+
+- Navigate to the [DivideWise](https://github.com/jack-brosnan/DivideWise) repository.
+- Click on the <>Code button.
+- Select the "HTTPS" option under the "Local" tab and copy the URL.
+- Open your terminal and change the directory to your desired location.
+- Use `git clone` followed by the copied repository URL.
+
+---
+
+# **Credits and Acknowledgements**
+
+
 
 ---
