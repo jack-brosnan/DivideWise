@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from decimal import Decimal
 
 CURRENCY = ((0, "€"), (1, "£"), (2, "$"))
 
@@ -136,28 +137,23 @@ class Contribution(models.Model):
     @property
     def remaining_share(self):
         """
-        Calculates the remaining share for contributors without custom
-        amounts, evenly dividing the remaining expense amount.
+        Calculates remaining amount after custom amounts applied.
+        Then divided into equal shares to the rest of the contributors.
         """
-        # Get all contributions for the expense line
         all_contributions = self.expense_line.expense_contributions.all()
-
-        # Calculate total custom amount
-        total_custom_amount = 0
+        total_custom_amount = Decimal(0)
         for contribution in all_contributions:
-            total_custom_amount += contribution.custom_amount or 0
+            custom_amount = contribution.custom_amount or Decimal(0)
+            total_custom_amount += custom_amount
 
-        # Remaining amount after deducting custom contributions
         remaining_amount = max(
-            self.expense_line.amount - total_custom_amount, 0
-        )
+            self.expense_line.amount - total_custom_amount,
+            Decimal(0)
+            )
 
-        # Count contributors without custom amounts
-        non_custom_contributors = all_contributions.filter(
-            custom_amount__isnull=True
-        ).count()
+        contributors_non_custom = all_contributions.filter(
+                custom_amount__isnull=True).count()
 
-        # Divide remaining amount to contributors without custom amounts
-        if non_custom_contributors > 0:
-            return round(remaining_amount / non_custom_contributors, 2)
-        return 0
+        if contributors_non_custom > 0:
+            return round(remaining_amount / contributors_non_custom, 2)
+        return Decimal(0)

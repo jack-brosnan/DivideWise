@@ -128,7 +128,7 @@
                             <!-- Table scroll-bar visable on smaller screen sizes -->
                             <div class="table-scroll">
                                 <table class="table">
-                                     <!-- Bootstrap class 'visually-hidden' to hide content, but remain accessible to assistive technologies -->
+                                    <!-- Bootstrap class 'visually-hidden' to hide content, but remain accessible to assistive technologies -->
                                     <caption class="visually-hidden">
                                         List of contributions for the expense line. Includes details of contrbutor,
                                         share type and amount to contribute
@@ -216,6 +216,7 @@
                     </div>
                 </div>
             </div>
+            {% empty %}
 
             {% endfor %}
             <!-- Add Expense form button -->
@@ -231,13 +232,11 @@
                     </h2>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
 <script>
-
     //Django record update messages - Display duration
     const messages = document.querySelectorAll('#message-container .alert');
     messages.forEach((message) => {
@@ -264,7 +263,6 @@
                 panel.classList.add('show');
             }
         });
-
         status = !status;
         toggleButton.textContent = status ? 'Collapse All' : 'Show All';
     });
@@ -285,13 +283,10 @@
             .map(checkbox => checkbox.id.replace('filter-checkbox-', ''));
 
         expenseLines.forEach(expenseLine => {
-
             const contributorsInLine = (expenseLine.dataset.contributors || '').split(',').map(id => id.trim());
             const matchesFilter = selectedContributorIds.length === 0 ||
                 contributorsInLine.some(id => selectedContributorIds.includes(id));
-
             expenseLine.style.display = matchesFilter ? '' : 'none';
-
             if (matchesFilter) filterContributionRows(expenseLine, selectedContributorIds);
         });
     }

@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic
+from django.views.generic import TemplateView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .models import (
     ExpenseSpace,
@@ -18,23 +20,24 @@ from .forms import (
 )
 
 
-class ExpenseSpaceList(generic.ListView):
+class ExpenseSpaceList(TemplateView):
     """
-    ListView for displaying a user's expense spaces.
+    Displays a welcome page for unauthenticated users
+    and a list of expense spaces for authenticated users.
     """
-    model = ExpenseSpace
     template_name = "expense_app/index.html"
-    context_object_name = "expense_spaces"
 
-    def get_queryset(self):
-        """
-        Return expense spaces for the logged-in user.
-        """
-        if isinstance(self.request.user, AnonymousUser):
-            return ExpenseSpace.objects.none()
-        return ExpenseSpace.objects.filter(
-            user=self.request.user
-        ).order_by("-created_on")
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            # Authenticated users see their expense spaces
+            context["expense_spaces"] = ExpenseSpace.objects.filter(
+                user=self.request.user
+            ).order_by("-created_on")
+        else:
+            # Unauthenticated users see the welcome page
+            context["expense_spaces"] = None
+        return context
 
 
 @login_required
