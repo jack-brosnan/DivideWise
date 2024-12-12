@@ -17,14 +17,14 @@
                     <!-- Expense space profile image -->
                     <div class="col-12 col-md-4 align-self-center">
                         <img src="{{ expense_space.space_image.url }}" class="expense-img card-img-top"
-                            alt="{{ expense_space.name }}">
+                            alt="{{ expense_space.name }} space image">
                     </div>
                     <!-- Expense space title and date created -->
                     <div class="col-12 col-md-8 align-self-center">
                         <h1>{{ expense_space.name }}</h1>
                         <p>{{ expense_space.description }}</p>
 
-                    <!-- Sum of total expense line amounts | adjusted for different screen sizes -->
+                        <!-- Sum of total expense line amounts | adjusted for different screen sizes -->
                         <p class="d-lg-none"><strong>Total:</strong> {{ expense_space.get_currency_display }}
                             {{ expense_space.total_expense }}</p>
                         <p class="d-none d-lg-inline"><strong>Total Expense:</strong>
@@ -45,7 +45,7 @@
                         </h3>
                     </div>
 
-                    <!-- Create contributor filter applying custom checkbox styles  -->
+                    <!-- Loops through contributors and creates filter applying custom checkbox style  -->
                     {% for c in contributor %}
                     <div class="contributor-filter col-6 pb-2">
                         <div class="filter-wrapper">
@@ -100,7 +100,7 @@
                             data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{ line.id }}"
                             aria-expanded="true" aria-controls="panelsStayOpen-{{ line.id }}">
 
-                            
+                            <!-- Expense line title and Fontawsome icon for contribution count -->
                             <span>{{ line.title }} <i class="fa-solid fa-user count-icon"></i>
                                 {{ line.expense_contributions.count }}</span>
 
@@ -114,7 +114,7 @@
                         </button>
                     </h2>
                     <div id="panelsStayOpen-{{ line.id }}" class="accordion-collapse collapse accordion-panel show">
-                        
+
                         <div class="accordion-body">
                             <!-- Warning message to display when custom amounts do not equal total expense amount -->
                             <p id="expense-warning-message-{{ line.id }}" class="amount-warning" hidden></p>
@@ -125,8 +125,14 @@
                                     class="fa-solid fa-pen-to-square edit-icon"></i>
                                 <span class="link-color"> Edit Expense</span>
                             </a>
+                            <!-- Table scroll-bar visable on smaller screen sizes -->
                             <div class="table-scroll">
                                 <table class="table">
+                                     <!-- Bootstrap class 'visually-hidden' to hide content, but remain accessible to assistive technologies -->
+                                    <caption class="visually-hidden">
+                                        List of contributions for the expense line. Includes details of contrbutor,
+                                        share type and amount to contribute
+                                    </caption>
                                     <thead>
                                         <tr>
                                             <th scope="col"></th>
@@ -141,7 +147,7 @@
                                         <tr data-contributor-id="{{ split.contributor.id }}"
                                             data-custom-amount="{{ split.custom_amount }}">
                                             <th>
-
+                                                <!-- Fontawsome icon for contribution delete form -->
                                                 <form method="post"
                                                     action="{% url 'delete_contribution' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
                                                     class="my-2">
@@ -154,9 +160,11 @@
 
                                             </th>
                                             <td>{{ split.contributor.name }}</td>
+
+                                            <!-- Contributor share type -->
                                             <td>{{ split.split_type }}</td>
 
-
+                                            <!-- Checks if custom_amount object value exists -->
                                             {% if split.custom_amount is none %}
                                             <td class="text-end">
                                                 <a href="{% url 'edit_custom_amount' space_id=expense_space.id expense_id=line.id contribution_id=split.id %}"
@@ -192,7 +200,7 @@
                                         {% endfor %}
                                         <tr>
                                             <td colspan="5">
-
+                                                <!-- Add contribution form link -->
                                                 <a href="{% url 'add_contribution' space_id=expense_space.id expense_id=line.id %}"
                                                     class="btn btn-link remove-decoration"><i
                                                         class="fa-solid fa-circle-plus add-icon"></i>
@@ -210,7 +218,7 @@
             </div>
 
             {% endfor %}
-            <!-- Add Expense Section -->
+            <!-- Add Expense form button -->
             <div class="accordion box-shadow my-4">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -229,6 +237,8 @@
 </section>
 
 <script>
+
+    //Django record update messages - Display duration
     const messages = document.querySelectorAll('#message-container .alert');
     messages.forEach((message) => {
         setTimeout(() => {
@@ -240,7 +250,7 @@
         }, 3000);
     });
 
-    // Toggle expense line accordion dropdown
+    // Button to toggle expense line accordion dropdown
     const toggleButton = document.getElementById('toggleButton');
     const panels = document.querySelectorAll('.accordion-panel');
 
@@ -259,7 +269,7 @@
         toggleButton.textContent = status ? 'Collapse All' : 'Show All';
     });
 
-    // Contributor filter
+    // Contributor filter script
 
     const contributorCheckboxes = document.querySelectorAll('.contributor-filter input[type="checkbox"]');
     const expenseLines = document.querySelectorAll('.accordion-item');
