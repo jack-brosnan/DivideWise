@@ -393,7 +393,7 @@ The app was tested across multiple devices (desktop, tablet, mobile) using Chrom
 | Displays success messages for add, edit, and delete actions  | Pass       |
 | Restricts access to contributors not associated with the user | Pass       |
 
----
+
 
 #### **Add Expense Line**
 
@@ -404,7 +404,7 @@ The app was tested across multiple devices (desktop, tablet, mobile) using Chrom
 | Displays success message upon successful addition            | Pass       |
 | Redirects to the associated expense space                    | Pass       |
 
----
+
 
 #### **Edit Expense Line**
 
@@ -416,7 +416,7 @@ The app was tested across multiple devices (desktop, tablet, mobile) using Chrom
 | Displays success message on update                           | Pass       |
 | Redirects to the associated expense space after update        | Pass       |
 
----
+
 
 #### **Delete Expense Line**
 
@@ -426,7 +426,7 @@ The app was tested across multiple devices (desktop, tablet, mobile) using Chrom
 | Displays success message upon deletion                       | Pass       |
 | Redirects to the associated expense space                    | Pass       |
 
----
+
 
 #### **Edit Custom Amount**
 
@@ -437,7 +437,7 @@ The app was tested across multiple devices (desktop, tablet, mobile) using Chrom
 | Displays success message on update                           | Pass       |
 | Redirects to the associated expense space after update        | Pass       |
 
----
+
 
 #### **Add Contribution Line**
 
@@ -448,7 +448,7 @@ The app was tested across multiple devices (desktop, tablet, mobile) using Chrom
 | Displays success message after adding contributors           | Pass       |
 | Redirects to the associated expense space after addition      | Pass       |
 
----
+
 
 #### **Delete Contribution Line**
 

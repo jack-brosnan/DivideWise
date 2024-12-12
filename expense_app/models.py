@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
-PAID_STATUS = ((0, "Not Paid"), (1, "Paid"))
 CURRENCY = ((0, "€"), (1, "£"), (2, "$"))
 
 
@@ -54,8 +53,6 @@ class ExpenseLine(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200, null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    paid_status = models.IntegerField(choices=PAID_STATUS, default=0)
-    due_date = models.DateField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -89,7 +86,6 @@ class Contributor(models.Model):
         related_name="contributors"
     )
     name = models.CharField(max_length=50)
-    email = models.EmailField(null=True, blank=True)
 
     def total_contributions(self):
         """
@@ -130,7 +126,6 @@ class Contribution(models.Model):
         null=True,
         blank=True
     )
-    paid_status = models.IntegerField(choices=PAID_STATUS, default=0)
 
     def split_type(self):
         """

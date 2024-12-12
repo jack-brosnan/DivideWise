@@ -23,7 +23,6 @@ class ExpenseLineAdmin(admin.ModelAdmin):
                     'expense_space',
                     'title',
                     'amount',
-                    'paid_status',
                     'created_on')
 
 
@@ -32,8 +31,7 @@ class ContributorAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'expense_space',
-        'name',
-        'email')
+        'name')
 
 
 @admin.register(Contribution)
@@ -44,7 +42,6 @@ class ContributionAdmin(admin.ModelAdmin):
                     'split_type',
                     'custom_amount',
                     'remaining_share',
-                    'paid_status'
                     )
     readonly_fields = ('remaining_share', 'split_type')
 
