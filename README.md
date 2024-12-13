@@ -336,10 +336,14 @@ The site was tested using the [WebAIM Contrast Checker](https://webaim.org/resou
   1. **Welcome Message Tagline**:  
      - The tagline text is compared against the background color rather than the image overlay it resides on.
      - Result: Contrast ratio does not meet WCAG standards in this scenario.
+
+     ![WCAG Contrast Landing](static/images/readme/dividewise_wcag-contrast-landing.png) 
     
   2. **Contributor Filter Text**:  
      - Black text in the contributor filter is compared against the container's dark background instead of the white filter background.
      - Result: Contrast ratio does not meet WCAG standards for text visibility.
+
+     ![WCAG Contrast Filter](static/images/readme/dividewise_wcag-contrast-filter.png) 
 
 - **Planned Updates**:
   These exceptions will be reviewed in future iterations to ensure full compliance with WCAG accessibility standards while maintaining the design aesthetics of the site.
@@ -575,8 +579,32 @@ Creating a clone enables you to make a local copy of the repository. Follow thes
 
 ---
 
-# **Credits and Acknowledgements**
-
-
+### **Credits and Acknowledgements**
 
 ---
+
+### **Resources**
+- **Tony Teaches Tech**: Provided guidance on hosting and deployment practices.  
+  [Watch the tutorial](https://www.youtube.com/watch?v=opjyyXoqrxg&t=1093s&ab_channel=TonyTeachesTech)  
+
+- **Cloud With Django**: Assisted in understanding Django project configuration and database integration.  
+  [Watch the video](https://www.youtube.com/watch?v=pqWyUAT38e0&t=2806s&ab_channel=CloudWithDjango)  
+
+- **Landing Page Template**: The CSS template for the landing page was adapted from [TemplateMo](https://templatemo.com/).
+
+- **ChatGPT and Stack Overflow**: Instrumental in resolving bugs, generating test scripts, and optimizing functionality.
+
+- **Code Institute LMS**
+
+---
+
+### **Guidance and Inspiration**
+- **Custom Button Design**: The button design was inspired by the clean and modern style of **FlightConnections.com**.
+- **EasySplit App**: The colorful design and simplified UI of this expense-splitting app influenced the aesthetic and usability of DivideWise.
+- **Code Institute LMS**: Provided consistent guidance and structured templates throughout the project.
+
+---
+
+### **Special Thanks**
+- **David Calikes**: For his support, and guidance as a course facilitator.  
+- **Kevin Loughrey**: For his expert advice and dedicated SME sessions.  
