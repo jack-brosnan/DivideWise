@@ -1,7 +1,7 @@
 /* Site brand colors */
 
 :root {
-    --brand-primary: #070eff8a;
+    --brand-primary: #0252f1;
     --brand-secondary: #E84610;
     --brand-accent: #77afff;
     --brand-dark: #3A4454;
@@ -9,36 +9,7 @@
     --brand-alt: #0dcaf0;
 }
 
-.brand-primary {
-    background-color: var(--brand-primary);
-    /* margin-bottom: 0 !important;
-    padding-bottom: 0 !important; */
-}
-
-.brand-secondary {
-    background-color: var(--brand-secondary);
-}
-
-.brand-light {
-    background-color: var(--brand-light);
-}
-
-.brand-dark {
-    background-color: var(--brand-dark);
-}
-
-
-.button--orange {
-    background-color: #E84610;
-}
-
-.brand-text-primary {
-    color: var(--brand-primary);
-}
-
-.text--orange {
-    color: var(--brand-secondary);
-}
+/* General Styling */
 
 html,
 body {
@@ -54,12 +25,259 @@ body {
     background-image: linear-gradient(-180deg, #0dcaf0, #0252f1);
 }
 
+.main-bg {
+    
+    background-color: #0252f1;
+    background-image: linear-gradient(-180deg, #0dcaf0, #0252f1);
+}
+
+.brand-primary {
+    background-color: var(--brand-primary);    
+}
+
+.brand-secondary {
+    background-color: var(--brand-secondary);
+}
+
+.brand-light {
+    background-color: var(--brand-light);
+}
+
+.brand-dark {
+    background-color: var(--brand-dark);
+}
+
+.brand-text-primary {
+    color: var(--brand-primary);
+}
+
+.text--orange {
+    color: var(--brand-secondary);
+}
+
+.link-color {
+    color: #000000;
+    text-decoration-line: none;
+    font-weight: bold;
+}
+
 .header-white {
     color: #FFFFFF;
     opacity: 1;
 }
 
-/* Landing Page */
+.container--white {
+    background-color: #FFFFFF;
+}
+
+.box-shadow {
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom alignment containers */
+
+
+.v-space {
+    line-height: 35px;    
+}
+
+.container.h-100 {
+    min-height: 80vh;
+}
+
+.container-v-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+/* Button custom styling - Credit: FlightConnections.com via CSS Scan */
+
+.btn--orange {
+    background-color: initial;
+    background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    position: relative;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    vertical-align: top;
+    white-space: nowrap;
+    z-index: 9;
+    border: 0;
+    transition: box-shadow .2s;
+}
+
+.btn--orange:hover {
+    color: #FFFFFF;
+    box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
+}
+
+.btn--orange:active {
+    color: #FFFFFF;
+}
+
+.btn--blue {
+    background-color: initial;
+    background-image: linear-gradient(-180deg, #0d6efd, #0900ff);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    position: relative;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    vertical-align: top;
+    white-space: nowrap;
+    z-index: 9;
+    border: 0;
+    transition: box-shadow .2s;
+}
+
+.btn--blue:hover {
+    color: #FFFFFF;
+    box-shadow: rgba(4, 0, 253, 0.5) 0 3px 8px;
+}
+
+.btn--blue:active {
+    color: #FFFFFF;
+}
+
+.btn--red {
+    background-color: initial;
+    background-image: linear-gradient(-180deg, #f94b4b, #ff0000);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    position: relative;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    vertical-align: top;
+    white-space: nowrap;
+    z-index: 9;
+    border: 0;
+    transition: box-shadow .2s;
+}
+
+.btn--red:hover {
+    color: #FFFFFF;
+    box-shadow: rgba(253, 0, 0, 0.5) 0 3px 8px;
+}
+
+.btn--red:active {
+    color: #FFFFFF;
+}
+
+.btn--purple {
+    background-color: initial;
+    background-image: linear-gradient(-180deg, #7a6ad8, #472fd4);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    position: relative;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    vertical-align: top;
+    white-space: nowrap;
+    z-index: 9;
+    border: 0;
+    transition: box-shadow .2s;
+}
+
+.btn--purple:hover {
+    color: #FFFFFF;
+    box-shadow: rgba(110, 0, 253, 0.5) 0 3px 8px;
+}
+
+.btn--purple:active {
+    color: #FFFFFF;
+}
+
+.btn--gray {
+    background-color: initial;    
+    background-image: linear-gradient(-180deg, #868f96, #596164);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    position: relative;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    vertical-align: top;
+    white-space: nowrap;
+    z-index: 9;
+    border: 0;
+    transition: box-shadow .2s;
+}
+
+.btn--gray:hover {
+    color: #FFFFFF;
+    box-shadow: rgba(64, 64, 65, 0.5) 0 3px 8px;
+}
+
+.btn--gray:active {
+    color: #FFFFFF;
+}
+
+/* Navbar Styles */
+
+.brand {
+    font-family: Lato, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #4A4A4F;
+}
+
+.red-o {
+    color: #fc3f00;
+}
+
+.thin {
+    font-weight: 300;
+}
+
+/* Welcome Page */
 
 #welcome {
     overflow: hidden;
@@ -187,6 +405,8 @@ body {
     }
 }
 
+/* Welcome Page End */
+
 /* Django Messages */
 
 .message-overlay {
@@ -207,61 +427,28 @@ body {
     text-align: center;
 }
 
-/* main {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-    flex: 1 0 auto;
-} */
+/* View Spaces Section */
 
-.box-shadow {
-    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+.card {
+    max-height: 600px;
+    height: auto;
 }
 
-
-
-
-.brand {
-    font-family: Lato, sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #4A4A4F;
+.card img {
+    max-height: 300px;
 }
 
-.red-o {
-    color: #f79776;
+.space-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-width: 100%;
 }
 
-.thin {
-    font-weight: 300;
-}
-
-.light-bg {
-    background-color: #fff;
-}
-
-.dark-bg {
-    background-color: #445261;
-}
-
-.main-bg {
-    
-    background-color: #0252f1;
-    background-image: linear-gradient(-180deg, #0dcaf0, #0252f1);
-}
-
-/* .card {
-    border: none;
-    background-color: transparent;
-} */
-
-.image-container {
-    position: relative;
-}
-
+/* Space card icon */
 .contributor-count {
     position: absolute;
     top: 2%;
-    /* min-width: 30%; */
     left: 2%;
     border-radius: 50%;
     padding: 5px;
@@ -273,137 +460,10 @@ body {
     cursor: pointer;
 }
 
-.scale {
-    width: 100%;
-    height: auto;
-}
-
-.author {
+.contributor-count-text {
     color: white;
     margin: 4px;
     text-transform: uppercase;
-}
-
-.masthead {
-    margin-top: 10px;
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    height: 33vh;
-    width: 100%;
-}
-
-.masthead-text {
-    background-color: #445261;
-    color: white;
-    position: relative;
-}
-
-.masthead-image {
-    position: relative;
-    overflow: hidden;
-}
-
-.masthead-image:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 90%;
-    height: 100%;
-    width: 150%;
-    background: #445261;
-    -webkit-transform: skew(15deg);
-    -moz-transform: skew(15deg);
-    transform: skew(15deg);
-    z-index: 100;
-}
-
-.profile-image {
-    width: 20px;
-}
-
-.post-link {
-    text-decoration: none;
-    color: #445261;
-}
-
-.post-link:hover,
-.page-link {
-    color: #E84610;
-}
-
-.post-title {
-    margin-top: 10%;
-    margin-left: 5%;
-}
-
-.post-subtitle {
-    margin-left: 5%;
-    color: lightgray;
-}
-
-.btn-signup,
-.btn-edit {
-    background-color: #188181;
-    color: #fff;
-}
-
-.btn-signup:hover,
-.btn-signup:active {
-    background-color: #fff;
-    color: #23BBBB;
-}
-
-.link {
-    color: #23BBBB;
-    text-decoration: none;
-}
-
-.link:hover,
-.link:active {
-    color: #445261;
-    text-decoration: underline;
-}
-
-.btn-like {
-    color: #E84610;
-    border: none;
-    background: transparent;
-}
-
-.btn-delete {
-    color: #fff;
-    background: #E84610;
-}
-
-.btn-like:hover,
-.btn-like:active {
-    color: #E84610;
-    background: transparent;
-    border: none;
-}
-
-.faded {
-    color: rgb(172, 175, 175);
-}
-
-.approval {
-    color: rgb(222, 146, 168);
-}
-
-/* Main View */
-
-/* .dashboard-view {
-    height:80vh;
-} */
-
-/* Expense Space Cards */
-
-.space-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    max-width: 100%;
 }
 
 /* Footer */
@@ -436,37 +496,22 @@ footer .nav-link:focus {
     border-top-left-radius: 5px;
 }
 
-
-.line-initials {
-    background-color: #E62C03;
-    background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
-    color: #ffffff;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-}
-
 .amount-warning {
-    color: red;
+    color: #a30000;
     font-weight: bold;
 }
 
-/* Class to stop users updating required fields on form: ExpenseSpace[edit] */
+/* Class to highlight to users the currency form is not enabled. Script added to disable - ExpenseSpace[edit] */
 
 .readonly {
 
-    color: gray;
+    color: rgba(128, 128, 128, 0.568);
     background-color: lightgrey;
     pointer-events: none;
 
 }
 
-/* Style form action buttons using fontawsome icons */
+/* Form action buttons using fontawsome icons */
 
 .delete-icon {
     background: none;
@@ -513,7 +558,6 @@ footer .nav-link:focus {
 }
 
 .accordion-button:not(.collapsed) {
-    /* color: #ffffff; */
     background-color: #ffffff;
     box-shadow: inset 0 calc(-1* var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
     font-weight: normal;
@@ -523,19 +567,6 @@ footer .nav-link:focus {
     z-index: 3;
     outline: 0;
     box-shadow: none;
-}
-
-
-
-.link-color {
-    color: #000000;
-    text-decoration-line: none;
-    font-weight: bold;
-}
-
-/* Contributor table */
-.contributor-container {
-    background-color: var(--brand-dark);
 }
 
 /* contribution table */
@@ -566,20 +597,6 @@ td {
     border-bottom-right-radius: 5px;
 }
 
-/* Manage Contributor section */
-
-.container--white {
-    background-color: #FFFFFF;
-}
-
-#container-empty-container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-shrink: 1;
-    font-weight: 700;
-}
-
 /* Add contribution page table */
 
 .contributor-table {
@@ -587,6 +604,7 @@ td {
     border-collapse: separate;
     border-spacing: 15px 10px;
 }
+
 
 .contributor-name {
     text-align: left;
@@ -677,10 +695,6 @@ form label {
 
 }
 
-.v-space {
-    line-height: 35px;    
-}
-
 .signup label,
 .login label {
     display: none;
@@ -691,11 +705,6 @@ form label {
     color: #FFFFFF;
 }
 
-.container.h-100 {
-    min-height: 80vh;
-}
-
-
 #hint_id_password1 {
     margin-top: 10px;
     background-color: var(--brand-dark);
@@ -705,192 +714,36 @@ form label {
     box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
 }
 
-.container-v-center {
+/* Expense View Overview */
+
+/* Image and Text content */
+
+.expense-img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    max-width: 100%;
+    padding: 4px;
+    border-top-left-radius: 5px;
+}
+
+/* Manage Contributor section */
+
+#container-empty-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    min-height: 80vh;
+    align-content: center;
+    flex-shrink: 1;
+    font-weight: 700;
 }
 
-/* Button custom styling - Credit: FlightConnections.com via CSS Scan */
-
-.btn--orange {
-    background-color: initial;
-    background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
-    height: 40px;
-    line-height: 40px;
-    outline: 0;
-    overflow: hidden;
-    padding: 0 10px;
-    position: relative;
-    text-align: center;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: top;
-    white-space: nowrap;
-    z-index: 9;
-    border: 0;
-    transition: box-shadow .2s;
+.contributor-container {
+    background-color: var(--brand-dark);
+    max-width: 500px;
+    transform: scale(1.1);
+    margin-right: auto;
+    margin-left: auto;
 }
-
-.btn--orange:hover {
-    color: #FFFFFF;
-    box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
-}
-
-.btn--orange:active {
-    color: #FFFFFF;
-}
-
-.btn--blue {
-    background-color: initial;
-    background-image: linear-gradient(-180deg, #0d6efd, #0900ff);
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
-    height: 40px;
-    line-height: 40px;
-    outline: 0;
-    overflow: hidden;
-    padding: 0 20px;
-    position: relative;
-    text-align: center;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: top;
-    white-space: nowrap;
-    z-index: 9;
-    border: 0;
-    transition: box-shadow .2s;
-}
-
-.btn--blue:hover {
-    color: #FFFFFF;
-    box-shadow: rgba(4, 0, 253, 0.5) 0 3px 8px;
-}
-
-.btn--blue:active {
-    color: #FFFFFF;
-}
-
-.btn--red {
-    background-color: initial;
-    background-image: linear-gradient(-180deg, #f94b4b, #ff0000);
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
-    height: 40px;
-    line-height: 40px;
-    outline: 0;
-    overflow: hidden;
-    padding: 0 20px;
-    position: relative;
-    text-align: center;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: top;
-    white-space: nowrap;
-    z-index: 9;
-    border: 0;
-    transition: box-shadow .2s;
-}
-
-.btn--red:hover {
-    color: #FFFFFF;
-    box-shadow: rgba(253, 0, 0, 0.5) 0 3px 8px;
-}
-
-.btn--red:active {
-    color: #FFFFFF;
-}
-
-.btn--purple {
-    background-color: initial;
-    background-image: linear-gradient(-180deg, #7a6ad8, #472fd4);
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
-    height: 40px;
-    line-height: 40px;
-    outline: 0;
-    overflow: hidden;
-    padding: 0 20px;
-    position: relative;
-    text-align: center;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: top;
-    white-space: nowrap;
-    z-index: 9;
-    border: 0;
-    transition: box-shadow .2s;
-}
-
-.btn--purple:hover {
-    color: #FFFFFF;
-    box-shadow: rgba(110, 0, 253, 0.5) 0 3px 8px;
-}
-
-.btn--purple:active {
-    color: #FFFFFF;
-}
-
-.btn--gray {
-    background-color: initial;    
-    background-image: linear-gradient(-180deg, #868f96, #596164);
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
-    height: 40px;
-    line-height: 40px;
-    outline: 0;
-    overflow: hidden;
-    padding: 0 20px;
-    position: relative;
-    text-align: center;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: top;
-    white-space: nowrap;
-    z-index: 9;
-    border: 0;
-    transition: box-shadow .2s;
-}
-
-.btn--gray:hover {
-    color: #FFFFFF;
-    box-shadow: rgba(64, 64, 65, 0.5) 0 3px 8px;
-}
-
-.btn--gray:active {
-    color: #FFFFFF;
-}
-
-/* Custom contributor filter switches (checkboxes) */
 
 .filter-wrapper {
     position: relative;
@@ -899,14 +752,6 @@ form label {
     justify-content: center;
     width: 100%;
 }
-
-.contributor-container {
-    max-width: 500px;
-    transform: scale(1.1);
-    margin-right: auto;
-    margin-left: auto;
-}
-
 
 .contributor-filter {
     flex: 0 0 48%;
@@ -955,14 +800,11 @@ form label {
     transform: translateY(-50%);
     color: #000000;
     font-size: 1.0rem;
-    /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
     z-index: 1;
     transition: 0.4s ease left;
     max-width: 90%;
-    text-align: center;
-    
+    text-align: center;    
 }
-
 
 input[type="checkbox"]:checked + .filter-bg .filter-btn {
     left: 72%;
@@ -981,6 +823,16 @@ input[type="checkbox"]:checked ~ .filter-content {
 }
 
 @media only screen and (min-width: 474px) {
+
+    .expense-img {
+        width: 100%;
+        max-height: 250px;
+        object-fit: contain;
+        max-width: 100%;
+        padding: 4px;
+        border-top-left-radius: 5px;
+    }
+
     .filter-bg {
         max-width: 200px;
         
@@ -1024,7 +876,7 @@ input[type="checkbox"]:checked ~ .filter-content {
 
     .contributor-container {
         max-width: 500px;
-        transform: scale(0.95);
+        transform: scale(1.0);
         margin-right: auto;
         margin-left: auto;
     }
@@ -1047,8 +899,38 @@ input[type="checkbox"]:checked ~ .filter-content {
 }
 
 @media only screen and (min-width: 992px) {
+
+    .contributor-container {
+        max-width: 500px;
+        transform: scale(1.0);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
     .filter-content {
         font-size: 1rem;
+    }
+
+    .filter-btn {
+        width: 25%;
+    }
+
+    input[type="checkbox"]:checked+ .filter-bg .filter-btn {
+        left: 75%;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+
+    .contributor-container {
+        max-width: 500px;
+        transform: scale(1.1);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .filter-content {
+        font-size: 0.9rem;
     }
 
     .filter-btn {

@@ -15,13 +15,13 @@
             <div class="col-md-6 align-self-center brand-light box-shadow rounded">
                 <div class="row">
                     <!-- Expense space profile image -->
-                    <div class="col-12 col-md-4 align-self-center">
+                    <div class="col-12 col-md-5 align-self-center">
                         <img src="{{ expense_space.space_image.url }}" class="expense-img card-img-top"
                             alt="{{ expense_space.name }} space image">
                     </div>
                     <!-- Expense space title and date created -->
-                    <div class="col-12 col-md-8 text-center align-self-center">
-                        <h1>{{ expense_space.name }}</h1>
+                    <div class="col-12 col-md-7 text-center align-self-center">
+                        <h2>{{ expense_space.name }}</h2>
                         <p>{{ expense_space.description }}</p>
 
                         <!-- Sum of total expense line amounts | adjusted for different screen sizes -->
