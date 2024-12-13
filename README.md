@@ -455,10 +455,15 @@ Django's test framework was used to validate models and views.
 
 ---
 
-# **Known Bugs**
+# **Known Bugs and Issues for Future Review**
 
-1. **Alert Messages**: Some alert messages may not display properly on smaller devices. This will be addressed in a future update.
-2. **Contribution Validation**: Rare edge cases for custom amounts exceeding limits may bypass validation.
+1. **Console Log Warnings for Cloudinary Images**:  
+   When loading Cloudinary-hosted images, some console warnings indicate that the images are being sent with an HTTP prefix instead of HTTPS. While this does not disrupt functionality, it may impact security and browser compatibility in the future.
+
+2. **Templates Not Linking to Local JavaScript File**:  
+   Attempts to include local JavaScript files failed. As a workaround, relevant scripts were embedded directly into the templates.
+
+These issues will be addressed in a future update to improve performance, maintainability, and compliance with best practices.
 
 ---
 
