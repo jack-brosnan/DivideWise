@@ -92,26 +92,22 @@
         </div>
     </main>
 
-
     <!-- Footer -->
     <div id="footer-container" class="footer mt-auto py-3 container-fluid">
-        <footer class="container d-flex flex-wrap justify-content-between align-items-center">
-            <p class="col-lg-4 mb-0">&copy;DivideWise</p>
-
-            <ul class="nav col-lg-5 justify-content-end">
-                <li class="nav-item"><a href="#" class="nav-link px-2">Home</a></li>
-                <li class="nav-item d-none d-md-block"><a href="#" class="nav-link px-2">Calculator</a></li>
-
-                <li class="nav-item dropdown d-md-none">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Resources
+        <footer class="footer text-white">
+            <div class="container text-center">
+                <p class="mb-1">&copy; 2024 Jack Brosnan™</p>
+                <div>
+                    <a href="https://github.com/jack-brosnan" target="_blank" class="text-white remove-decoration me-3"
+                        aria-label="GitHub">
+                        <i class="fab fa-github"></i> GitHub
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Calculator</a></li>
-                    </ul>
-                </li>
-            </ul>
+                    <a href="https://www.linkedin.com/in/jack-brosnan-063044163/" target="_blank" class="text-white remove-decoration"
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
         </footer>
     </div>
 
@@ -129,9 +125,8 @@
     <script src="https://kit.fontawesome.com/1ef2e57231.js" crossorigin="anonymous"></script>
 
     <script>
-
         //Script for displaying confirmation modal for deleting Expense Spaces 
-        
+
         const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
         const deleteButtons = document.getElementsByClassName("delete-space");
         const deleteForm = document.getElementById("deleteForm");
