@@ -212,45 +212,41 @@ As a **user**, I can **add and manage contributors assigned to a space** so that
 
 ---
 
-# **Features Implemented**
+# **Features and Responsiveness**
+
+## Welcome Page:
+- A welcoming and visually appealing header to introduce users to DivideWise.
+- Prominent buttons to either log in or register, making navigation straightforward for new and returning users.
+- The layout adjusts seamlessly across devices, including desktops, tablets, and mobile screens.
+- Clear messaging to describe the app’s purpose.
+
+| ![Landing Page Desktop](static/images/readme/dividewise_landing-desktop.png) | ![Landing Page Mobile](static/images/readme/dividewise_landing-mobile.png)
+|---|---|
 
 ## Home Page:
 - Displays a list of expense spaces for logged-in users.
-- Anonymous users are unable to see any expense spaces.
 - Provides quick navigation to view, edit, or delete expense spaces.
 - Displays the total expense amount for each expense space.
 - Includes a responsive design to ensure usability on various screen sizes.
+
+| ![View Spaces Desktop](static/images/readme/dividewise_spaces-desktop.png) | ![View Spaces Mobile 1](static/images/readme/dividewise_spaces-mobile1.png) | ![View Spaces Mobile 2](static/images/readme/dividewise_spaces-mobile2.png) |
+|---|---|---|
 
 ## View Space Page:
 - Displays detailed information about the selected expense space.
 - Lists associated expense lines in descending order of creation.
 - Shows contributors and their contributions for the expense space.
 - Includes options to add, edit, or delete expense lines and contributors.
-- Provides an intuitive filter for contributors, allowing users to view specific details.
 
-## Add Space Page:
-- Allows users to create a new expense space.
-- Includes fields for the space name, description, currency, and image upload.
-- Provides validation to ensure required fields are completed before submission.
-- Displays a success message upon successful creation.
+| ![View Space Desktop](static/images/readme/dividewise_viewspace-desktop.png) | ![View Space Mobile 1](static/images/readme/dividewise_viewspace-mobile1.png) | ![View Space Mobile 2](static/images/readme/dividewise_viewspace-mobile2.png) |
+|---|---|---|
 
-## Edit Space Page:
-- Displays a pre-filled form for editing an existing expense space.
-- Allows users to update the name, description, currency, and image.
-- Ensures validation on all fields before saving changes.
-- Includes a cancel button to return to the home page without making changes.
+## Custom Filter
+- The custom filter feature on the **View Space Page** allows users to streamline their view by selecting contributors. It dynamically updates the visible expense lines and contribution rows based on the selected filters, ensuring an intuitive and user-focused experience.
+- The filter layout adjusts seamlessly for desktop and mobile views.
 
-## Add Expense Page:
-- Enables users to add a new expense line to an expense space.
-- Includes fields for title, description, amount, and due date.
-- Validates all fields to ensure accurate input.
-- Displays a success message upon successful addition.
-
-## Edit Expense Page:
-- Displays a pre-filled form for editing an existing expense line.
-- Allows users to update the title, description, amount, and due date.
-- Provides options to save changes or delete the expense line.
-- Includes validation to ensure no fields are left incomplete.
+| ![Filter](static/images/readme/dividewise_filter-desktop.png) | ![Filter](static/images/readme/dividewise_filter-mobile.png)
+|---|---|
 
 ## Add Contribution Page:
 - Displays a list of unassigned contributors for the selected expense line.
@@ -258,11 +254,17 @@ As a **user**, I can **add and manage contributors assigned to a space** so that
 - Provides a cancel button to return to the view space page without adding contributors.
 - Displays a success message upon successful addition of contributors.
 
+![Add contribution](static/images/readme/dividewise_contribution-form.png) 
+---
+
 ## Edit Contributor Page:
 - Lists all contributors associated with the selected expense space.
 - Provides options to edit or delete contributors.
 - Includes a form to add new contributors to the expense space.
 - Ensures validation for contributor details before saving changes.
+
+![View Space Desktop](static/images/readme/dividewise_contributor-form.png) 
+---
 
 ## Edit Custom Amount Page:
 - Displays a form to update the custom amount for a specific contribution.
@@ -270,31 +272,8 @@ As a **user**, I can **add and manage contributors assigned to a space** so that
 - Displays a calculated maximum allowable amount for user reference.
 - Includes validation and provides clear error messages for invalid input.
 
-## Login Page:
-- Allows registered users to log in securely.
-- Includes a "forgot password" option for users who need to reset their password.
-- Redirects successfully logged-in users to the home page.
-
-## Registration Page:
-- Allows new users to create an account securely.
-- Includes fields for username, email, and password.
-- Ensures validation on all fields before account creation.
-- Redirects successfully registered users to the home page.
-
-## Logout Page:
-- Allows users to securely log out of their account.
-- Redirects users to the login page after successful logout.
-
-### Responsive Design:
-- Ensures all pages are optimized for use on mobile, tablet, and desktop devices.
-- The navbar collapses into a burger menu on smaller screens for improved navigation.
-- Page elements adjust to ensure readability and usability on smaller screens.
-
-## Additional Security Features:
-- Restricts access to expense spaces and features for unauthorized users.
-- Validates form inputs to prevent malicious submissions.
-- Prevents users from accessing or modifying data they do not own.
-- Redirects unauthorized users attempting restricted actions to the login page.
+![View Space Desktop](static/images/readme/dividewise_custom-amount-form.png) 
+---
 
 ##### [ Back to Top ](#table-of-contents)
 
@@ -322,6 +301,12 @@ As a **user**, I can **add and manage contributors assigned to a space** so that
 
 ## **Responsiveness**
 The app was tested across multiple devices (desktop, tablet, mobile) using Chrome DevTools.
+
+## Additional Security checks:
+- Restricts access to expense spaces and features for unauthorized users.
+- Validates form inputs to prevent malicious submissions.
+- Prevents users from accessing or modifying data they do not own.
+- Redirects unauthorized users attempting restricted actions to the login page.
 
 ### Manual Testing Results
 
