@@ -21,8 +21,13 @@ body {
 }
 
 body {
+    font-family: 'Roboto', sans-serif;
     background-color: #0252f1;
     background-image: linear-gradient(-180deg, #0dcaf0, #0252f1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
 }
 
 .main-bg {
@@ -443,6 +448,11 @@ body {
     height: auto;
     object-fit: contain;
     max-width: 100%;
+}
+
+.add-space-text {
+    font-size: 1.4rem;
+    text-decoration-line: none;
 }
 
 /* Space card icon */

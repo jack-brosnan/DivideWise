@@ -14,9 +14,9 @@
                 <h1 class="header-white text-center header-container">Your Expense Spaces</h1>
             </div>
             <!-- Add Space form link -->
-            <div class="col-3 d-none d-md-inline align-content-center text-end">
+            <div class="col-3 d-none d-md-inline align-content-center text-end add-space-button">
                 <a href="{% url 'add_space' %}"
-                    class="p-2 container--white box-shadow remove-decoration rounded-pill"><i
+                    class="p-2 container--white add-space-text box-shadow rounded-pill"><i
                         class="fa-solid fa-circle-plus add-icon"></i>
                     <span class="link-color"> Add Space</span></a>
             </div>
@@ -73,10 +73,10 @@
             {% endfor %}
         </div>
         <!-- Add Space button link for small screen devices -->
-        <div class="col-12 d-md-none my-3 text-center">
-            <a href="{% url 'add_space' %}" class="p-4 container--white box-shadow remove-decoration rounded-pill"><i
+        <div class="col-12 d-md-none my-4 text-center">
+            <a href="{% url 'add_space' %}" class="p-4 container--white add-space-text box-shadow rounded-pill"><i
                     class="fa-solid fa-circle-plus add-icon"></i>
-                <span class="link-color"> Add Space</span></a>
+                <span class="link-color add-space-text"> Add Space</span></a>
         </div>
     </div>
 
