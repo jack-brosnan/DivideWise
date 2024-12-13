@@ -16,8 +16,13 @@
                 <div class="row">
                     <!-- Expense space profile image -->
                     <div class="col-12 col-md-5 align-self-center">
+                        {% if "placeholder" in expense_space.space_image.url %}
+                        <img src="{% static 'images/placeholder.png' %}" class="expense-img card-img-top"
+                            alt="placeholder image">
+                        {% else %}
                         <img src="{{ expense_space.space_image.url }}" class="expense-img card-img-top"
                             alt="{{ expense_space.name }} space image">
+                        {% endif %}
                     </div>
                     <!-- Expense space title and date created -->
                     <div class="col-12 col-md-7 text-center align-self-center">

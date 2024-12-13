@@ -28,8 +28,11 @@
                 <div class="card box-shadow">
                     <div class="image-container">
                         <div class="d-flex justify-content-center">
-                            <img src="{{ space.space_image.url }}" class="space-img card-img-top"
-                                alt="{{ space.name }}">
+                            {% if "placeholder" in space.space_image.url %}
+                            <img src="{% static 'images/placeholder.png' %}" class="space-img card-img-top" alt="placeholder image">
+                            {% else %}
+                            <img src="{{ space.space_image.url }}" class="space-img card-img-top" alt="{{ space.name }}">
+                            {% endif %}             
                             <div class="contributor-count text-center"
                                 title="{{ space.contributors.count }} contributors added">
                                 <p class="contributor-count-text"><i class="fa-solid fa-user"></i>
