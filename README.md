@@ -29,7 +29,7 @@ The responsive website allows users to manage expenses seamlessly, making it ide
 6. [Testing and Validation](#testing-and-validation)  
    - [Manual Testing Results](#manual-testing-results)
    - [Automated Testing](#automated-testing)
-7. [Known Bugs](#known-bugs)  
+7. [Known Bugs and Issues for Future Review](#known-bugs-and-issues-for-future-review) 
 8. [Deployment](#deployment)
    - [Deployment Steps](#deployment-steps)
    - [Forking the Repository](#forking-the-repository)
@@ -306,6 +306,48 @@ As a **user**, I can **add and manage contributors assigned to a space** so that
 ## **Responsiveness**
 The app was tested across multiple devices (desktop, tablet, mobile) using Chrome DevTools.
 
+### **CSS Validation**
+The CSS files were validated using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/).  
+- **Result**: All styles passed validation successfully with no errors. Confirms that the CSS adheres to web standards and ensures consistent rendering across browsers.
+
+![View Space Desktop](static/images/readme/dividewise_w3c-CSS-validator.png) 
+
+---
+
+### **HTML Validation**
+The templates were validated using the [W3C Markup Validation Service](https://validator.w3.org/).  
+- **Initial Issues**: Some templates showed parse errors during initial tests, particularly due to inline JavaScript.
+![Console Log Errors Placeholder](static/images/readme/dividewise_w3-html-validator_parseerrors.png)
+- **Resolution**:
+  1. Cleared the W3C cache and re-ran the validation tests. This resolved persistent parse errors.
+     ![Console Log Errors Placeholder](static/images/readme/dividewise_w3-html-validator_viewspace.png)
+  2. Updated inline JavaScript and ensured all `<script>` tags were properly formatted and closed.
+- **Result**: All templates passed validation with no remaining errors or warnings.
+
+---
+
+### **WCAG Contrast Checker**
+The site was tested using the [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) to ensure compliance with WCAG (Web Content Accessibility Guidelines).
+
+- **General Results**:  
+  The majority of the site achieved **high contrast ratings**, ensuring good readability and accessibility for users with visual impairments.
+
+- **Exceptions Identified**:
+  1. **Welcome Message Tagline**:  
+     - The tagline text is compared against the background color rather than the image overlay it resides on.
+     - Result: Contrast ratio does not meet WCAG standards in this scenario.
+    
+  2. **Contributor Filter Text**:  
+     - Black text in the contributor filter is compared against the container's dark background instead of the white filter background.
+     - Result: Contrast ratio does not meet WCAG standards for text visibility.
+
+- **Planned Updates**:
+  These exceptions will be reviewed in future iterations to ensure full compliance with WCAG accessibility standards while maintaining the design aesthetics of the site.
+
+  ### **PEP 8 Compliance**
+
+- The Python codebase adheres to **PEP 8** standards, ensuring readability, consistency, and maintainability. Key practices include proper indentation, adherence to naming conventions, grouping and ordering imports, and meaningful comments and docstrings. The code was validated using Code institute's **CI Python Linter**, with all significant warnings and errors addressed. This adherence promotes clean and organized code, improving maintainability and collaboration.
+
 ## Additional Security checks:
 - Restricts access to expense spaces and features for unauthorized users.
 - Validates form inputs to prevent malicious submissions.
@@ -450,15 +492,25 @@ The app was tested across multiple devices (desktop, tablet, mobile) using Chrom
 ---
 
 
-## **Automated Testing**
-Django's test framework was used to validate models and views.
+### **Test Scripts Developed with AI**
 
----
+To ensure the robustness of the application, comprehensive test scripts were developed with the assistance of AI tools. These scripts were designed to automate the testing of key application functionalities, including models, views, forms, and URLs. 
+
+#### **Key Highlights:**
+
+- **Model Tests:** Validated database interactions, ensuring accurate calculations for fields like `total_expense` and `remaining_share`. Test cases also verified the integrity of relationships between models (e.g., ExpenseSpace, ExpenseLine, Contributor, and Contribution).
+- **View Tests:** Confirmed proper routing, template rendering, and response codes for various user actions. Ensured that permissions and access controls worked as intended.
+- **Form Tests:** Tested form validation logic, including custom validation methods such as maximum allowable custom amounts and required fields.
+- **URL Tests:** Validated that URLs mapped correctly to their corresponding views, ensuring seamless navigation across the application.
+
+AI assistance streamlined the process by Providing optimized test logic to minimize redundancy offering quick corrections for common testing errors or edge cases.
 
 # **Known Bugs and Issues for Future Review**
 
 1. **Console Log Warnings for Cloudinary Images**:  
    When loading Cloudinary-hosted images, some console warnings indicate that the images are being sent with an HTTP prefix instead of HTTPS. While this does not disrupt functionality, it may impact security and browser compatibility in the future.
+
+   ![Console Log Errors Placeholder](static/images/readme/dividewise_console-errors.png)
 
 2. **Templates Not Linking to Local JavaScript File**:  
    Attempts to include local JavaScript files failed. As a workaround, relevant scripts were embedded directly into the templates.
