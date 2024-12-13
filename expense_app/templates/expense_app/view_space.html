@@ -28,6 +28,7 @@
                     <div class="col-12 col-md-7 text-center align-self-center">
                         <h2>{{ expense_space.name }}</h2>
                         <p>{{ expense_space.description }}</p>
+                        <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
 
                         <!-- Sum of total expense line amounts | adjusted for different screen sizes -->
                         <p class="d-lg-none"><strong>Total:</strong> {{ expense_space.get_currency_display }}
@@ -35,7 +36,6 @@
                         <p class="d-none d-lg-inline"><strong>Total Expense:</strong>
                             {{ expense_space.get_currency_display }}
                             {{ expense_space.total_expense }}</p>
-                        <p><small>Created on: {{ expense_space.created_on|date:"M d, Y" }}</small></p>
 
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                             aria-expanded="true" aria-controls="panelsStayOpen-{{ line.id }}">
 
                             <!-- Expense line title and Fontawsome icon for contribution count -->
-                            <span>{{ line.title }} <i class="fa-solid fa-user count-icon"></i>
+                            <span class="button-text">{{ line.title }} <i class="fa-solid fa-user count-icon"></i>
                                 {{ line.expense_contributions.count }}</span>
 
                             <!-- Expense line total amount -->
@@ -123,6 +123,12 @@
                         <div class="accordion-body">
                             <!-- Warning message to display when custom amounts do not equal total expense amount -->
                             <p id="expense-warning-message-{{ line.id }}" class="amount-warning" hidden></p>
+
+                            {% if line.description %}
+                            <p>{{ line.description }}</p>
+                            {% else %}
+                            <p class="visually-hidden">No description provided</p>
+                            {% endif %}
 
                             <!-- Edit expense line link -->
                             <a href="{% url 'edit_expense' space_id=expense_space.id expense_id=line.id %}"
