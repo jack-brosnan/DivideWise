@@ -1,3 +1,5 @@
+![Divide Wise banner image](static/images/readme/dividewise_readme-banner.png)
+
 # **DivideWise**
 
 DivideWise is a web application designed to help users efficiently track and manage shared expenses. Users can create shared expense spaces, add contributors, split costs, and assign contribution amounts.
@@ -19,16 +21,20 @@ The responsive website allows users to manage expenses seamlessly, making it ide
    - [Entity Relationship Model](#entity-relationship-model)
    - [Wireframes](#wireframes)
 2. [Agile Development](#agile-development)
-   - [Kanban Board](#kanban-board)
+   - [GitHub Project Board](#github-project-board)
    - [User Stories](#user-stories)
-3. [Features Implemented](#features-implemented)  
+3. [Features and Responsiveness](#features-and-responsiveness)  
 4. [Future Enhancements](#future-enhancements)  
 5. [Technology Used](#technology-used) 
-6. [Testing](#testing-and-validation)  
-7. [Bugs](#known-bugs)  
+6. [Testing and Validation](#testing-and-validation)  
+   - [Manual Testing Results](#manual-testing-results)
+   - [Automated Testing](#automated-testing)
+7. [Known Bugs](#known-bugs)  
 8. [Deployment](#deployment)
-9. [Resources](#resources)  
-10. [Credits and Acknowledgements](#credits-and-acknowledgements)
+   - [Deployment Steps](#deployment-steps)
+   - [Forking the Repository](#forking-the-repository)
+   - [Creating a Clone of the Repository](#creating-a-clone-of-the-repository)
+9. [Credits and Acknowledgements](#credits-and-acknowledgements)
 
 ---
 
@@ -84,12 +90,6 @@ The following wireframes illustrate the design and functionality envisioned for 
 
 The index page serves as the main dashboard for users, displaying a list of their created spaces. It includes clear navigation options and responsive design to ensure seamless accessibility on smaller screens.
 
-- **Desktop View:**  
-  The layout includes a navigation bar, a list of spaces with quick access to view details, and action buttons for creating new spaces. Pagination is implemented for large lists of spaces.  
-  
-- **Mobile View:**  
-  The mobile layout stacks elements vertically for better usability on smaller screens. The navigation bar is replaced with a collapsible menu for easy navigation.  
-
 ![Index Page Desktop Placeholder](static/images/readme/dividewise_wireframe-index.png)
 
 ---
@@ -97,12 +97,6 @@ The index page serves as the main dashboard for users, displaying a list of thei
 ### View Space (Desktop and Mobile)
 
 The view space page provides detailed information about a specific space, including the associated expense lines and contributors. It ensures clear and organized presentation of data.
-
-- **Desktop View:**  
-  A structured layout displays space details, a list of expense lines, and contributors. Users can add, edit, or delete expense lines and contributors directly from this page.  
-  
-- **Mobile View:**  
-  On smaller screens, the design adapts by stacking elements vertically. Key actions remain accessible through prominent buttons and collapsible sections.
 
 ![View Space Mobile Placeholder](static/images/readme/dividewise_wireframe-viewspace.png)
 
@@ -112,26 +106,36 @@ The view space page provides detailed information about a specific space, includ
 
 The wireframes for the forms include layouts for creating or editing spaces, expenses, and contributors. These forms prioritize simplicity and clarity for user input.
 
-- **Form Layouts:**  
-  Forms are designed with intuitive labels and placeholders. Error messages and validation feedback are displayed inline for clarity. The layout ensures responsive alignment on all devices.
-
-- **Django Confirmation Message:**  
-  A confirmation message appears on the index page after actions like adding or editing spaces. This feedback ensures users are informed about the success of their actions.
+A confirmation message appears on the index page after actions like adding or editing spaces. This feedback ensures users are informed about the success of their actions.
 
 ![Confirmation Message Placeholder](static/images/readme/dividewise_wireframe-forms.png)
 
 
 ---
 
-# **Agile Development**
+## **Agile Development**
 
-## **Kanban Board**
-DivideWise followed Agile methodologies, with a Kanban board hosted on GitHub Projects. The board included:
-- **Backlog**: Unprioritized tasks.
-- **In Progress**: Tasks actively being worked on.
-- **Done**: Completed tasks.
+### GitHub Project Board
 
-[View Kanban Board](#)
+The [GitHub Project Board](https://github.com/users/jack-brosnan/projects/8/views/1) was leveraged to efficiently manage tasks and monitor progress throughout the development process. The board was organized into the following columns:
+
+- **To Do**: Tasks planned for the current development cycle.
+- **In Progress**: Tasks currently being worked on.
+- **Done**: Tasks that have been completed.
+- **Won't Do**: Deferred tasks to be addressed in future iterations.
+
+This structure provided clear visibility into the project's status and helped prioritize work effectively.
+
+### Benefits of the Agile Approach
+
+- **Prioritized Stories**: Used the MoSCoW methodology to focus on what matters most.
+- **Flexibility**: Allowed adjustments to scope and priorities as the project evolved.
+- **Focused Delivery**: Ensured development stayed aligned with user stories to meet user needs.
+- **Task Tracking**: Provided a comprehensive view of completed, ongoing, and upcoming tasks.
+
+By utilizing GitHub Project Boards, task management was streamlined, ensuring the timely delivery of the Minimum Viable Product (MVP).
+
+[View the GitHub Project Board](https://github.com/users/jack-brosnan/projects/8/views/1)
 
 ## **User Stories**
 ### User Story 1: User Authentication
